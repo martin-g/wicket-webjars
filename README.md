@@ -5,7 +5,7 @@ Integration of webjars for Apache Wicket.
 
 Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn1kk0n/job/wicket-webjars/badge/icon)](https://buildhive.cloudbees.com/job/l0rdn1kk0n/job/wicket-webjars/)
 
-**wicket-webjars** dependes on [mustache.java](https://github.com/webjars/webjars).
+**wicket-webjars** dependes on [webjars](https://github.com/webjars/webjars).
 
 Documentation:
 
