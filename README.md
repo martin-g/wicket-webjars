@@ -74,3 +74,23 @@ Add dependencies to your pom.xml:
   </dependency>
 </dependencies>
 ```
+
+
+To use always recent version from your pom you have to replace the version in path with the string "current". When resource
+name gets resolved this string will be replaced by recent available version in classpath.
+
+```java
+public WebjarsComponent extends Panel {
+
+  public WebjarsComponent(String id) {
+      super(id);
+  }
+
+  @Override
+  public void renderHead(IHeaderResponse response) {
+    super.renderHead(response);
+
+    response.render(JavaScriptHeaderItem.forReference(new WebjarsJavaScriptResourceReference("jquery/current/jquery.js")));
+  }
+}
+```
