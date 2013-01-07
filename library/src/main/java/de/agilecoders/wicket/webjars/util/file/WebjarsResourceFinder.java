@@ -55,25 +55,27 @@ public class WebjarsResourceFinder implements IResourceFinder {
      * @return The resource stream
      */
     @Override
-    public IResourceStream find(Class<?> clazz, String pathName) {
+    public IResourceStream find(final Class<?> clazz, final String pathName) {
         final int pos = pathName != null ? pathName.lastIndexOf("/webjars/") : -1;
 
         if (WebjarsJavaScriptResourceReference.class.equals(clazz) && pos > -1) {
             try {
-                final String webjarsPath = AssetLocator.getWebJarPath(pathName.substring(pos));
+                final String webjarsPath = AssetLocator.getFullPath(pathName.substring(pos));
 
                 LOG.debug("webjars path: {}", webjarsPath);
 
                 if (webjarsPath != null) {
-                    final String resourcePath = "META-INF/resources/" + webjarsPath;
-
                     for (WeakReference<ClassLoader> classLoader : classLoaders) {
-                        final URL url = classLoader.get().getResource(resourcePath);
+                        final ClassLoader cl = classLoader.get();
 
-                        LOG.debug("webjars url: {} from: {}; used ClassLoader: {}", new Object[] { url, resourcePath, classLoader.get() });
+                        if (cl != null) {
+                            final URL url = cl.getResource(webjarsPath);
 
-                        if (url != null) {
-                            return new UrlResourceStream(url);
+                            LOG.debug("webjars url: {} from: {}; used ClassLoader: {}", new Object[] { url, webjarsPath, classLoader.get() });
+
+                            if (url != null) {
+                                return new UrlResourceStream(url);
+                            }
                         }
                     }
                 }
@@ -81,6 +83,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
                 LOG.error("can't locate resource for: {}; {}", new Object[] {
                         pathName, e.getMessage(), e
                 });
+
                 return null;
             }
         }
