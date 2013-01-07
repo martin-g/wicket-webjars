@@ -24,9 +24,23 @@ public class WebjarsResourceFinder implements IResourceFinder {
     private final Set<WeakReference<ClassLoader>> classLoaders = new HashSet<WeakReference<ClassLoader>>();
 
     /**
+     * Holder for webjars resource finder
+     */
+    private static final class Holder {
+        private static final WebjarsResourceFinder instance = new WebjarsResourceFinder();
+    }
+
+    /**
+     * @return webjars resource finder
+     */
+    public static WebjarsResourceFinder instance() {
+        return Holder.instance;
+    }
+
+    /**
      * Construct.
      */
-    public WebjarsResourceFinder() {
+    private WebjarsResourceFinder() {
         classLoaders.add(new WeakReference<ClassLoader>(WebjarsJavaScriptResourceReference.class.getClassLoader()));
         classLoaders.add(new WeakReference<ClassLoader>(Thread.currentThread().getContextClassLoader()));
         classLoaders.add(new WeakReference<ClassLoader>(AssetLocator.class.getClassLoader()));

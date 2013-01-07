@@ -1,6 +1,11 @@
 package de.agilecoders.wicket.webjars.util;
 
+import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
+import org.apache.wicket.Application;
+import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.lang.Args;
+
+import java.util.List;
 
 /**
  * Helper class for webjars resources
@@ -37,6 +42,19 @@ public final class Webjars {
      */
     private static String appendLeadingSlash(final String path) {
         return path.startsWith(PATH_SPLITTER) ? path : PATH_SPLITTER + path;
+    }
+
+    /**
+     * installs the webjars resource finder
+     *
+     * @param app the wicket application
+     */
+    public static void install(final Application app) {
+        final List<IResourceFinder> finders = app.getResourceSettings().getResourceFinders();
+
+        if (!finders.contains(WebjarsResourceFinder.instance())) {
+            finders.add(WebjarsResourceFinder.instance());
+        }
     }
 
     /**
