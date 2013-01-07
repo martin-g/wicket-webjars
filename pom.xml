@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <groupId>de.agilecoders.wicket.webjars</groupId>
+    <artifactId>wicket-webjars-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1.0-SNAPSHOT</version>
+    <name>wicket-webjars-parent</name>
+    <description/>
+    <url>https://github.com/l0rdn1kk0n/wicket-webjars</url>
+
+    <scm>
+        <url>git@github.com:l0rdn1kk0n/wicket-webjars.git</url>
+        <connection>scm:git:git@github.com:l0rdn1kk0n/wicket-webjars.git</connection>
+        <developerConnection>scm:git:git@github.com:l0rdn1kk0n/wicket-webjars.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/l0rdn1kk0n/wicket-webjars/issues</url>
+    </issueManagement>
+
+    <organization>
+        <name>agilecoders.de</name>
+        <url>http://agilecoders.de</url>
+    </organization>
+
+    <prerequisites>
+        <maven>${mvn.version}</maven>
+    </prerequisites>
+
+    <modules>
+        <module>library</module>
+        <module>samples</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--  WICKET DEPENDENCIES -->
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-core</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.agilecoders.wicket.webjars</groupId>
+                <artifactId>wicket-webjars</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>webjars-locator</artifactId>
+                <version>0.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!--  WICKET DEPENDENCIES -->
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+        </dependency>
+
+        <!-- LOGGING DEPENDENCIES - LOG4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <filtering>false</filtering>
+                <directory>src/test/java</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </testResource>
+        </testResources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>${mvn.build.java.version}</source>
+                    <target>${mvn.build.java.version}</target>
+                    <compilerVersion>${mvn.build.java.version}</compilerVersion>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <inherited>true</inherited>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>miha</id>
+            <name>Michael Haitz</name>
+            <email>michael.haitz@agilecoders.de</email>
+            <organization>agilecoders.de</organization>
+            <roles>
+                <role>Owner</role>
+                <role>Comitter</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <github.global.server>github</github.global.server>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+        <mvn.build.java.version>1.6</mvn.build.java.version>
+        <mvn.version>3.0.0</mvn.version>
+
+        <versions-maven-plugin.version>1.3.1</versions-maven-plugin.version>
+        <wicket.version>6.4.0</wicket.version>
+    </properties>
+
+</project>

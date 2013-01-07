@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Apache Wicket Quickstart</title>
+        <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet"/>
+    </head>
+    <body>
+        <div id="hd">
+            <div id="logo">
+                <img src="logo.png" width="50px" height="50px" alt="Wicket Logo"/>
+
+                <h1>Apache Wicket Webjars</h1>
+            </div>
+        </div>
+        <div id="bd">
+            <div id="replace">This text will be replaced by jQuery after <span id="time">5</span> seconds...</div>
+            <script>
+                $(function () {
+                    var time = 5;
+                    var update = function() {
+                         if (time > 0) {
+                             $("#time").text(time);
+                             time--;
+                             setTimeout(update, 1000);
+                         }
+                    };
+
+                    setTimeout(update, 0);
+
+                    setTimeout(function () {
+                        $("#replace").text("it works...");
+                    }, 5000);
+                });
+            </script>
+        </div>
+        <div id="ft">
+        </div>
+    </body>
+</html>
