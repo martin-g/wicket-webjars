@@ -75,6 +75,11 @@ Add dependencies to your pom.xml:
 </dependencies>
 ```
 
+It is also possible to use a resource by adding it to your html markup directly:
+
+```html
+<img src="/webjars/jquery-ui/1.9.2/css/smoothness/images/ui-icons_cd0a0a_256x240.png"/>
+```
 
 To use always recent version from your pom you have to replace the version in path with the string "current". When resource
 name gets resolved this string will be replaced by recent available version in classpath. (this feature is available since 0.2.0)
