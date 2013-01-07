@@ -77,7 +77,7 @@ Add dependencies to your pom.xml:
 
 
 To use always recent version from your pom you have to replace the version in path with the string "current". When resource
-name gets resolved this string will be replaced by recent available version in classpath.
+name gets resolved this string will be replaced by recent available version in classpath. (this feature is available since 0.2.0)
 
 ```java
 public WebjarsComponent extends Panel {
