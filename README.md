@@ -5,7 +5,7 @@ Integration of webjars for Apache Wicket.
 
 Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn1kk0n/job/wicket-webjars/badge/icon)](https://buildhive.cloudbees.com/job/l0rdn1kk0n/job/wicket-webjars/)
 
-**wicket-webjars** dependes on [mustache.java](https://github.com/webjars/webjars).
+**wicket-webjars** dependes on [webjars](https://github.com/webjars/webjars).
 
 Documentation:
 
@@ -75,9 +75,14 @@ Add dependencies to your pom.xml:
 </dependencies>
 ```
 
+It is also possible to use a resource by adding it to your html markup directly:
+
+```html
+<img src="/webjars/jquery-ui/1.9.2/css/smoothness/images/ui-icons_cd0a0a_256x240.png"/>
+```
 
 To use always recent version from your pom you have to replace the version in path with the string "current". When resource
-name gets resolved this string will be replaced by recent available version in classpath.
+name gets resolved this string will be replaced by recent available version in classpath. (this feature is available since 0.2.0)
 
 ```java
 public WebjarsComponent extends Panel {
