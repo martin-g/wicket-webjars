@@ -1,5 +1,6 @@
 package de.agilecoders.wicket.webjars.util.file;
 
+import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import org.apache.wicket.core.util.resource.UrlResourceStream;
 import org.apache.wicket.util.file.IResourceFinder;
@@ -41,7 +42,6 @@ public class WebjarsResourceFinder implements IResourceFinder {
      * Construct.
      */
     private WebjarsResourceFinder() {
-        classLoaders.add(new WeakReference<ClassLoader>(WebjarsJavaScriptResourceReference.class.getClassLoader()));
         classLoaders.add(new WeakReference<ClassLoader>(Thread.currentThread().getContextClassLoader()));
         classLoaders.add(new WeakReference<ClassLoader>(AssetLocator.class.getClassLoader()));
         classLoaders.add(new WeakReference<ClassLoader>(getClass().getClassLoader()));
@@ -56,38 +56,42 @@ public class WebjarsResourceFinder implements IResourceFinder {
      */
     @Override
     public IResourceStream find(final Class<?> clazz, final String pathName) {
-        final int pos = pathName != null ? pathName.lastIndexOf("/webjars/") : -1;
 
-        if (WebjarsJavaScriptResourceReference.class.equals(clazz) && pos > -1) {
-            try {
-                final String webjarsPath = AssetLocator.getFullPath(pathName.substring(pos));
 
-                LOG.debug("webjars path: {}", webjarsPath);
+        if (WebjarsJavaScriptResourceReference.class.equals(clazz) || WebjarsCssResourceReference.class.equals(clazz)) {
+            final int pos = pathName != null ? pathName.lastIndexOf("/webjars/") : -1;
 
-                if (webjarsPath != null) {
-                    for (WeakReference<ClassLoader> classLoader : classLoaders) {
-                        final ClassLoader cl = classLoader.get();
+            if (pos > -1) {
+                try {
+                    final String webjarsPath = AssetLocator.getFullPath(pathName.substring(pos));
 
-                        if (cl != null) {
-                            final URL url = cl.getResource(webjarsPath);
+                    LOG.debug("webjars path: {}", webjarsPath);
 
-                            LOG.debug("webjars url: {} from: {}; used ClassLoader: {}", new Object[] { url, webjarsPath, classLoader.get() });
+                    if (webjarsPath != null) {
+                        for (WeakReference<ClassLoader> classLoader : classLoaders) {
+                            final ClassLoader cl = classLoader.get();
 
-                            if (url != null) {
-                                return new UrlResourceStream(url);
+                            if (cl != null) {
+                                final URL url = cl.getResource(webjarsPath);
+
+                                LOG.debug("webjars url: {} from: {}; used ClassLoader: {}", new Object[] { url, webjarsPath, classLoader.get() });
+
+                                if (url != null) {
+                                    return new UrlResourceStream(url);
+                                }
                             }
                         }
                     }
+                } catch (RuntimeException e) {
+                    LOG.error("can't locate resource for: {}; {}", new Object[] {
+                            pathName, e.getMessage(), e
+                    });
+
+                    return null;
                 }
-            } catch (RuntimeException e) {
-                LOG.error("can't locate resource for: {}; {}", new Object[] {
-                        pathName, e.getMessage(), e
-                });
 
-                return null;
+                LOG.debug("there is no webjars resource for: {}", pathName);
             }
-
-            LOG.debug("there is no webjars resource for: {}", pathName);
         }
 
         return null;

@@ -40,7 +40,7 @@ public final class WicketWebjars {
      * @return path with leading slash
      */
     private static String appendLeadingSlash(final String path) {
-        return path.startsWith(PATH_SPLITTER) ? path : PATH_SPLITTER + path;
+        return path.charAt(0) == '/' ? path : PATH_SPLITTER + path;
     }
 
     /**
