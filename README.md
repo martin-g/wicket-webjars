@@ -32,7 +32,7 @@ Installation:
     public void init() {
         super.init();
 
-        Webjars.install(this);
+        WicketWebjars.install(this);
     }
 ```
 

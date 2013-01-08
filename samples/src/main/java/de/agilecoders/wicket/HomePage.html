@@ -15,16 +15,18 @@
             </div>
         </div>
         <div id="bd">
+            <h2>Default wicket resource reference:</h2>
+
             <div id="replace">This text will be replaced by jQuery after <span id="time">5</span> seconds...</div>
             <script>
                 $(function () {
                     var time = 5;
-                    var update = function() {
-                         if (time > 0) {
-                             $("#time").text(time);
-                             time--;
-                             setTimeout(update, 1000);
-                         }
+                    var update = function () {
+                        if (time > 0) {
+                            $("#time").text(time);
+                            time--;
+                            setTimeout(update, 1000);
+                        }
                     };
 
                     setTimeout(update, 0);
@@ -34,6 +36,11 @@
                     }, 5000);
                 });
             </script>
+            <br><br>
+
+            <h2>Static linked resource:</h2>
+            <br>
+            <img src="/webjars/jquery-ui/1.9.2/css/smoothness/images/ui-icons_cd0a0a_256x240.png"/>
         </div>
         <div id="ft">
         </div>

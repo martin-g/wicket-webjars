@@ -1,42 +1,60 @@
 package de.agilecoders.wicket.webjars.request.resource;
 
 import org.apache.wicket.request.resource.CssResourceReference;
+
 import java.util.Locale;
-import static de.agilecoders.wicket.webjars.util.Webjars.prependWebjarsPathIfMissing;
-import static de.agilecoders.wicket.webjars.util.Webjars.useRecentVersion;
+
+import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
+import static de.agilecoders.wicket.webjars.util.WicketWebjars.prependWebjarsPathIfMissing;
 
 /**
  * Static resource reference for webjars css resources. The resources are filtered (stripped comments and
  * whitespace) if there is registered compressor.
- *
+ * <p/>
  * You are able find out how a specific path looks like on http://www.webjars.org/.
  *
  * @author miha
  */
 public class WebjarsCssResourceReference extends CssResourceReference {
 
+    final String originalName;
+
     /**
      * Construct.
      *
-     * @param path The webjars path to load
+     * @param name The webjars path to load
      */
-    public WebjarsCssResourceReference(final String path) {
-        super(WebjarsCssResourceReference.class, useRecentVersion(prependWebjarsPathIfMissing(path)));
+    public WebjarsCssResourceReference(final String name) {
+        super(WebjarsCssResourceReference.class, useRecent(prependWebjarsPathIfMissing(name)));
+
+        this.originalName = name;
+    }
+
+    /**
+     * @return original name of webjars resource before resolving it
+     */
+    public final String getOriginalName() {
+        return originalName;
     }
 
     @Override
-    public Locale getLocale() {
+    public final Locale getLocale() {
         return null;
     }
 
     @Override
-    public String getStyle() {
+    public final String getStyle() {
         return null;
     }
 
     @Override
-    public String getVariation() {
+    public final String getVariation() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "[webjars css resource] " + getOriginalName() + " (resolved name: " + getName() + ")";
     }
 
 }

@@ -86,6 +86,8 @@ public class WebjarsResourceFinder implements IResourceFinder {
 
                 return null;
             }
+
+            LOG.debug("there is no webjars resource for: {}", pathName);
         }
 
         return null;
