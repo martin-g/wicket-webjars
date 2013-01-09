@@ -5,12 +5,12 @@
     <parent>
         <groupId>de.agilecoders.wicket.webjars</groupId>
         <artifactId>wicket-webjars-parent</artifactId>
-        <version>0.1.1-SNAPSHOT</version>
+        <version>0.2.0</version>
     </parent>
 
     <groupId>de.agilecoders.wicket.webjars</groupId>
     <artifactId>wicket-webjars</artifactId>
-    <version>0.1.1-SNAPSHOT</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
     <name>library</name>
 
