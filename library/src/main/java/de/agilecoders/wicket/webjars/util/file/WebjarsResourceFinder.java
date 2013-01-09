@@ -1,9 +1,10 @@
 package de.agilecoders.wicket.webjars.util.file;
 
-import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
-import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
+import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
+import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.core.util.resource.UrlResourceStream;
 import org.apache.wicket.util.file.IResourceFinder;
+import org.apache.wicket.util.lang.Args;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +42,23 @@ public class WebjarsResourceFinder implements IResourceFinder {
     /**
      * Construct.
      */
-    private WebjarsResourceFinder() {
-        classLoaders.add(new WeakReference<ClassLoader>(Thread.currentThread().getContextClassLoader()));
-        classLoaders.add(new WeakReference<ClassLoader>(AssetLocator.class.getClassLoader()));
-        classLoaders.add(new WeakReference<ClassLoader>(getClass().getClassLoader()));
+    protected WebjarsResourceFinder() {
+        addClassLoader(Thread.currentThread().getContextClassLoader(),
+                       AssetLocator.class.getClassLoader(),
+                       getClass().getClassLoader());
+    }
+
+    /**
+     * adds a {@link ClassLoader} to the set of {@link ClassLoader} to use for resource lookup
+     *
+     * @param classLoaders array of {@link ClassLoader}
+     */
+    protected final void addClassLoader(ClassLoader... classLoaders) {
+        Args.notNull(classLoaders, "classLoaders");
+
+        for (ClassLoader classLoader : classLoaders) {
+            this.classLoaders.add(new WeakReference<ClassLoader>(classLoader));
+        }
     }
 
     /**
@@ -56,9 +70,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
      */
     @Override
     public IResourceStream find(final Class<?> clazz, final String pathName) {
-
-
-        if (WebjarsJavaScriptResourceReference.class.equals(clazz) || WebjarsCssResourceReference.class.equals(clazz)) {
+        if (IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
             final int pos = pathName != null ? pathName.lastIndexOf("/webjars/") : -1;
 
             if (pos > -1) {
@@ -68,16 +80,14 @@ public class WebjarsResourceFinder implements IResourceFinder {
                     LOG.debug("webjars path: {}", webjarsPath);
 
                     if (webjarsPath != null) {
-                        for (WeakReference<ClassLoader> classLoader : classLoaders) {
-                            final ClassLoader cl = classLoader.get();
+                        for (WeakReference<ClassLoader> weakClassLoader : classLoaders) {
+                            final ClassLoader classLoader = weakClassLoader.get();
 
-                            if (cl != null) {
-                                final URL url = cl.getResource(webjarsPath);
+                            if (classLoader != null) {
+                                final IResourceStream stream = newResourceStream(classLoader, webjarsPath);
 
-                                LOG.debug("webjars url: {} from: {}; used ClassLoader: {}", new Object[] { url, webjarsPath, classLoader.get() });
-
-                                if (url != null) {
-                                    return new UrlResourceStream(url);
+                                if (stream != null) {
+                                    return stream;
                                 }
                             }
                         }
@@ -87,11 +97,32 @@ public class WebjarsResourceFinder implements IResourceFinder {
                             pathName, e.getMessage(), e
                     });
 
-                    return null;
+                    throw new WicketRuntimeException(e);
                 }
 
                 LOG.debug("there is no webjars resource for: {}", pathName);
             }
+        }
+
+        return null;
+    }
+
+    /**
+     * creates a new {@link IResourceStream} for given resource path with should be loaded by given
+     * class loader.
+     *
+     * @param classLoader The class loader to use for resource loading
+     * @param webjarsPath The resource to load
+     * @return new {@link IResourceStream} instance that represents the content of given resource path or
+     *         null if resource wasn't found
+     */
+    protected IResourceStream newResourceStream(final ClassLoader classLoader, final String webjarsPath) {
+        final URL url = classLoader.getResource(webjarsPath);
+
+        LOG.debug("webjars url: {} from: {}; used ClassLoader: {}", new Object[] { url, webjarsPath, classLoader });
+
+        if (url != null) {
+            return new UrlResourceStream(url);
         }
 
         return null;

@@ -15,7 +15,7 @@ import static de.agilecoders.wicket.webjars.util.WicketWebjars.prependWebjarsPat
  *
  * @author miha
  */
-public class WebjarsJavaScriptResourceReference extends JavaScriptResourceReference {
+public class WebjarsJavaScriptResourceReference extends JavaScriptResourceReference implements IWebjarsResourceReference {
 
     private final String originalName;
 
@@ -31,8 +31,9 @@ public class WebjarsJavaScriptResourceReference extends JavaScriptResourceRefere
     }
 
     /**
-     * @return original name of webjars resource before resolving it
+     * {@inheritDoc}
      */
+    @Override
     public final String getOriginalName() {
         return originalName;
     }
