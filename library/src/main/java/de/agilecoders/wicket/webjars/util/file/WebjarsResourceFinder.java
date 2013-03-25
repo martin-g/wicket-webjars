@@ -1,6 +1,10 @@
 package de.agilecoders.wicket.webjars.util.file;
 
-import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
+import java.lang.ref.WeakReference;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.core.util.resource.UrlResourceStream;
 import org.apache.wicket.util.file.IResourceFinder;
@@ -10,10 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.webjars.AssetLocator;
 
-import java.lang.ref.WeakReference;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
+import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
 
 /**
  * Knows how to find webjars resources.

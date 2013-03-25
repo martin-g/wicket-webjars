@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<name>webjar-container-fragment</name>
+	<artifactId>webjar-container-fragment</artifactId>
+	<groupId>de.agilecoders.wicket.webjars</groupId>
+	<version>0.2.0</version>
+	<packaging>bundle</packaging>
+
+	<parent>
+		<groupId>de.agilecoders.wicket.webjars</groupId>
+		<artifactId>wicket-webjars-parent</artifactId>
+		<version>0.2.0</version>
+	</parent>
+
+	<properties>
+		<jquerypp.version>1.0b2</jquerypp.version>
+		<jquery.version>1.9.0</jquery.version>
+		<modernizr.version>2.6.2-1</modernizr.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquerypp</artifactId>
+			<version>${jquerypp.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>${jquery.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>modernizr</artifactId>
+			<version>${modernizr.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+
+						<!-- Attach this fragment to the webjar bundle, allowing the resource lookup to work -->
+						<Fragment-Host>wrap_mvn_org.webjars_webjars-locator_0.1</Fragment-Host>
+						<Bundle-Classpath>.</Bundle-Classpath>
+
+						<!-- This includes the webjars within this bundle and unpacks them so that we can access their content -->
+						<Embed-Dependency>
+							bootstrap;scope|runtime;inline=true,
+							jquerypp;scope|runtime;inline=true,
+							jquery;scope|runtime;inline=true,
+							modernizr;scope|runtime;inline=true
+						</Embed-Dependency>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
