@@ -1,35 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>de.agilecoders.wicket.webjars</groupId>
-        <artifactId>wicket-webjars-parent</artifactId>
-        <version>0.2.0</version>
-    </parent>
+	<parent>
+		<groupId>de.agilecoders.wicket.webjars</groupId>
+		<artifactId>wicket-webjars-parent</artifactId>
+		<version>0.2.0</version>
+	</parent>
 
-    <groupId>de.agilecoders.wicket.webjars</groupId>
-    <artifactId>wicket-webjars</artifactId>
-    <version>0.2.0</version>
-    <packaging>jar</packaging>
-    <name>library</name>
+	<groupId>de.agilecoders.wicket.webjars</groupId>
+	<artifactId>wicket-webjars</artifactId>
+	<version>0.2.0</version>
+	<packaging>bundle</packaging>
+	<name>library</name>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>${mvn.build.java.version}</source>
-                    <target>${mvn.build.java.version}</target>
-                    <compilerVersion>${mvn.build.java.version}</compilerVersion>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                    <optimize>true</optimize>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<dependencies>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.2.0</version>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${mvn.build.java.version}</source>
+					<target>${mvn.build.java.version}</target>
+					<compilerVersion>${mvn.build.java.version}</compilerVersion>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+
+
+			<!-- BD - Allows for jar to be built with an OSGi compatiable manifest -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+					</instructions>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
