@@ -1,21 +1,25 @@
 package de.agilecoders.wicket.webjars.util;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import org.apache.commons.lang.StringUtils;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.webjars.AssetLocator;
-
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import org.reflections.vfs.Vfs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.webjars.AssetLocator;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
+
+import de.agilecoders.wicket.webjars.util.osgi.BundleUrlType;
 
 /**
  * Callable that loads the recent version string of given webjars resource
@@ -31,7 +35,12 @@ public class RecentVersionCallable implements Callable<String> {
      * Holder for reflection framework configuration builder
      */
     private static final class AssetLocatorConfigurationBuilder {
-        private static ConfigurationBuilder instance = new ConfigurationBuilder()
+        static {
+        	//BD - This ensures that anything with the bundle protocol can be handled
+        	Vfs.addDefaultURLTypes(new BundleUrlType());
+        }
+    	
+    	private static ConfigurationBuilder instance = new ConfigurationBuilder() 
                 .addUrls(ClasspathHelper.forPackage(StringUtils.join(AssetLocator.WEBJARS_PATH_PREFIX, "."), AssetLocator.class.getClassLoader()))
                 .setScanners(new ResourcesScanner());
     }
