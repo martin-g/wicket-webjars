@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<!-- This features XML allows us to provision Karaf easily and consistently. 
+	Each feature installs a set of bundles, which once ready provide an environment within which we can run unit tests -->
+	<feature name="wicket" version="6.6.0">
+		<bundle dependency="true">wrap:mvn:org.apache.wicket/wicket-core/6.6.0</bundle>
+		<bundle dependency="true">wrap:mvn:org.apache.wicket/wicket-request/6.6.0</bundle>
+		<bundle dependency="true">wrap:mvn:org.apache.wicket/wicket-util/6.6.0</bundle>
+	</feature>
+
+	<feature name="supportingLibs" version="0.8.2-SNAPSHOT">
+		<bundle dependency="true">wrap:mvn:org.reflections/reflections/0.9.8</bundle>
+		<bundle dependency="true">mvn:com.google.guava/guava/13.0.1</bundle>
+		<bundle dependency="true">wrap:mvn:org.apache.directory.studio/org.apache.commons.lang/2.6</bundle>
+	</feature>
+
+	<feature name="webjars" version="0.2.1-SNAPSHOT">
+		<bundle dependency="true">mvn:de.agilecoders.wicket.webjars/wicket-webjars/0.2.1-SNAPSHOT</bundle>
+		<bundle dependency="true">mvn:de.agilecoders.wicket.webjars/webjar-container-fragment/0.2.1-SNAPSHOT</bundle>
+		<bundle dependency="true">wrap:mvn:org.webjars/webjars-locator/0.1</bundle>
+	</feature>
+</features>

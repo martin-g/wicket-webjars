@@ -4,13 +4,13 @@
 	<name>webjar-container-fragment</name>
 	<artifactId>webjar-container-fragment</artifactId>
 	<groupId>de.agilecoders.wicket.webjars</groupId>
-	<version>0.2.0</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<packaging>bundle</packaging>
 
 	<parent>
 		<groupId>de.agilecoders.wicket.webjars</groupId>
 		<artifactId>wicket-webjars-parent</artifactId>
-		<version>0.2.0</version>
+		<version>0.2.1-SNAPSHOT</version>
 	</parent>
 
 	<properties>
@@ -80,4 +80,5 @@
 		</plugins>
 	</build>
 
+	<description>An example of how to provide webjar resources in an OSGi environment.</description>
 </project>

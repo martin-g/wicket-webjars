@@ -16,12 +16,22 @@ import org.webjars.AssetLocator;
  */
 public class BundleUrlType implements UrlType {
 
-	//BD - Note that this changes to bundle in R4.3
-	private static final String BUNDLE_PROTOCOL = "bundleresource";
+	// BD - Note that this changes to bundle in R4.3
+	private static final String[] BUNDLE_PROTOCOLS = { "bundleresource", "bundle" };
 
 	@Override
 	public boolean matches(URL url) throws Exception {
-		return BUNDLE_PROTOCOL.equals(url.getProtocol());
+		boolean result = false;
+
+		for (String protocol : BUNDLE_PROTOCOLS) {
+			result = protocol.equals(url.getProtocol());
+			
+			if(result){
+				break;
+			}
+		}
+		
+		return result;
 	}
 
 	@Override

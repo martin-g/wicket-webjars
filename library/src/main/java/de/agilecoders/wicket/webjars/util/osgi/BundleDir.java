@@ -39,16 +39,19 @@ public class BundleDir implements Dir {
 			public Iterator<Vfs.File> iterator() {
 				return new AbstractIterator<Vfs.File>() {
 
-					//BD - Get all of the entries in this bundle
+					// BD - Get all of the entries in this bundle
 					final Enumeration<URL> entries = bundle.findEntries("", "*", true);
 
 					protected Vfs.File computeNext() {
-						while (entries.hasMoreElements()) {
-							URL entry = entries.nextElement();
 
-							//BD - Exclude dirs, as with ZipDir
-							if (!entry.getFile().endsWith("/")) {
-								return new BundleFile(BundleDir.this, entry);
+						if (entries != null) {
+							while (entries.hasMoreElements()) {
+								URL entry = entries.nextElement();
+
+								// BD - Exclude dirs, as with ZipDir
+								if (!entry.getFile().endsWith("/")) {
+									return new BundleFile(BundleDir.this, entry);
+								}
 							}
 						}
 

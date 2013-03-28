@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.agilecoders.wicket.webjars</groupId>
+		<artifactId>wicket-webjars-parent</artifactId>
+		<version>0.2.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>de.agilecoders.wicket.webjars</groupId>
+	<artifactId>wicket-webjars-itests</artifactId>
+	<version>0.2.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>itests</name>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+		<!-- Pax Exam - OSGi Testing Framework -->
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-junit4</artifactId>
+			<version>${exam.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Apache Karaf Pax Exam Bridge -->
+		<dependency>
+			<groupId>org.apache.karaf.tooling.exam</groupId>
+			<artifactId>org.apache.karaf.tooling.exam.container</artifactId>
+			<version>${karaf.tooling.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Apache Karaf -->
+		<dependency>
+			<groupId>org.apache.karaf</groupId>
+			<artifactId>apache-karaf</artifactId>
+			<version>${karaf.version}</version>
+			<type>zip</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>de.agilecoders.wicket.webjars</groupId>
+			<artifactId>wicket-webjars</artifactId>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>${mvn.build.java.version}</source>
+					<target>${mvn.build.java.version}</target>
+					<compilerVersion>${mvn.build.java.version}</compilerVersion>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+
+			<!-- Generate depends file, so versionAsInProject() works -->
+			<plugin>
+				<groupId>org.apache.servicemix.tooling</groupId>
+				<artifactId>depends-maven-plugin</artifactId>
+				<version>${plugin.depends.version}</version>
+				<executions>
+					<execution>
+						<id>generate-depends-file</id>
+						<goals>
+							<goal>generate-depends-file</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<description>A simple integration test, to prove that webjars are now able to function in an OSGi container.</description>
+</project>
