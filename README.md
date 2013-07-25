@@ -99,3 +99,9 @@ public WebjarsComponent extends Panel {
   }
 }
 ```
+
+Authors
+-------
+
+[![Ohloh profile for Michael Haitz](https://www.ohloh.net/accounts/235496/widgets/account_detailed.gif)](https://www.ohloh.net/accounts/235496?ref=Detailed) 
+
