@@ -72,7 +72,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
     @Override
     public IResourceStream find(final Class<?> clazz, final String pathName) {
         if (IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
-            final int pos = pathName != null ? pathName.lastIndexOf("/webjars/") : -1;
+            final int pos = pathName != null ? pathName.lastIndexOf("webjars/") : -1;
 
             if (pos > -1) {
                 try {
