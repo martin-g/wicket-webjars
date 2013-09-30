@@ -2,14 +2,13 @@ package de.agilecoders.wicket.webjars.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import org.apache.commons.lang.StringUtils;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.webjars.AssetLocator;
+import org.webjars.WebJarAssetLocator;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -32,7 +31,7 @@ public class RecentVersionCallable implements Callable<String> {
      */
     private static final class AssetLocatorConfigurationBuilder {
         private static ConfigurationBuilder instance = new ConfigurationBuilder()
-                .addUrls(ClasspathHelper.forPackage(StringUtils.join(AssetLocator.WEBJARS_PATH_PREFIX, "."), AssetLocator.class.getClassLoader()))
+                .addUrls(ClasspathHelper.forPackage(WebJarAssetLocator.WEBJARS_PACKAGE, WebJarAssetLocator.class.getClassLoader()))
                 .setScanners(new ResourcesScanner());
     }
 
@@ -92,7 +91,7 @@ public class RecentVersionCallable implements Callable<String> {
                 return versions.get(0);
             } else if (versions.size() > 1) {
                 LOG.warn("more than one version of a dependency is not supported till now. webjars resource: {}; available versions: {}; using: {}",
-                         new Object[] { fileName, versions, versions.get(0) });
+                         fileName, versions, versions.get(0));
 
                 return versions.get(0);
             } else {

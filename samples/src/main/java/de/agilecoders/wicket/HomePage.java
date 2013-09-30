@@ -1,6 +1,8 @@
 package de.agilecoders.wicket;
 
+import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
+import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
@@ -18,5 +20,7 @@ public class HomePage extends WebPage {
         super.renderHead(response);
 
         response.render(JavaScriptHeaderItem.forReference(new WebjarsJavaScriptResourceReference("jquery/current/jquery.min.js")));
+        response.render(CssHeaderItem.forReference(new WebjarsCssResourceReference("bootstrap/current/css/bootstrap.min.css")));
+        response.render(CssHeaderItem.forReference(new WebjarsCssResourceReference("bootstrap/current/css/bootstrap-theme.min.css")));
     }
 }

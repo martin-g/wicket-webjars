@@ -6,11 +6,10 @@
         <groupId>de.agilecoders.wicket.webjars</groupId>
         <artifactId>wicket-webjars-parent</artifactId>
         <version>0.2.1-SNAPSHOT</version>
+        <relativePath>../</relativePath>
     </parent>
 
-    <groupId>de.agilecoders.wicket.webjars</groupId>
     <artifactId>samples</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <dependencies>
@@ -32,15 +31,21 @@
         </dependency>
 
         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.4</version>
+            <version>1.7.5</version>
         </dependency>
 
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.17</version>
         </dependency>
     </dependencies>
 
