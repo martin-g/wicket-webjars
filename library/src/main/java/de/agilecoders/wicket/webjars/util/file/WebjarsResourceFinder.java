@@ -43,14 +43,21 @@ public class WebjarsResourceFinder implements IResourceFinder {
      * Construct.
      */
     protected WebjarsResourceFinder() {
-        ClassLoader[] classLoaders = new ClassLoader[] {
+        ClassLoader[] classLoaders = classLoaders();
+
+        locator = newLocator(classLoaders);
+        urlHandler = new ClasspathUrlStreamHandler(classLoaders);
+    }
+
+    /**
+     * @return classloaders to use
+     */
+    protected ClassLoader[] classLoaders() {
+        return new ClassLoader[] {
                 Thread.currentThread().getContextClassLoader(),
                 WebJarAssetLocator.class.getClassLoader(),
                 getClass().getClassLoader()
         };
-
-        locator = newLocator(classLoaders);
-        urlHandler = new ClasspathUrlStreamHandler(classLoaders);
     }
 
     /**
