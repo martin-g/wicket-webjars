@@ -18,7 +18,7 @@ Add maven dependency:
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>wicket-webjars</artifactId>
-  <version>0.3.0</version>
+  <version>0.3.1</version>
 </dependency>
 ```
 
