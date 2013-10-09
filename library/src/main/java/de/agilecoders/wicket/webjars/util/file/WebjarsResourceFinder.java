@@ -8,6 +8,7 @@ import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.webjars.VfsAwareWebJarAssetLocator;
 import org.webjars.WebJarAssetLocator;
 
 import java.net.MalformedURLException;
@@ -36,7 +37,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
         return Holder.instance;
     }
 
-    private final WebJarAssetLocator locator;
+    private final VfsAwareWebJarAssetLocator locator;
     private final ClasspathUrlStreamHandler urlHandler;
 
     /**
@@ -45,7 +46,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
     protected WebjarsResourceFinder() {
         ClassLoader[] classLoaders = classLoaders();
 
-        locator = newLocator(classLoaders);
+        locator = newLocator();
         urlHandler = new ClasspathUrlStreamHandler(classLoaders);
     }
 
@@ -55,6 +56,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
     protected ClassLoader[] classLoaders() {
         return new ClassLoader[] {
                 Thread.currentThread().getContextClassLoader(),
+                VfsAwareWebJarAssetLocator.class.getClassLoader(),
                 WebJarAssetLocator.class.getClassLoader(),
                 getClass().getClassLoader()
         };
@@ -64,10 +66,17 @@ public class WebjarsResourceFinder implements IResourceFinder {
      * @param classLoaders the classloaders to use to load resources
      * @return new resource locator instance
      */
-    protected WebJarAssetLocator newLocator(ClassLoader[] classLoaders) {
-        return new WebJarAssetLocator(
-                WebJarAssetLocator.getFullPathIndex(Pattern.compile(".*"), classLoaders)
+    protected VfsAwareWebJarAssetLocator newLocator(ClassLoader[] classLoaders) {
+        return new VfsAwareWebJarAssetLocator(
+                VfsAwareWebJarAssetLocator.getFullPathIndex(Pattern.compile(".*"), classLoaders)
         );
+    }
+
+    /**
+     * @return new resource locator instance
+     */
+    protected VfsAwareWebJarAssetLocator newLocator() {
+        return newLocator(classLoaders());
     }
 
     /**
