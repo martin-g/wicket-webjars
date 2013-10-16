@@ -4,6 +4,8 @@ import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
 import org.apache.wicket.Application;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.lang.Args;
+import org.webjars.AssetPathCollector;
+import org.webjars.VfsAwareWebJarAssetLocator;
 
 import java.util.List;
 
@@ -14,6 +16,15 @@ import java.util.List;
  */
 public final class WicketWebjars {
     private static final String PATH_SPLITTER = "/";
+
+    /**
+     * registers an additional asset collector
+     *
+     * @param collectorArr the collectors to register
+     */
+    public static void registerCollector(AssetPathCollector... collectorArr) {
+        VfsAwareWebJarAssetLocator.registerCollector(collectorArr);
+    }
 
     /**
      * prepends the webjars path if missing

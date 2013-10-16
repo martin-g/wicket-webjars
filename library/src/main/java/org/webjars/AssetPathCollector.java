@@ -1,21 +1,16 @@
 package org.webjars;
 
-import org.jboss.vfs.VirtualFile;
-
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -145,39 +140,4 @@ public interface AssetPathCollector {
         }
     }
 
-    public static class VfsJarAssetPathCollector extends JarAssetPathCollector {
-        private static final Pattern PATTERN = Pattern.compile("/([^/]*\\.jar)");
-
-        public VfsJarAssetPathCollector() {
-            super("vfs");
-        }
-
-        @Override
-        protected JarFile newJarFile(URL url) {
-            try {
-                URLConnection conn = url.openConnection();
-                VirtualFile vf = (VirtualFile) conn.getContent();
-                File contentsFile = vf.getPhysicalFile();
-                String c = contentsFile.getPath();
-
-                final String jarName = toJarName(url);
-                final String pathToJar = c.substring(0, c.indexOf("/contents/"));
-
-                return new JarFile(new File(pathToJar, jarName));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        private static String toJarName(URL url) throws FileNotFoundException {
-            final String path = url.getPath();
-
-            Matcher m = PATTERN.matcher(path);
-            if (m.find()) {
-                return m.group(1);
-            }
-
-            throw new FileNotFoundException(url.getPath());
-        }
-    }
 }

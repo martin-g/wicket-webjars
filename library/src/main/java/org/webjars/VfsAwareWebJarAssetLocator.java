@@ -1,5 +1,7 @@
 package org.webjars;
 
+import com.google.common.collect.Lists;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -30,9 +32,19 @@ public class VfsAwareWebJarAssetLocator {
     private static final Set<AssetPathCollector> collectors = new HashSet<AssetPathCollector>();
 
     static {
-        collectors.add(new AssetPathCollector.FileAssetPathCollector(WEBJARS_PATH_PREFIX));
-        collectors.add(new AssetPathCollector.JarAssetPathCollector());
-        collectors.add(new AssetPathCollector.VfsJarAssetPathCollector());
+        registerCollector(new AssetPathCollector.FileAssetPathCollector(WebJarAssetLocator.WEBJARS_PATH_PREFIX),
+                          new AssetPathCollector.JarAssetPathCollector());
+    }
+
+    /**
+     * registers an additional collector
+     *
+     * @param collectorArr the collectors to register
+     */
+    public static void registerCollector(AssetPathCollector... collectorArr) {
+        synchronized (collectors) {
+            collectors.addAll(Lists.newArrayList(collectorArr));
+        }
     }
 
     /*
@@ -42,7 +54,7 @@ public class VfsAwareWebJarAssetLocator {
         final Set<URL> urls = new HashSet<URL>();
         for (final ClassLoader classLoader : classLoaders) {
             try {
-                final Enumeration<URL> enumeration = classLoader.getResources(WEBJARS_PATH_PREFIX);
+                final Enumeration<URL> enumeration = classLoader.getResources(WebJarAssetLocator.WEBJARS_PATH_PREFIX);
                 while (enumeration.hasMoreElements()) {
                     urls.add(enumeration.nextElement());
                 }
