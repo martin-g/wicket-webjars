@@ -2,7 +2,6 @@ package de.agilecoders.wicket.webjars.util.file;
 
 import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
 import de.agilecoders.wicket.webjars.util.ClasspathUrlStreamHandler;
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.core.util.resource.UrlResourceStream;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
