@@ -100,13 +100,11 @@ public class WebjarsResourceFinder implements IResourceFinder {
                     LOG.debug("webjars path: {}", webjarsPath);
 
                     stream = newResourceStream(webjarsPath);
-                } catch (RuntimeException e) {
+                } catch (Exception e) {
                     LOG.error("can't locate resource for: {}; {}", pathName, e.getMessage(), e);
-
-                    throw new WicketRuntimeException(e);
                 }
 
-                if (stream != null) {
+                if (stream == null) {
                     LOG.debug("there is no webjars resource for: {}", pathName);
                 }
             }
