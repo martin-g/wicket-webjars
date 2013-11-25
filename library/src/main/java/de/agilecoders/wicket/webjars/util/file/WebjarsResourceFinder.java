@@ -2,7 +2,6 @@ package de.agilecoders.wicket.webjars.util.file;
 
 import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
 import de.agilecoders.wicket.webjars.util.ClasspathUrlStreamHandler;
-import org.apache.wicket.WicketRuntimeException;
 import org.apache.wicket.core.util.resource.UrlResourceStream;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
@@ -100,13 +99,11 @@ public class WebjarsResourceFinder implements IResourceFinder {
                     LOG.debug("webjars path: {}", webjarsPath);
 
                     stream = newResourceStream(webjarsPath);
-                } catch (RuntimeException e) {
-                    LOG.error("can't locate resource for: {}; {}", pathName, e.getMessage(), e);
-
-                    throw new WicketRuntimeException(e);
+                } catch (Exception e) {
+                    LOG.info("can't locate resource for: {}; {}", pathName, e.getMessage(), e);
                 }
 
-                if (stream != null) {
+                if (stream == null) {
                     LOG.debug("there is no webjars resource for: {}", pathName);
                 }
             }
