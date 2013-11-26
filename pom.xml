@@ -60,7 +60,7 @@
             <dependency>
                 <groupId>org.webjars</groupId>
                 <artifactId>webjars-locator</artifactId>
-                <version>0.5</version>
+                <version>${org.webjars.locator.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -201,7 +201,8 @@
         <mvn.version>3.0.0</mvn.version>
 
         <versions-maven-plugin.version>1.3.1</versions-maven-plugin.version>
-        <wicket.version>6.11.0</wicket.version>
+        <org.webjars.locator.version>0.6</org.webjars.locator.version>
+        <wicket.version>6.12.0</wicket.version>
     </properties>
 
 </project>
