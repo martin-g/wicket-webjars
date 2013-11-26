@@ -18,13 +18,13 @@ Add maven dependency:
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>wicket-webjars</artifactId>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
 </dependency>
 
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>vfs-support</artifactId>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
 </dependency>
 ```
 
@@ -73,7 +73,6 @@ Add dependencies to your pom.xml:
   <dependency>
       <groupId>de.agilecoders.wicket.webjars</groupId>
       <artifactId>wicket-webjars</artifactId>
-      <version>0.3.0</version>
   </dependency>
 
   <dependency>
