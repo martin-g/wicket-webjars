@@ -1,11 +1,12 @@
 package de.agilecoders.wicket.webjars.util;
 
+import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
+
 import org.apache.wicket.Application;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.lang.Args;
-import org.webjars.AssetPathCollector;
-import org.webjars.VfsAwareWebJarAssetLocator;
+import org.webjars.WebJarAssetLocator;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public final class WicketWebjars {
      * @param collectorArr the collectors to register
      */
     public static void registerCollector(AssetPathCollector... collectorArr) {
-        VfsAwareWebJarAssetLocator.registerCollector(collectorArr);
+        WebJarAssetLocator.registerCollector(collectorArr);
     }
 
     /**

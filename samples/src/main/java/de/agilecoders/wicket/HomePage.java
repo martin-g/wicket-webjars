@@ -20,7 +20,7 @@ public class HomePage extends WebPage {
         super.renderHead(response);
 
         response.render(JavaScriptHeaderItem.forReference(new WebjarsJavaScriptResourceReference("jquery/current/jquery.min.js")));
-        response.render(CssHeaderItem.forReference(new WebjarsCssResourceReference("bootstrap/current/css/bootstrap.min.css")));
-        response.render(CssHeaderItem.forReference(new WebjarsCssResourceReference("bootstrap/current/css/bootstrap-theme.min.css")));
+        response.render(CssHeaderItem.forReference(new WebjarsCssResourceReference("bootstrap/current/css/bootstrap.css")));
+        response.render(CssHeaderItem.forReference(new WebjarsCssResourceReference("bootstrap/current/css/bootstrap-theme.css")));
     }
 }
