@@ -93,7 +93,7 @@ public interface AssetPathCollector {
         }
 
         private void aggregateFile(final File file, final Set<String> aggregatedChildren, final Pattern filterExpr) {
-            final String path = file.getPath();
+            final String path = file.getPath().replaceAll("\\", "/");
             final String relativePath = path.substring(path.indexOf(pathPrefix));
             if (filterExpr.matcher(relativePath).matches()) {
                 aggregatedChildren.add(relativePath);
