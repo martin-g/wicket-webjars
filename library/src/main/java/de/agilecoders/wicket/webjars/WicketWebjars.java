@@ -1,12 +1,10 @@
-package de.agilecoders.wicket.webjars.util;
+package de.agilecoders.wicket.webjars;
 
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
-
 import org.apache.wicket.Application;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.lang.Args;
-import org.webjars.WebJarAssetLocator;
 
 import java.util.List;
 

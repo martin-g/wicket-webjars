@@ -1,5 +1,9 @@
 package de.agilecoders.wicket.webjars.collectors;
 
+import de.agilecoders.wicket.webjars.vfs.ExtendedUrlTypeVFS;
+import org.jboss.vfs.VirtualFile;
+import org.reflections.vfs.Vfs;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,60 +14,56 @@ import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jboss.vfs.VirtualFile;
-import org.reflections.vfs.Vfs;
-
-import de.agilecoders.wicket.webjars.vfs.ExtendedUrlTypeVFS;
-
 /**
  * Adds support of vfs protocol to webjars.
- * 
+ *
  * @author miha
  */
 public class VfsJarAssetPathCollector extends JarAssetPathCollector {
-	private static final Pattern PATTERN = Pattern.compile("/([^/]*\\.jar)");
+    private static final Pattern PATTERN = Pattern.compile("/([^/]*\\.jar)");
 
-	/**
-	 * Construct.
-	 */
-	public VfsJarAssetPathCollector() {
-		super("vfs", "vfszip", "vfsfile");
-		addDefaultUrlTypes();
-	}
+    /**
+     * Construct.
+     */
+    public VfsJarAssetPathCollector() {
+        super("vfs", "vfszip", "vfsfile");
 
-	@Override
-	protected JarFile newJarFile(URL url) {
-		try {
-			URLConnection conn = url.openConnection();
-			VirtualFile vf = (VirtualFile) conn.getContent();
-			File contentsFile = vf.getPhysicalFile();
-			String c = contentsFile.getPath().replace('\\', '/');
+        addDefaultUrlTypes();
+    }
 
-			final String jarName = toJarName(url);
-			final String pathToJar = c.substring(0, c.indexOf("/contents/"));
+    @Override
+    protected JarFile newJarFile(URL url) {
+        try {
+            URLConnection conn = url.openConnection();
+            VirtualFile vf = (VirtualFile) conn.getContent();
+            File contentsFile = vf.getPhysicalFile();
+            String c = contentsFile.getPath().replace('\\', '/');
 
-			return new JarFile(new File(pathToJar, jarName));
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            final String jarName = toJarName(url);
+            final String pathToJar = c.substring(0, c.indexOf("/contents/"));
 
-	private static String toJarName(URL url) throws FileNotFoundException {
-		final String path = url.getPath();
+            return new JarFile(new File(pathToJar, jarName));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-		Matcher m = PATTERN.matcher(path);
-		if (m.find()) {
-			return m.group(1);
-		}
+    private static String toJarName(URL url) throws FileNotFoundException {
+        final String path = url.getPath();
 
-		throw new FileNotFoundException(url.getPath());
-	}
+        Matcher m = PATTERN.matcher(path);
+        if (m.find()) {
+            return m.group(1);
+        }
 
-	private static AtomicBoolean added = new AtomicBoolean(false);
+        throw new FileNotFoundException(url.getPath());
+    }
 
-	private static void addDefaultUrlTypes() {
-		if (!added.getAndSet(true)) {
-			Vfs.addDefaultURLTypes(new ExtendedUrlTypeVFS());
-		}
-	}
+    private static AtomicBoolean added = new AtomicBoolean(false);
+
+    private static void addDefaultUrlTypes() {
+        if (!added.getAndSet(true)) {
+            Vfs.addDefaultURLTypes(new ExtendedUrlTypeVFS());
+        }
+    }
 }

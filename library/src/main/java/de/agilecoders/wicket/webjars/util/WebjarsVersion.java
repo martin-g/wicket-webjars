@@ -1,5 +1,6 @@
 package de.agilecoders.wicket.webjars.util;
 
+import de.agilecoders.wicket.webjars.WicketWebjars;
 import org.apache.wicket.util.lang.Args;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

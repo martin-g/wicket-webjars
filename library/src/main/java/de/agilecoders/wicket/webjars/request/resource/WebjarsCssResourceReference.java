@@ -4,8 +4,8 @@ import org.apache.wicket.request.resource.CssResourceReference;
 
 import java.util.Locale;
 
+import static de.agilecoders.wicket.webjars.WicketWebjars.prependWebjarsPathIfMissing;
 import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
-import static de.agilecoders.wicket.webjars.util.WicketWebjars.prependWebjarsPathIfMissing;
 
 /**
  * Static resource reference for webjars css resources. The resources are filtered (stripped comments and

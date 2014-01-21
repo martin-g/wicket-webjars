@@ -2,13 +2,14 @@ package de.agilecoders.wicket.webjars.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import de.agilecoders.wicket.webjars.WebJarAssetLocator;
+import de.agilecoders.wicket.webjars.WicketWebjars;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.webjars.WebJarAssetLocator;
 
 import java.util.List;
 import java.util.concurrent.Callable;

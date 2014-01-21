@@ -14,43 +14,48 @@ import java.util.regex.Pattern;
 
 public class JarAssetPathCollector extends ProtocolAwareAssetPathCollector {
 
-	public JarAssetPathCollector() {
-		super("jar");
-	}
+    /**
+     * Construct accepting the jar protocol.
+     */
+    public JarAssetPathCollector() {
+        super("jar");
+    }
 
-	protected JarAssetPathCollector(final String protocol) {
-		super(protocol);
-	}
+    /**
+     * Construct.
+     *
+     * @param protocols the protocols to accept
+     */
+    protected JarAssetPathCollector(final String... protocols) {
+        super(protocols);
+    }
 
-	protected JarAssetPathCollector(final String... protocols) {
-		super(protocols);
-	}
+    @Override
+    public Collection<String> collect(URL url, Pattern filterExpr) {
+        final JarFile jarFile = newJarFile(url);
+        final Set<String> assetPaths = new HashSet<String>();
 
-	@Override
-	public Collection<String> collect(URL url, Pattern filterExpr) {
-		final JarFile jarFile = newJarFile(url);
-		final Set<String> assetPaths = new HashSet<String>();
+        final Enumeration<JarEntry> entries = jarFile.entries();
+        while (entries.hasMoreElements()) {
+            final JarEntry entry = entries.nextElement();
+            final String assetPathCandidate = entry.getName();
 
-		final Enumeration<JarEntry> entries = jarFile.entries();
-		while (entries.hasMoreElements()) {
-			final JarEntry entry = entries.nextElement();
-			final String assetPathCandidate = entry.getName();
-			if (!entry.isDirectory() && filterExpr.matcher(assetPathCandidate).matches()) {
-				assetPaths.add(assetPathCandidate);
-			}
-		}
+            if (!entry.isDirectory() && filterExpr.matcher(assetPathCandidate).matches()) {
+                assetPaths.add(assetPathCandidate);
+            }
+        }
 
-		return assetPaths;
-	}
+        return assetPaths;
+    }
 
-	protected JarFile newJarFile(final URL url) {
-		try {
-			final String path = url.getPath();
-			final File file = new File(URI.create(path.substring(0, path.indexOf("!"))));
+    protected JarFile newJarFile(final URL url) {
+        try {
+            final String path = url.getPath();
+            final File file = new File(URI.create(path.substring(0, path.indexOf("!"))));
 
-			return new JarFile(file);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+            return new JarFile(file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

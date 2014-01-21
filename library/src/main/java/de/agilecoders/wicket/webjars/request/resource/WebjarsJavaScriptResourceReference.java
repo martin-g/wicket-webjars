@@ -4,8 +4,8 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import java.util.Locale;
 
+import static de.agilecoders.wicket.webjars.WicketWebjars.prependWebjarsPathIfMissing;
 import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
-import static de.agilecoders.wicket.webjars.util.WicketWebjars.prependWebjarsPathIfMissing;
 
 /**
  * Static resource reference for javascript webjars resources. The resources are filtered (stripped comments
