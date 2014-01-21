@@ -38,11 +38,12 @@ Installation:
     public void init() {
         super.init();
 
-        // install installs 2 default collector instances (FileAssetPathCollector(WEBJARS_PATH_PREFIX), JarAssetPathCollector)
+        // install installs 2 default collector instances 
+        // (FileAssetPathCollector(WEBJARS_PATH_PREFIX), JarAssetPathCollector)
         // and a webjars resource finder.
         WicketWebjars.install(this);
 
-        // register vfs collector to use webjars on jboss (please add maven dependency too)
+        // register vfs collector to use webjars on jboss (you don't need to add maven dependency)
         WicketWebjars.registerCollector(new VfsJarAssetPathCollector());
     }
 ```
