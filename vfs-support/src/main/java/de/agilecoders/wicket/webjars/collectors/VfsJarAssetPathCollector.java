@@ -37,7 +37,7 @@ public class VfsJarAssetPathCollector extends AssetPathCollector.JarAssetPathCol
             URLConnection conn = url.openConnection();
             VirtualFile vf = (VirtualFile) conn.getContent();
             File contentsFile = vf.getPhysicalFile();
-            String c = contentsFile.getPath();
+            String c = contentsFile.getPath().replaceAll("\\", "/");
 
             final String jarName = toJarName(url);
             final String pathToJar = c.substring(0, c.indexOf("/contents/"));
