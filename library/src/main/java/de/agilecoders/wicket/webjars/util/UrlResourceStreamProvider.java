@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * TODO miha: document class purpose
+ * Loads a resource by using {@link de.agilecoders.wicket.webjars.util.ClasspathUrlStreamHandler}.
  *
  * @author miha
  */

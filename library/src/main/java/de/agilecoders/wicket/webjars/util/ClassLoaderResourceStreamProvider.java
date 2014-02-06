@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * TODO miha: document class purpose
+ * Loads a resource by calling {@link ClassLoader#getResourceAsStream(String)}
  *
  * @author miha
  */
@@ -21,6 +21,11 @@ public class ClassLoaderResourceStreamProvider implements IResourceStreamProvide
 
     private final ClassLoader[] classLoaders;
 
+    /**
+     * Construct.
+     *
+     * @param classLoaders the class loaders to use to find/load resources
+     */
     public ClassLoaderResourceStreamProvider(ClassLoader... classLoaders) {
         this.classLoaders = classLoaders;
     }
