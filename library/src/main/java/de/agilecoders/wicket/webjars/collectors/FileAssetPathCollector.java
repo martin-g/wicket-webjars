@@ -76,6 +76,7 @@ public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
     private void aggregateFile(final File file, final Set<String> aggregatedChildren, final Pattern filterExpr) {
         final String path = file.getPath().replace('\\', '/');
         final String relativePath = path.substring(path.indexOf(pathPrefix));
+
         if (filterExpr.matcher(relativePath).matches()) {
             aggregatedChildren.add(relativePath);
         }

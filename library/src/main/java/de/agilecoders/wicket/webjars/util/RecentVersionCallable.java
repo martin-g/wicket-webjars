@@ -2,8 +2,8 @@ package de.agilecoders.wicket.webjars.util;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import de.agilecoders.wicket.webjars.WebJarAssetLocator;
 import de.agilecoders.wicket.webjars.WicketWebjars;
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
@@ -31,9 +31,15 @@ public class RecentVersionCallable implements Callable<String> {
      * Holder for reflection framework configuration builder
      */
     private static final class AssetLocatorConfigurationBuilder {
-        private static ConfigurationBuilder instance = new ConfigurationBuilder()
-                .addUrls(ClasspathHelper.forPackage(WebJarAssetLocator.WEBJARS_PACKAGE, WebJarAssetLocator.class.getClassLoader()))
-                .setScanners(new ResourcesScanner());
+        private static final ConfigurationBuilder instance;
+
+        static {
+            IWebjarsSettings settings = WicketWebjars.settings();
+
+            instance = new ConfigurationBuilder()
+                    .addUrls(ClasspathHelper.forPackage(settings.webjarsPackage(), settings.classLoaders()))
+                    .setScanners(new ResourcesScanner());
+        }
     }
 
     /**

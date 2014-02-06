@@ -71,6 +71,11 @@
                 <artifactId>wicket-core</artifactId>
                 <version>${wicket.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-request</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
 
             <!-- LOGGING DEPENDENCIES - LOG4J -->
             <dependency>
@@ -84,6 +89,12 @@
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
                 <version>${reflections.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
             </dependency>
 
             <dependency>
