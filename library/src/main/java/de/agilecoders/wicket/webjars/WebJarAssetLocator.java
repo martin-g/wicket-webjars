@@ -1,9 +1,12 @@
 package de.agilecoders.wicket.webjars;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import org.apache.wicket.util.lang.Args;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,16 +14,20 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Locate WebJar assets. The class is thread safe.
  */
 public class WebJarAssetLocator {
+    private static final Logger LOG = LoggerFactory.getLogger(WicketWebjars.class);
+
     private final IWebjarsSettings settings;
     private final SortedMap<String, String> fullPathIndex;
     private final Set<AssetPathCollector> collectors;
@@ -30,6 +37,68 @@ public class WebJarAssetLocator {
      */
     public WebJarAssetLocator(IWebjarsSettings settings) {
         this(settings, null);
+    }
+
+    public String recentVersionOf(String partialPath) {
+        partialPath = prependWebjarsPathIfMissing(partialPath);
+        final Matcher partialPathMatcher = settings.webjarsPathPattern().matcher(partialPath);
+
+        if (partialPathMatcher.find() && "current".equalsIgnoreCase(partialPathMatcher.group(2))) {
+            final Set<String> assets = listAssets(partialPathMatcher.group(1));
+            final String fileName = partialPathMatcher.group(3);
+            final List<String> versions = Lists.newArrayList();
+
+            for (String asset : assets) {
+                if (asset.endsWith(fileName)) {
+                    final Matcher matcher = settings.webjarsPathPattern().matcher(asset);
+
+                    if (matcher.find()) {
+                        versions.add(matcher.group(2));
+                    }
+                }
+            }
+
+            if (versions.size() == 1) {
+                return versions.get(0);
+            } else if (versions.size() > 1) {
+                LOG.warn("more than one version of a dependency is not supported till now. webjars resource: {}; available versions: {}; using: {}",
+                         fileName, versions, versions.get(0));
+
+                return versions.get(0);
+            } else {
+                LOG.debug("no version found for webjars resource: {}", partialPath);
+            }
+        } else {
+            LOG.trace("given webjars resource isn't a dynamic versioned one: {}", partialPath);
+        }
+
+        return null;
+    }
+
+    /**
+     * prepends the webjars path if missing
+     *
+     * @param path the file name to check
+     * @return file name that starts with "/webjars/"
+     */
+    public static String prependWebjarsPathIfMissing(final String path) {
+        final String cleanedName = appendLeadingSlash(Args.notEmpty(path, "path"));
+
+        if (!path.contains("/webjars/")) {
+            return "/webjars" + cleanedName;
+        }
+
+        return path;
+    }
+
+    /**
+     * prepends a leading slash if there is none.
+     *
+     * @param path the path
+     * @return path with leading slash
+     */
+    private static String appendLeadingSlash(final String path) {
+        return path.charAt(0) == '/' ? path : '/' + path;
     }
 
     /**
@@ -63,7 +132,11 @@ public class WebJarAssetLocator {
      * @param partialPath the path to return e.g. "jquery.js" or "abc/someother.js". This must be a distinct path within the index passed in.
      * @return a fully qualified path to the resource.
      */
-    public String getFullPath(final String partialPath) {
+    public String getFullPath(String partialPath) {
+        partialPath = Args.notEmpty(partialPath, "partialPath").contains("/current/") ?
+                      recentVersionOf(partialPath) :
+                      partialPath;
+
         final String reversePartialPath = reversePath(partialPath);
         final SortedMap<String, String> fullPathTail = fullPathIndex.tailMap(reversePartialPath);
 
@@ -98,7 +171,7 @@ public class WebJarAssetLocator {
     public Set<String> listAssets(final String folderPath) {
         final Collection<String> allAssets = fullPathIndex.values();
         final Set<String> assets = new HashSet<String>();
-        final String prefix = settings.webjarsPath() + folderPath;
+        final String prefix = settings.webjarsPath() + appendLeadingSlash(folderPath);
 
         for (final String asset : allAssets) {
             if (asset.startsWith(prefix)) {

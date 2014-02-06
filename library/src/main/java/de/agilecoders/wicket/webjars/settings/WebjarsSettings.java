@@ -20,6 +20,7 @@ public class WebjarsSettings implements IWebjarsSettings {
     private String webjarsPackage;
     private String webjarsPath;
     private Pattern resourcePattern;
+    private Pattern webjarsPathPattern;
 
     /**
      * Construct.
@@ -29,6 +30,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.webjarsPackage = "META-INF.resources.webjars";
         this.webjarsPath = this.webjarsPackage.replaceAll("\\.", "/");
         this.resourcePattern = Pattern.compile(".*");
+        this.webjarsPathPattern = Pattern.compile("/webjars/([^/]*)/([^/]*)/(.*)");
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new FileAssetPathCollector(webjarsPath),
@@ -68,6 +70,11 @@ public class WebjarsSettings implements IWebjarsSettings {
     @Override
     public Pattern resourcePattern() {
         return resourcePattern;
+    }
+
+    @Override
+    public Pattern webjarsPathPattern() {
+        return webjarsPathPattern;
     }
 
     public WebjarsSettings resourcePattern(Pattern resourcePattern) {

@@ -4,7 +4,6 @@ import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
 import java.util.Locale;
 
-import static de.agilecoders.wicket.webjars.WicketWebjars.prependWebjarsPathIfMissing;
 import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
 
 /**
@@ -25,7 +24,7 @@ public class WebjarsJavaScriptResourceReference extends JavaScriptResourceRefere
      * @param name The webjars path to load
      */
     public WebjarsJavaScriptResourceReference(final String name) {
-        super(WebjarsJavaScriptResourceReference.class, useRecent(prependWebjarsPathIfMissing(name)));
+        super(WebjarsJavaScriptResourceReference.class, useRecent(name));
 
         this.originalName = name;
     }

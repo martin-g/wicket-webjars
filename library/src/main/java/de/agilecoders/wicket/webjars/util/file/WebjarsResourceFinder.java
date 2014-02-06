@@ -45,6 +45,14 @@ public class WebjarsResourceFinder implements IResourceFinder {
     }
 
     /**
+     * @param partialPath the path to detect version for
+     * @return recent version
+     */
+    public String recentVersionOf(String partialPath) {
+        return locator.recentVersionOf(partialPath);
+    }
+
+    /**
      * Looks for a given path name along the webjars root path
      *
      * @param clazz    The class requesting the resource stream
@@ -73,7 +81,6 @@ public class WebjarsResourceFinder implements IResourceFinder {
                     LOG.debug("there is no webjars resource for: {}", pathName);
                 }
             }
-
         }
 
         return stream;

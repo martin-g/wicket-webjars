@@ -41,4 +41,9 @@ public interface IWebjarsSettings {
      * @return the pattern to filter accepted webjars resources
      */
     Pattern resourcePattern();
+
+    /**
+     * @return the full path pattern. The pattern must contain 3 groups: prefix, version, filename
+     */
+    Pattern webjarsPathPattern();
 }

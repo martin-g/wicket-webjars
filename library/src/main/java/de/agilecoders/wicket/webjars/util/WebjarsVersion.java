@@ -1,5 +1,6 @@
 package de.agilecoders.wicket.webjars.util;
 
+import de.agilecoders.wicket.webjars.WebJarAssetLocator;
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import org.apache.wicket.util.lang.Args;
 import org.slf4j.Logger;
@@ -26,8 +27,10 @@ public final class WebjarsVersion {
      *
      * @param path the full resource path
      */
-    public static String useRecent(final String path) {
+    public static String useRecent(String path) {
         Args.notEmpty(path, "path");
+
+        path = WebJarAssetLocator.prependWebjarsPathIfMissing(path);
 
         if (path.matches("/webjars/[^/]*/current/.*")) {
             return path.replaceFirst("/current/", "/" + recentVersion(path) + "/");

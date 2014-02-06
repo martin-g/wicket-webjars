@@ -4,7 +4,6 @@ import org.apache.wicket.request.resource.CssResourceReference;
 
 import java.util.Locale;
 
-import static de.agilecoders.wicket.webjars.WicketWebjars.prependWebjarsPathIfMissing;
 import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
 
 /**
@@ -25,7 +24,7 @@ public class WebjarsCssResourceReference extends CssResourceReference implements
      * @param name The webjars path to load
      */
     public WebjarsCssResourceReference(final String name) {
-        super(WebjarsCssResourceReference.class, useRecent(prependWebjarsPathIfMissing(name)));
+        super(WebjarsCssResourceReference.class, useRecent(name));
 
         this.originalName = name;
     }
