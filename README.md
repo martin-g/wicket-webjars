@@ -18,13 +18,7 @@ Add maven dependency:
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>wicket-webjars</artifactId>
-  <version>0.3.4</version>
-</dependency>
-
-<dependency>
-  <groupId>de.agilecoders.wicket.webjars</groupId>
-  <artifactId>vfs-support</artifactId>
-  <version>0.3.4</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
@@ -41,10 +35,14 @@ Installation:
         // install installs 2 default collector instances 
         // (FileAssetPathCollector(WEBJARS_PATH_PREFIX), JarAssetPathCollector)
         // and a webjars resource finder.
-        WicketWebjars.install(this);
+        WebjarsSettings settings = new WebjarsSettings();
 
         // register vfs collector to use webjars on jboss (you don't need to add maven dependency)
-        WicketWebjars.registerCollector(new VfsJarAssetPathCollector());
+        Set<AssetPathCollector> collectors = Sets.newHashSet(settings.assetPathCollectors());
+        collectors.add(new VfsJarAssetPathCollector());
+        settings.assetPathCollectors(collectors.toArray(new AssetPathCollector[collectors.size()]));
+        
+        WicketWebjars.install(this, settings);
     }
 ```
 
