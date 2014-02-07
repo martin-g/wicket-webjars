@@ -1,6 +1,7 @@
 package de.agilecoders.wicket.webjars.settings;
 
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
+import org.apache.wicket.util.time.Duration;
 
 import java.util.regex.Pattern;
 
@@ -46,4 +47,14 @@ public interface IWebjarsSettings {
      * @return the full path pattern. The pattern must contain 3 groups: prefix, version, filename
      */
     Pattern webjarsPathPattern();
+
+    /**
+     * @return placeholder for recent version (e.g. current)
+     */
+    String recentVersionPlaceHolder();
+
+    /**
+     * @return timeout which is used when reading from cache (Future.get(timeout))
+     */
+    Duration readFromCacheTimeout();
 }

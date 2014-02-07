@@ -15,8 +15,6 @@ import java.util.List;
  * @author miha
  */
 public final class WicketWebjars {
-    private static final String PATH_SPLITTER = "/";
-    private static WebjarsResourceFinder FINDER = null;
 
     /**
      * The {@link org.apache.wicket.MetaDataKey} used to retrieve the {@link IWebjarsSettings} from the Wicket {@link Appendable}.
@@ -25,19 +23,12 @@ public final class WicketWebjars {
     };
 
     /**
-     * @return the webjars resource finder
-     */
-    public static WebjarsResourceFinder finder() {
-        return FINDER;
-    }
-
-    /**
      * installs the webjars resource finder and uses a set of default settings.
      *
      * @param app the wicket application
      */
     public static void install(final Application app) {
-        install(app, new WebjarsSettings());
+        install(app, null);
     }
 
     /**
@@ -50,6 +41,10 @@ public final class WicketWebjars {
         final IWebjarsSettings existingSettings = settings(app);
 
         if (existingSettings == null) {
+            if (settings == null) {
+                settings = new WebjarsSettings();
+            }
+
             app.setMetaData(WEBJARS_SETTINGS_METADATA_KEY, settings);
 
             final List<IResourceFinder> finders = app.getResourceSettings().getResourceFinders();
@@ -57,7 +52,6 @@ public final class WicketWebjars {
 
             if (!finders.contains(finder)) {
                 finders.add(finder);
-                FINDER = finder;
             }
         }
     }
@@ -79,7 +73,14 @@ public final class WicketWebjars {
      */
     public static IWebjarsSettings settings() {
         if (Application.exists()) {
-            return settings(Application.get());
+            IWebjarsSettings settings = Application.get().getMetaData(WEBJARS_SETTINGS_METADATA_KEY);
+
+            if (settings != null) {
+                return settings;
+            } else {
+                throw new IllegalStateException("you have to call WicketWebjars.install() before you can use an "
+                                                + "IWebjarsResourceReference or any other component.");
+            }
         }
 
         throw new IllegalStateException("there is no active application assigned to this thread.");

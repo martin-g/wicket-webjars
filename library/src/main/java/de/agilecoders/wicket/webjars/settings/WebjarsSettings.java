@@ -1,10 +1,11 @@
 package de.agilecoders.wicket.webjars.settings;
 
-import de.agilecoders.wicket.webjars.WebJarAssetLocator;
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.JarAssetPathCollector;
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
 import org.apache.wicket.util.lang.Args;
+import org.apache.wicket.util.time.Duration;
 
 import java.util.regex.Pattern;
 
@@ -15,8 +16,10 @@ import java.util.regex.Pattern;
  */
 public class WebjarsSettings implements IWebjarsSettings {
 
+    private Duration readFromCacheTimeout;
+    private ResourceStreamProvider resourceStreamProvider;
+    private String recentVersionPlaceHolder;
     private AssetPathCollector[] assetPathCollectors;
-    private ResourceStreamProvider resourceStreamProvider = null;
     private String webjarsPackage;
     private String webjarsPath;
     private Pattern resourcePattern;
@@ -31,6 +34,8 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.webjarsPath = this.webjarsPackage.replaceAll("\\.", "/");
         this.resourcePattern = Pattern.compile(".*");
         this.webjarsPathPattern = Pattern.compile("/webjars/([^/]*)/([^/]*)/(.*)");
+        this.recentVersionPlaceHolder = "current";
+        this.readFromCacheTimeout = Duration.seconds(3);
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new FileAssetPathCollector(webjarsPath),
@@ -75,6 +80,26 @@ public class WebjarsSettings implements IWebjarsSettings {
     @Override
     public Pattern webjarsPathPattern() {
         return webjarsPathPattern;
+    }
+
+    @Override
+    public String recentVersionPlaceHolder() {
+        return recentVersionPlaceHolder;
+    }
+
+    @Override
+    public Duration readFromCacheTimeout() {
+        return readFromCacheTimeout;
+    }
+
+    public WebjarsSettings readFromCacheTimeout(Duration readFromCacheTimeout) {
+        this.readFromCacheTimeout = readFromCacheTimeout;
+        return this;
+    }
+
+    public WebjarsSettings recentVersionPlaceHolder(String recentVersionPlaceHolder) {
+        this.recentVersionPlaceHolder = recentVersionPlaceHolder;
+        return this;
     }
 
     public WebjarsSettings resourcePattern(Pattern resourcePattern) {

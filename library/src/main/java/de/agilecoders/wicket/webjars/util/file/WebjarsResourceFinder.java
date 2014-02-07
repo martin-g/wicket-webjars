@@ -1,9 +1,10 @@
 package de.agilecoders.wicket.webjars.util.file;
 
-import de.agilecoders.wicket.webjars.WebJarAssetLocator;
 import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+import de.agilecoders.wicket.webjars.util.IFullPathProvider;
 import de.agilecoders.wicket.webjars.util.IResourceStreamProvider;
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.slf4j.Logger;
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
 public class WebjarsResourceFinder implements IResourceFinder {
     private static final Logger LOG = LoggerFactory.getLogger("wicket-webjars");
 
-    private final WebJarAssetLocator locator;
+    private final IFullPathProvider locator;
     private final IResourceStreamProvider resourceStreamProvider;
     private final IWebjarsSettings settings;
     private final int hashCode;
@@ -29,7 +30,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
      */
     public WebjarsResourceFinder(IWebjarsSettings settings) {
         this.settings = settings;
-        this.locator = newLocator();
+        this.locator = newFullPathProvider();
         this.resourceStreamProvider = settings.resourceStreamProvider().newInstance(settings.classLoaders());
 
         int result = locator != null ? locator.hashCode() : 0;
@@ -40,16 +41,8 @@ public class WebjarsResourceFinder implements IResourceFinder {
     /**
      * @return new resource locator instance
      */
-    protected WebJarAssetLocator newLocator() {
+    protected IFullPathProvider newFullPathProvider() {
         return new WebJarAssetLocator(settings);
-    }
-
-    /**
-     * @param partialPath the path to detect version for
-     * @return recent version
-     */
-    public String recentVersionOf(String partialPath) {
-        return locator.recentVersionOf(partialPath);
     }
 
     /**
