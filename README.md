@@ -32,7 +32,7 @@ Installation:
     public void init() {
         super.init();
 
-        // install installs 2 default collector instances 
+        // install 2 default collector instances 
         // (FileAssetPathCollector(WEBJARS_PATH_PREFIX), JarAssetPathCollector)
         // and a webjars resource finder.
         WebjarsSettings settings = new WebjarsSettings();
