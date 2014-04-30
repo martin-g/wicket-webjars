@@ -11,6 +11,7 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.UrlResourceReference;
 import org.apache.wicket.util.file.IResourceFinder;
 
+import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
@@ -80,7 +81,7 @@ public final class WicketWebjars {
      */
     public static IWebjarsSettings settings() {
         if (Application.exists()) {
-            IWebjarsSettings settings = Application.get().getMetaData(WEBJARS_SETTINGS_METADATA_KEY);
+            final IWebjarsSettings settings = Application.get().getMetaData(WEBJARS_SETTINGS_METADATA_KEY);
 
             if (settings != null) {
                 return settings;
@@ -94,17 +95,33 @@ public final class WicketWebjars {
     }
     
     /**
-     * returns a {@link ResourceReference} to either the appropriate CDN or application-relative webjar
+     * returns a {@link ResourceReference} to either the appropriate CDN or application-relative JavaScript webjar
      * 
      * @param name webjar name
-     * @return {@link ResourceReference} for the given webjar name
+     * @return {@link ResourceReference} for the given JavaScript webjar
      */
-    public static ResourceReference newResourceReference(final String name) {
+    public static ResourceReference newJavaScriptResourceReference(final String name) {
 		ResourceReference resourceReference = null;
 		if (settings().useCdnResources()) {
 			resourceReference = new UrlResourceReference(Url.parse(IWebjarsSettings.WEB_JAR_CDN + useRecent(name)));
 		} else {
 			resourceReference = new WebjarsJavaScriptResourceReference(name);
+		}
+		return resourceReference;
+    }
+    
+    /**
+     * returns a {@link ResourceReference} to either the appropriate CDN or application-relative CSS webjar
+     * 
+     * @param name webjar name
+     * @return {@link ResourceReference} for the given CSS webjar
+     */
+    public static ResourceReference newCssResourceReference(final String name) {
+		ResourceReference resourceReference = null;
+		if (settings().useCdnResources()) {
+			resourceReference = new UrlResourceReference(Url.parse(IWebjarsSettings.WEB_JAR_CDN + useRecent(name)));
+		} else {
+			resourceReference = new WebjarsCssResourceReference(name);
 		}
 		return resourceReference;
     }
