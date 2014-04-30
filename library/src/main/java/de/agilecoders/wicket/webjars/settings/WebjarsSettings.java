@@ -4,6 +4,7 @@ import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.JarAssetPathCollector;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.lang.Args;
 import org.apache.wicket.util.time.Duration;
 
@@ -24,6 +25,7 @@ public class WebjarsSettings implements IWebjarsSettings {
     private String webjarsPath;
     private Pattern resourcePattern;
     private Pattern webjarsPathPattern;
+    private boolean useCdnResources;
 
     /**
      * Construct.
@@ -36,6 +38,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.webjarsPathPattern = Pattern.compile("/webjars/([^/]*)/([^/]*)/(.*)");
         this.recentVersionPlaceHolder = "current";
         this.readFromCacheTimeout = Duration.seconds(3);
+        this.useCdnResources = false;
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new FileAssetPathCollector(webjarsPath),
@@ -92,6 +95,11 @@ public class WebjarsSettings implements IWebjarsSettings {
         return readFromCacheTimeout;
     }
 
+	@Override
+	public boolean useCdnResources() {
+		return useCdnResources;
+	}
+    
     public WebjarsSettings readFromCacheTimeout(Duration readFromCacheTimeout) {
         this.readFromCacheTimeout = readFromCacheTimeout;
         return this;
@@ -126,4 +134,10 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.assetPathCollectors = Args.notNull(assetPathCollectors, "assetPathCollectors");
         return this;
     }
+    
+    public WebjarsSettings useCdnResources(boolean useCdnResources) { 
+    	this.useCdnResources = useCdnResources;
+    	return this;
+    }
+
 }

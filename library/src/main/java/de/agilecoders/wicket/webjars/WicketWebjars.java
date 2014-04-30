@@ -1,13 +1,20 @@
 package de.agilecoders.wicket.webjars;
 
+import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
+
+import java.util.List;
+
+import org.apache.wicket.Application;
+import org.apache.wicket.MetaDataKey;
+import org.apache.wicket.request.Url;
+import org.apache.wicket.request.resource.ResourceReference;
+import org.apache.wicket.request.resource.UrlResourceReference;
+import org.apache.wicket.util.file.IResourceFinder;
+
+import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
-import org.apache.wicket.Application;
-import org.apache.wicket.MetaDataKey;
-import org.apache.wicket.util.file.IResourceFinder;
-
-import java.util.List;
 
 /**
  * Helper class for webjars resources
@@ -84,6 +91,22 @@ public final class WicketWebjars {
         }
 
         throw new IllegalStateException("there is no active application assigned to this thread.");
+    }
+    
+    /**
+     * returns a {@link ResourceReference} to either the appropriate CDN or application-relative webjar
+     * 
+     * @param name webjar name
+     * @return {@link ResourceReference} for the given webjar name
+     */
+    public static ResourceReference newResourceReference(final String name) {
+		ResourceReference resourceReference = null;
+		if (settings().useCdnResources()) {
+			resourceReference = new UrlResourceReference(Url.parse(IWebjarsSettings.WEB_JAR_CDN + useRecent(name)));
+		} else {
+			resourceReference = new WebjarsJavaScriptResourceReference(name);
+		}
+		return resourceReference;
     }
 
     /**

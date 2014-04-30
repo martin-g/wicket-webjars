@@ -11,6 +11,11 @@ import java.util.regex.Pattern;
  * @author miha
  */
 public interface IWebjarsSettings {
+	
+    /**
+     * The url of the WebJars CDN.
+     */
+    String WEB_JAR_CDN = "//www.jsdelivr.com/";
 
     /**
      * @return {@link de.agilecoders.wicket.webjars.settings.ResourceStreamProvider} to use to load resources
@@ -57,4 +62,10 @@ public interface IWebjarsSettings {
      * @return timeout which is used when reading from cache (Future.get(timeout))
      */
     Duration readFromCacheTimeout();
+    
+    /**
+     * @return true, if the resources for the webjars should be loaded from a CDN network
+     */
+    boolean useCdnResources();
+    
 }
