@@ -1,9 +1,10 @@
 package de.agilecoders.wicket.webjars.settings;
 
-import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
+import java.util.regex.Pattern;
+
 import org.apache.wicket.util.time.Duration;
 
-import java.util.regex.Pattern;
+import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 
 /**
  * Settings interface for all webjars depended settings
@@ -11,11 +12,6 @@ import java.util.regex.Pattern;
  * @author miha
  */
 public interface IWebjarsSettings {
-	
-    /**
-     * The url of the WebJars CDN.
-     */
-    String WEB_JAR_CDN = "//www.jsdelivr.com/";
 
     /**
      * @return {@link de.agilecoders.wicket.webjars.settings.ResourceStreamProvider} to use to load resources
@@ -67,5 +63,10 @@ public interface IWebjarsSettings {
      * @return true, if the resources for the webjars should be loaded from a CDN network
      */
     boolean useCdnResources();
+    
+    /**
+     * @return base URL of the webjars CDN
+     */
+    String cdnUrl();
     
 }

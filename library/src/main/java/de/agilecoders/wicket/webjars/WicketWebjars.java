@@ -1,18 +1,19 @@
 package de.agilecoders.wicket.webjars;
 
-import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
-
 import java.util.List;
 
 import org.apache.wicket.Application;
 import org.apache.wicket.MetaDataKey;
-import org.apache.wicket.request.Url;
-import org.apache.wicket.request.resource.ResourceReference;
-import org.apache.wicket.request.resource.UrlResourceReference;
+import org.apache.wicket.core.request.mapper.ResourceReferenceMapper;
+import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.IRequestMapper;
+import org.apache.wicket.request.mapper.parameter.PageParametersEncoder;
+import org.apache.wicket.request.resource.caching.NoOpResourceCachingStrategy;
+import org.apache.wicket.util.IProvider;
+import org.apache.wicket.util.ValueProvider;
 import org.apache.wicket.util.file.IResourceFinder;
 
-import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
-import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
+import de.agilecoders.wicket.webjars.request.WebjarsCDNRequestMapper;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
@@ -35,7 +36,7 @@ public final class WicketWebjars {
      *
      * @param app the wicket application
      */
-    public static void install(final Application app) {
+    public static void install(final WebApplication app) {
         install(app, null);
     }
 
@@ -45,7 +46,7 @@ public final class WicketWebjars {
      * @param app      the wicket application
      * @param settings the settings to use
      */
-    public static void install(final Application app, IWebjarsSettings settings) {
+    public static void install(final WebApplication app, IWebjarsSettings settings) {
         final IWebjarsSettings existingSettings = settings(app);
 
         if (existingSettings == null) {
@@ -55,6 +56,21 @@ public final class WicketWebjars {
 
             app.setMetaData(WEBJARS_SETTINGS_METADATA_KEY, settings);
 
+            if (settings.useCdnResources()) {
+                IRequestMapper delegate = new ResourceReferenceMapper(
+                        new PageParametersEncoder(), new IProvider<String>() {
+                            @Override
+                            public String get() {
+                                return app.getResourceSettings()
+                                        .getParentFolderPlaceholder();
+                            }
+                        },
+                        ValueProvider.of(NoOpResourceCachingStrategy.INSTANCE));
+                WebjarsCDNRequestMapper mapper = new WebjarsCDNRequestMapper(
+                        delegate, settings.cdnUrl());
+                app.mount(mapper);
+            }
+            
             final List<IResourceFinder> finders = app.getResourceSettings().getResourceFinders();
             final WebjarsResourceFinder finder = new WebjarsResourceFinder(settings);
 
@@ -92,38 +108,6 @@ public final class WicketWebjars {
         }
 
         throw new IllegalStateException("there is no active application assigned to this thread.");
-    }
-    
-    /**
-     * returns a {@link ResourceReference} to either the appropriate CDN or application-relative JavaScript webjar
-     * 
-     * @param name webjar name
-     * @return {@link ResourceReference} for the given JavaScript webjar
-     */
-    public static ResourceReference newJavaScriptResourceReference(final String name) {
-		ResourceReference resourceReference = null;
-		if (settings().useCdnResources()) {
-			resourceReference = new UrlResourceReference(Url.parse(IWebjarsSettings.WEB_JAR_CDN + useRecent(name)));
-		} else {
-			resourceReference = new WebjarsJavaScriptResourceReference(name);
-		}
-		return resourceReference;
-    }
-    
-    /**
-     * returns a {@link ResourceReference} to either the appropriate CDN or application-relative CSS webjar
-     * 
-     * @param name webjar name
-     * @return {@link ResourceReference} for the given CSS webjar
-     */
-    public static ResourceReference newCssResourceReference(final String name) {
-		ResourceReference resourceReference = null;
-		if (settings().useCdnResources()) {
-			resourceReference = new UrlResourceReference(Url.parse(IWebjarsSettings.WEB_JAR_CDN + useRecent(name)));
-		} else {
-			resourceReference = new WebjarsCssResourceReference(name);
-		}
-		return resourceReference;
     }
 
     /**
