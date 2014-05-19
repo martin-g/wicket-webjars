@@ -8,9 +8,8 @@ import org.apache.wicket.core.request.mapper.ResourceReferenceMapper;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.mapper.parameter.PageParametersEncoder;
-import org.apache.wicket.request.resource.caching.NoOpResourceCachingStrategy;
+import org.apache.wicket.request.resource.caching.IResourceCachingStrategy;
 import org.apache.wicket.util.IProvider;
-import org.apache.wicket.util.ValueProvider;
 import org.apache.wicket.util.file.IResourceFinder;
 
 import de.agilecoders.wicket.webjars.request.WebjarsCDNRequestMapper;
@@ -57,16 +56,20 @@ public final class WicketWebjars {
             app.setMetaData(WEBJARS_SETTINGS_METADATA_KEY, settings);
 
             if (settings.useCdnResources()) {
-                IRequestMapper delegate = new ResourceReferenceMapper(
+                final IRequestMapper delegate = new ResourceReferenceMapper(
                         new PageParametersEncoder(), new IProvider<String>() {
                             @Override
                             public String get() {
                                 return app.getResourceSettings()
                                         .getParentFolderPlaceholder();
                             }
-                        },
-                        ValueProvider.of(NoOpResourceCachingStrategy.INSTANCE));
-                WebjarsCDNRequestMapper mapper = new WebjarsCDNRequestMapper(
+                        }, 
+                        new IProvider<IResourceCachingStrategy>() {
+                        	@Override
+                            public IResourceCachingStrategy get() {
+                                return app.getResourceSettings().getCachingStrategy();
+                            }});
+                final WebjarsCDNRequestMapper mapper = new WebjarsCDNRequestMapper(
                         delegate, settings.cdnUrl());
                 app.mount(mapper);
             }

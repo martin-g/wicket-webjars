@@ -1,5 +1,7 @@
 package de.agilecoders.wicket.webjars.request;
 
+import java.util.regex.Pattern;
+
 import org.apache.wicket.request.IRequestHandler;
 import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.Request;
@@ -35,9 +37,11 @@ public class WebjarsCDNRequestMapper implements IRequestMapper {
 					.getResourceReference();
 			if (resourceReference instanceof IWebjarsResourceReference) {
 				final Url url = chain.mapHandler(requestHandler);
-				final String urlString = url.toString();
+				String urlString = url.toString();
 				final int index = urlString.indexOf(WEBJAR_PATH);
 				if (index >= 0) {
+					// remove the version info from the url -- doesn't affect the webjars index above
+					urlString = url.toString().replaceAll("-ver-\\d+", "");
 					return Url.parse(Strings.join("/", webJarCdnUrl,
 							urlString.substring(index + WEBJAR_PATH.length())));
 				} else {
