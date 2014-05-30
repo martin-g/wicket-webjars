@@ -1,13 +1,14 @@
 package de.agilecoders.wicket.webjars.settings;
 
+import java.util.regex.Pattern;
+
+import org.apache.wicket.util.lang.Args;
+import org.apache.wicket.util.time.Duration;
+
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.JarAssetPathCollector;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
-import org.apache.wicket.util.lang.Args;
-import org.apache.wicket.util.time.Duration;
-
-import java.util.regex.Pattern;
 
 /**
  * default {@link de.agilecoders.wicket.webjars.settings.IWebjarsSettings} implementation.
@@ -16,6 +17,11 @@ import java.util.regex.Pattern;
  */
 public class WebjarsSettings implements IWebjarsSettings {
 
+    /**
+     * The default base url of the WebJars CDN.
+     */
+    private static String DEFAULT_WEBJAR_CDN = "//cdn.jsdelivr.net:80";
+	
     private Duration readFromCacheTimeout;
     private ResourceStreamProvider resourceStreamProvider;
     private String recentVersionPlaceHolder;
@@ -24,6 +30,8 @@ public class WebjarsSettings implements IWebjarsSettings {
     private String webjarsPath;
     private Pattern resourcePattern;
     private Pattern webjarsPathPattern;
+    private boolean useCdnResources;
+    private String cdnUrl;
 
     /**
      * Construct.
@@ -36,6 +44,8 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.webjarsPathPattern = Pattern.compile("/webjars/([^/]*)/([^/]*)/(.*)");
         this.recentVersionPlaceHolder = "current";
         this.readFromCacheTimeout = Duration.seconds(3);
+        this.useCdnResources = false;
+        this.cdnUrl = DEFAULT_WEBJAR_CDN;
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new FileAssetPathCollector(webjarsPath),
@@ -92,6 +102,16 @@ public class WebjarsSettings implements IWebjarsSettings {
         return readFromCacheTimeout;
     }
 
+	@Override
+	public boolean useCdnResources() {
+		return useCdnResources;
+	}
+	
+	@Override
+	public String cdnUrl() {
+		return cdnUrl;
+	}
+    
     public WebjarsSettings readFromCacheTimeout(Duration readFromCacheTimeout) {
         this.readFromCacheTimeout = readFromCacheTimeout;
         return this;
@@ -126,4 +146,15 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.assetPathCollectors = Args.notNull(assetPathCollectors, "assetPathCollectors");
         return this;
     }
+    
+    public WebjarsSettings useCdnResources(boolean useCdnResources) { 
+    	this.useCdnResources = useCdnResources;
+    	return this;
+    }
+    
+    public WebjarsSettings cdnUrl(String cdnUrl) {
+    	this.cdnUrl = cdnUrl;
+    	return this;
+    }
+
 }

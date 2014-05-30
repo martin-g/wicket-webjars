@@ -1,9 +1,10 @@
 package de.agilecoders.wicket.webjars.settings;
 
-import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
+import java.util.regex.Pattern;
+
 import org.apache.wicket.util.time.Duration;
 
-import java.util.regex.Pattern;
+import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 
 /**
  * Settings interface for all webjars depended settings
@@ -57,4 +58,15 @@ public interface IWebjarsSettings {
      * @return timeout which is used when reading from cache (Future.get(timeout))
      */
     Duration readFromCacheTimeout();
+    
+    /**
+     * @return true, if the resources for the webjars should be loaded from a CDN network
+     */
+    boolean useCdnResources();
+    
+    /**
+     * @return base URL of the webjars CDN
+     */
+    String cdnUrl();
+    
 }
