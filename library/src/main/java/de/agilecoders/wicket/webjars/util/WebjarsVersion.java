@@ -28,7 +28,7 @@ public final class WebjarsVersion {
     private static final class Holder {
         private static final IWebjarsSettings settings = WicketWebjars.settings();
 
-        private static final String recentVersionPattern = "/webjars/[^/]*/" + settings.recentVersionPlaceHolder() + "/.*";
+        private static final String recentVersionPattern = Helper.PATH_PREFIX + "[^/]*/" + settings.recentVersionPlaceHolder() + "/.*";
         private static final String replacePattern = "/" + settings.recentVersionPlaceHolder() + "/";
         private static final Duration timeout = settings.readFromCacheTimeout();
     }

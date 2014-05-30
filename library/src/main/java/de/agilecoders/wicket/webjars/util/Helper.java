@@ -9,6 +9,8 @@ import org.apache.wicket.util.lang.Args;
  */
 public final class Helper {
 
+    public static final String PATH_PREFIX = "/webjars/";
+
     /**
      * prepends the webjars path if missing
      *
@@ -18,7 +20,7 @@ public final class Helper {
     public static String prependWebjarsPathIfMissing(final String path) {
         final String cleanedName = appendLeadingSlash(Args.notEmpty(path, "path"));
 
-        if (!path.contains("/webjars/")) {
+        if (!path.contains(PATH_PREFIX)) {
             return "/webjars" + cleanedName;
         }
 

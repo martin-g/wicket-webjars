@@ -30,6 +30,7 @@ public class WicketApplication extends WebApplication {
         super.init();
 
         WebjarsSettings settings = new WebjarsSettings();
+        settings.useCdnResources(true);
 
         Set<AssetPathCollector> collectors = Sets.newHashSet(settings.assetPathCollectors());
         collectors.add(new VfsJarAssetPathCollector());

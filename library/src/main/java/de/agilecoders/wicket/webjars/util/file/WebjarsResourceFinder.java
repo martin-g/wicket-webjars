@@ -2,6 +2,7 @@ package de.agilecoders.wicket.webjars.util.file;
 
 import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+import de.agilecoders.wicket.webjars.util.Helper;
 import de.agilecoders.wicket.webjars.util.IFullPathProvider;
 import de.agilecoders.wicket.webjars.util.IResourceStreamProvider;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
@@ -57,7 +58,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
         IResourceStream stream = null;
 
         if (IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
-            final int pos = pathName != null ? pathName.lastIndexOf("/webjars/") : -1;
+            final int pos = pathName != null ? pathName.lastIndexOf(Helper.PATH_PREFIX) : -1;
 
             if (pos > -1) {
                 try {
