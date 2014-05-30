@@ -1,5 +1,7 @@
 package de.agilecoders.wicket.webjars.collectors;
 
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -55,7 +57,7 @@ public class JarAssetPathCollector extends ProtocolAwareAssetPathCollector {
 
             return new JarFile(file);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WebJarAssetLocator.ResourceException(url.toString(), e.getMessage());
         }
     }
 }

@@ -28,8 +28,7 @@ public final class WebjarsVersion {
     private static final class Holder {
         private static final IWebjarsSettings settings = WicketWebjars.settings();
 
-        private static final String recentVersionPattern = "/webjars/[^/]*/" + settings
-                .recentVersionPlaceHolder() + "/.*";
+        private static final String recentVersionPattern = "/webjars/[^/]*/" + settings.recentVersionPlaceHolder() + "/.*";
         private static final String replacePattern = "/" + settings.recentVersionPlaceHolder() + "/";
         private static final Duration timeout = settings.readFromCacheTimeout();
     }
@@ -77,7 +76,8 @@ public final class WebjarsVersion {
             LOG.error("can't collect recent version of {}; {}", partialPath, e.getMessage());
         }
 
-        throw new IllegalArgumentException("there is no webjars dependency for: " + partialPath);
+        throw new WebJarAssetLocator.ResourceException(partialPath, "there is no webjars dependency for: " +
+                                                                    partialPath);
     }
 
     private WebjarsVersion() {

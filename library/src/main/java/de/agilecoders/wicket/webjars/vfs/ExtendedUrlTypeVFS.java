@@ -1,5 +1,6 @@
 package de.agilecoders.wicket.webjars.vfs;
 
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
 import org.jboss.vfs.VirtualFile;
 import org.reflections.vfs.UrlTypeVFS;
 import org.reflections.vfs.Vfs.Dir;
@@ -44,7 +45,7 @@ public class ExtendedUrlTypeVFS extends UrlTypeVFS {
                     return new VfsDir(url);
                 }
             } catch (IOException e) {
-                throw new RuntimeException("error reading from VFS", e);
+                throw new WebJarAssetLocator.ResourceException(url.toString(), "error reading from VFS: " + e.getMessage());
             }
         }
         return super.createDir(url);

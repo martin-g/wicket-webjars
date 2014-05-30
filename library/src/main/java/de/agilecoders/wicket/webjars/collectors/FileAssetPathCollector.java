@@ -1,5 +1,7 @@
 package de.agilecoders.wicket.webjars.collectors;
 
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
+
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -36,7 +38,7 @@ public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
         try {
             file = new File(url.toURI());
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new WebJarAssetLocator.ResourceException(url.toString(), e.getMessage());
         }
 
         return listFiles(file, filterExpr);
@@ -58,7 +60,8 @@ public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
     private void aggregateChildren(final File rootDirectory, final File file, final Set<String> aggregatedChildren, final Pattern filterExpr, final int level) {
         if (file != null && file.isDirectory()) {
             if (level > MAX_DIRECTORY_DEPTH) {
-                throw new IllegalStateException("Got deeper than " + MAX_DIRECTORY_DEPTH + " levels while searching " + rootDirectory);
+                throw new WebJarAssetLocator.ResourceException(rootDirectory.getAbsolutePath(),
+                                                               "Got deeper than " + MAX_DIRECTORY_DEPTH + " levels while searching " + rootDirectory);
             }
 
             File[] files = file.listFiles();

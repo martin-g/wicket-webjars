@@ -5,6 +5,8 @@ import de.agilecoders.wicket.webjars.collectors.IAssetProvider;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import org.apache.wicket.util.lang.Args;
 
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -28,11 +30,12 @@ public class WebJarAssetLocator implements IAssetProvider, IFullPathProvider {
     }
 
     private String throwNotFoundException(final String partialPath) {
-        throw new IllegalArgumentException(partialPath + " could not be found. Make sure you've added the corresponding WebJar and please check for typos.");
+        throw new ResourceException(partialPath, partialPath + " could not be found. Make sure you've added the "
+                                                 + "corresponding WebJar and please check for typos.");
     }
 
     private String throwMultipleMatchesException(final String partialPath) {
-        throw new IllegalArgumentException("Multiple matches found for " + partialPath
+        throw new ResourceException(partialPath, "Multiple matches found for " + partialPath
                                            + ". Please provide a more specific path, for example by including a version number.");
     }
 
@@ -73,4 +76,67 @@ public class WebJarAssetLocator implements IAssetProvider, IFullPathProvider {
         return assetMap.listAssets(folderPath);
     }
 
+    /**
+     * resource exception without stacktrace.
+     */
+    public static class ResourceException extends RuntimeException {
+
+        private final String resource;
+
+        /**
+         * Construct.
+         *
+         * @param resource the resource
+         * @param message  error message
+         */
+        public ResourceException(String resource, String message) {
+            super(message);
+
+            this.resource = resource;
+        }
+
+        public String resource() {
+            return resource;
+        }
+
+        @Override
+        public synchronized Throwable getCause() {
+            return null;
+        }
+
+        @Override
+        public synchronized Throwable initCause(Throwable cause) {
+            return this;
+        }
+
+        @Override
+        public void printStackTrace() {
+            // nothing to do
+        }
+
+        @Override
+        public void printStackTrace(PrintStream s) {
+            printStackTrace();
+        }
+
+        @Override
+        public void printStackTrace(PrintWriter s) {
+            printStackTrace();
+        }
+
+        @Override
+        public synchronized Throwable fillInStackTrace() {
+            return this;
+        }
+
+        @Override
+        public StackTraceElement[] getStackTrace() {
+            return new StackTraceElement[] { };
+        }
+
+        @Override
+        public void setStackTrace(StackTraceElement[] stackTrace) {
+            // nothing to do
+        }
+    }
 }

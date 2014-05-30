@@ -1,11 +1,11 @@
 package de.agilecoders.wicket.webjars.collectors;
 
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
 import de.agilecoders.wicket.webjars.vfs.ExtendedUrlTypeVFS;
 import org.jboss.vfs.VirtualFile;
 import org.reflections.vfs.Vfs;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -44,11 +44,11 @@ public class VfsJarAssetPathCollector extends JarAssetPathCollector {
 
             return new JarFile(new File(pathToJar, jarName));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new WebJarAssetLocator.ResourceException(url.toString(), e.getMessage());
         }
     }
 
-    private static String toJarName(URL url) throws FileNotFoundException {
+    private static String toJarName(URL url) {
         final String path = url.getPath();
 
         Matcher m = PATTERN.matcher(path);
@@ -56,7 +56,7 @@ public class VfsJarAssetPathCollector extends JarAssetPathCollector {
             return m.group(1);
         }
 
-        throw new FileNotFoundException(url.getPath());
+        throw new WebJarAssetLocator.ResourceException(path, "given url isn't a jar file");
     }
 
     private static AtomicBoolean added = new AtomicBoolean(false);

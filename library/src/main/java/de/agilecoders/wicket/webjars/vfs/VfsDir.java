@@ -1,6 +1,7 @@
 package de.agilecoders.wicket.webjars.vfs;
 
 import com.google.common.collect.AbstractIterator;
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
 import org.jboss.vfs.VirtualFile;
 import org.reflections.vfs.Vfs;
 
@@ -30,7 +31,8 @@ public class VfsDir implements Vfs.Dir {
                                                    + (content == null ? "null" : content.getClass().getName()));
             }
         } catch (IOException e) {
-            throw new RuntimeException("could not instantiate VFS directory", e);
+            throw new WebJarAssetLocator.ResourceException(url.toString(), "could not instantiate VFS directory: " +
+                                                                           e.getMessage());
         }
     }
 
