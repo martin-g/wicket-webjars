@@ -36,13 +36,14 @@ public class WebJarAssetLocator implements IAssetProvider, IFullPathProvider {
 
     private String throwMultipleMatchesException(final String partialPath) {
         throw new ResourceException(partialPath, "Multiple matches found for " + partialPath
-                                           + ". Please provide a more specific path, for example by including a version number.");
+                                                 + ". Please provide a more specific path, for example by including a version number.");
     }
 
     @Override
     public String getFullPath(String partialPath) {
         partialPath = Args.notEmpty(partialPath, "partialPath").contains(recentVersionPlaceHolder) ?
-                      assetMap.findRecentVersionFor(partialPath) :
+                      partialPath.replace(recentVersionPlaceHolder,
+                                          "/" + assetMap.findRecentVersionFor(partialPath) + "/") :
                       partialPath;
 
         final String reversePartialPath = reversePath(partialPath);
