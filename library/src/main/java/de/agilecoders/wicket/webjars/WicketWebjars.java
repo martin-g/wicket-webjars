@@ -33,6 +33,16 @@ public final class WicketWebjars {
     };
 
     /**
+     * Checks whether Webjars support is already installed
+     *
+     * @param application the wicket application
+     * @return {@code true} if Webjars is already installed, otherwise {@code false}
+     */
+    public static boolean isInstalled(Application application) {
+        return application.getMetaData(WEBJARS_SETTINGS_METADATA_KEY) != null;
+    }
+
+    /**
      * installs the webjars resource finder and uses a set of default settings.
      *
      * @param app the wicket application
