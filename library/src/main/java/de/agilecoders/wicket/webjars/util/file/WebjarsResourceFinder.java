@@ -57,7 +57,7 @@ public class WebjarsResourceFinder implements IResourceFinder {
     public IResourceStream find(final Class<?> clazz, final String pathName) {
         IResourceStream stream = null;
 
-        if (IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
+        if (clazz != null && IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
             final int pos = pathName != null ? pathName.lastIndexOf(Helper.PATH_PREFIX) : -1;
 
             if (pos > -1) {

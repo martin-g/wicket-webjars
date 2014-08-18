@@ -39,6 +39,18 @@ public class WebjarsResourceFinderTest extends Assert {
         assertNull(finder.find(String.class, "non existing"));
     }
 
+    /**
+     * https://github.com/l0rdn1kk0n/wicket-webjars/issues/20
+     *
+     * Return {@code null} for missing resources
+     */
+    @Test
+    public void findWithNullScope() {
+        WebjarsResourceFinder finder = new WebjarsResourceFinder(WicketWebjars.settings());
+
+        assertNull(finder.find(null, "non existing"));
+    }
+
     @Test
     public void findOnGAE() throws ResourceStreamNotFoundException, IOException {
         System.setProperty("com.google.appengine.runtime.environment", "Production");
