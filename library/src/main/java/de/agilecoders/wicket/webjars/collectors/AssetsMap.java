@@ -26,7 +26,7 @@ import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
  *
  * @author miha
  */
-public final class AssetsMap implements IAssetProvider, IRecentVersionProvider {
+public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     private static final Logger LOG = LoggerFactory.getLogger(WicketWebjars.class);
 
     private final IWebjarsSettings settings;
@@ -53,7 +53,7 @@ public final class AssetsMap implements IAssetProvider, IRecentVersionProvider {
 
         if (partialPathMatcher.find() && recentVersionPlaceHolder.equalsIgnoreCase(partialPathMatcher.group(2))) {
             final Set<String> assets = listAssets(partialPathMatcher.group(1));
-            final String fileName = partialPathMatcher.group(3);
+            final String fileName = "/" + partialPathMatcher.group(3);
             final List<String> versions = Lists.newArrayList();
 
             for (String asset : assets) {
