@@ -9,39 +9,31 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>wicket-webjars</artifactId>
+    <artifactId>wicket-webjars-vfs</artifactId>
     <packaging>jar</packaging>
-    <name>library</name>
+    <name>library-vfs</name>
 
     <dependencies>
-        <!-- WICKET DEPENDENCIES -->
         <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-core</artifactId>
+            <groupId>de.agilecoders.wicket.webjars</groupId>
+            <artifactId>wicket-webjars</artifactId>
+        </dependency>
+
+        <!-- THIRD PARTY DEPENDENCIES -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-request</artifactId>
-        </dependency>
-
-        <!-- LOGGING DEPENDENCIES - LOG4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>org.jboss</groupId>
+            <artifactId>jboss-vfs</artifactId>
         </dependency>
 
         <!-- TESTING DEPENDENCIES -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>1.8.3</version>
             <scope>test</scope>
         </dependency>
 

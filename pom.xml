@@ -38,6 +38,7 @@
 
     <modules>
         <module>library</module>
+        <module>library-vfs</module>
         <module>samples</module>
     </modules>
 
@@ -62,6 +63,12 @@
             <dependency>
                 <groupId>de.agilecoders.wicket.webjars</groupId>
                 <artifactId>wicket-webjars</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.agilecoders.wicket.webjars</groupId>
+                <artifactId>wicket-webjars-vfs</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
