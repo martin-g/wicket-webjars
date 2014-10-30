@@ -3,6 +3,7 @@ package de.agilecoders.wicket.webjars.settings;
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.JarAssetPathCollector;
+import de.agilecoders.wicket.webjars.collectors.VfsAssetPathCollector;
 import de.agilecoders.wicket.webjars.util.Helper;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
 import org.apache.wicket.util.lang.Args;
@@ -50,7 +51,8 @@ public class WebjarsSettings implements IWebjarsSettings {
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new FileAssetPathCollector(webjarsPath),
-                new JarAssetPathCollector()
+                new JarAssetPathCollector(),
+                new VfsAssetPathCollector()
         };
     }
 

@@ -37,11 +37,6 @@
             <artifactId>reflections</artifactId>
         </dependency>
 
-        <dependency>
-        <groupId>org.jboss</groupId>
-            <artifactId>jboss-vfs</artifactId>
-        </dependency>
-
         <!-- TESTING DEPENDENCIES -->
         <dependency>
             <groupId>junit</groupId>
