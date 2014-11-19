@@ -114,3 +114,7 @@ Authors
 
 [![Ohloh profile for Michael Haitz](//www.ohloh.net/accounts/235496/widgets/account_detailed.gif)](https://www.ohloh.net/accounts/235496?ref=Detailed) 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/l0rdn1kk0n/wicket-webjars/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
