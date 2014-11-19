@@ -18,7 +18,7 @@ Add maven dependency:
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>wicket-webjars</artifactId>
-  <version>0.4.1</version>
+  <version>0.4.4</version>
 </dependency>
 ```
 
@@ -32,16 +32,11 @@ Installation:
     public void init() {
         super.init();
 
-        // install 2 default collector instances 
-        // (FileAssetPathCollector(WEBJARS_PATH_PREFIX), JarAssetPathCollector)
+        // install 3 default collector instances
+        // (FileAssetPathCollector(WEBJARS_PATH_PREFIX), JarAssetPathCollector, VfsAssetPathCollector)
         // and a webjars resource finder.
         WebjarsSettings settings = new WebjarsSettings();
 
-        // register vfs collector to use webjars on jboss (you don't need to add maven dependency)
-        Set<AssetPathCollector> collectors = Sets.newHashSet(settings.assetPathCollectors());
-        collectors.add(new VfsJarAssetPathCollector());
-        settings.assetPathCollectors(collectors.toArray(new AssetPathCollector[collectors.size()]));
-        
         WicketWebjars.install(this, settings);
     }
 ```
@@ -112,9 +107,9 @@ public WebjarsComponent extends Panel {
 Authors
 -------
 
-[![Ohloh profile for Michael Haitz](//www.ohloh.net/accounts/235496/widgets/account_detailed.gif)](https://www.ohloh.net/accounts/235496?ref=Detailed) 
+[![Ohloh profile for Michael Haitz](https://www.openhub.net/accounts/l0rdn1kk0n/widgets/account_detailed.gif)](https://www.openhub.net/accounts/l0rdn1kk0n?ref=Detailed)
 
-
+[![Ohloh profile for Martin Grigorov](https://www.openhub.net/accounts/mgrigorov/widgets/account_detailed.gif)](https://www.openhub.net/accounts/mgrigorov?ref=Detailed)
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/l0rdn1kk0n/wicket-webjars/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
