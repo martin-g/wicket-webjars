@@ -49,11 +49,10 @@
         <mvn.build.java.version>1.6</mvn.build.java.version>
         <mvn.version>3.0.0</mvn.version>
 
-        <wicket.version>6.15.0</wicket.version>
+        <wicket.version>6.18.0</wicket.version>
         <slf4j.version>1.7.7</slf4j.version>
         <guava.version>18.0</guava.version>
         <junit.version>4.11</junit.version>
-        <jboss.vfs.version>3.2.5.Final</jboss.vfs.version>
     </properties>
 
     <dependencyManagement>
@@ -95,13 +94,6 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>3.1.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss</groupId>
-                <artifactId>jboss-vfs</artifactId>
-                <version>${jboss.vfs.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- TESTING DEPENDENCIES -->
