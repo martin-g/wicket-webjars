@@ -22,10 +22,6 @@
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.wicket</groupId>
-            <artifactId>wicket-request</artifactId>
-        </dependency>
 
         <dependency>
         <groupId>org.webjars</groupId>
@@ -42,13 +38,13 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.0.0</version>
+            <version>3.3.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.5</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <dependency>
@@ -87,20 +83,5 @@
                 </excludes>
             </testResource>
         </testResources>
-        <plugins>
-            <plugin>
-                <inherited>true</inherited>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <encoding>UTF-8</encoding>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-        </plugins>
     </build>
 </project>
