@@ -7,6 +7,12 @@ Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn
 
 **wicket-webjars** dependes on [webjars](https://github.com/webjars/webjars).
 
+Current release version:
+
+* For Wicket 7.x use 0.5.0
+* For Wicket 6.x use 0.4.5
+
+
 Documentation:
 
 - [Webjars Documentation](http://www.webjars.org/documentation)
