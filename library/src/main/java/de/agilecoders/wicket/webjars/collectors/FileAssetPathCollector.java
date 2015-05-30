@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
  * @author miha
  */
 public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
-    private static final int MAX_DIRECTORY_DEPTH = 5;
 
     private final String pathPrefix;
 
@@ -53,22 +52,17 @@ public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
      */
     private Set<String> listFiles(final File file, final Pattern filterExpr) {
         final Set<String> aggregatedChildren = new HashSet<String>();
-        aggregateChildren(file, file, aggregatedChildren, filterExpr, 0);
+        aggregateChildren(file, aggregatedChildren, filterExpr);
         return aggregatedChildren;
     }
 
-    private void aggregateChildren(final File rootDirectory, final File file, final Set<String> aggregatedChildren, final Pattern filterExpr, final int level) {
+    private void aggregateChildren(final File file, final Set<String> aggregatedChildren, final Pattern filterExpr) {
         if (file != null && file.isDirectory()) {
-            if (level > MAX_DIRECTORY_DEPTH) {
-                throw new WebJarAssetLocator.ResourceException(rootDirectory.getAbsolutePath(),
-                                                               "Got deeper than " + MAX_DIRECTORY_DEPTH + " levels while searching " + rootDirectory);
-            }
-
             File[] files = file.listFiles();
 
             if (files != null) {
                 for (final File child : files) {
-                    aggregateChildren(rootDirectory, child, aggregatedChildren, filterExpr, level + 1);
+                    aggregateChildren(child, aggregatedChildren, filterExpr);
                 }
             }
         } else if (file != null) {
