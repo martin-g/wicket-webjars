@@ -9,8 +9,8 @@ Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn
 
 Current release version:
 
-* For Wicket 7.x use 0.5.0
-* For Wicket 6.x use 0.4.5
+* For Wicket 7.x use 0.5.x
+* For Wicket 6.x use 0.4.x
 
 
 Documentation:
@@ -24,7 +24,7 @@ Add maven dependency:
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>wicket-webjars</artifactId>
-  <version>0.4.4</version>
+  <version>0.4.7</version>
 </dependency>
 ```
 
