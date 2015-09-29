@@ -37,16 +37,17 @@ public class JarAssetPathCollector extends ProtocolAwareAssetPathCollector {
     @Override
     public Collection<String> collect(URL url, Pattern filterExpr) {
         final JarFile jarFile = newJarFile(url);
-        final Set<String> assetPaths = new HashSet<String>();
+        final Set<String> assetPaths = new HashSet<>();
 
-        boolean isWarFile = jarFile.getName().endsWith(".war");
+        final String jarFileName = jarFile.getName();
+        boolean isArchive = jarFileName.endsWith(".war") || jarFileName.endsWith(".jar");
 
         final Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             final JarEntry entry = entries.nextElement();
             final String assetPathCandidate = entry.getName();
 
-            if (isWarFile && assetPathCandidate.endsWith(".jar")) {
+            if (isArchive && assetPathCandidate.endsWith(".jar")) {
                 collectInnerJar(jarFile, entry, assetPaths, filterExpr);
             } else if (!entry.isDirectory() && filterExpr.matcher(assetPathCandidate).matches()) {
                 assetPaths.add(assetPathCandidate);
