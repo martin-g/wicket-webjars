@@ -53,7 +53,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
 
         if (partialPathMatcher.find() && recentVersionPlaceHolder.equalsIgnoreCase(partialPathMatcher.group(2))) {
             final Set<String> assets = listAssets(partialPathMatcher.group(1));
-            final String fileName = "/" + partialPathMatcher.group(3);
+            final String fileName = "/" + partialPathMatcher.group(4);
             final List<String> versions = Lists.newArrayList();
 
             for (String asset : assets) {
@@ -129,6 +129,9 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
      */
     private Set<String> getAssetPaths(final Pattern filterExpr, final ClassLoader... classLoaders) {
         final Set<String> assetPaths = new HashSet<String>();
+        
+        assetPaths.addAll(new ClasspathAssetPathCollector().collect(filterExpr));
+        
         final Set<URL> urls = listWebjarsParentURLs(classLoaders);
 
         for (final URL url : urls) {
