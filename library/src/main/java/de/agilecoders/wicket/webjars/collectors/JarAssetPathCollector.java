@@ -1,7 +1,5 @@
 package de.agilecoders.wicket.webjars.collectors;
 
-import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +14,12 @@ import java.util.jar.JarFile;
 import java.util.jar.JarInputStream;
 import java.util.regex.Pattern;
 
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
+
+/**
+ * @see ClasspathAssetPathCollector
+ */
+@Deprecated
 public class JarAssetPathCollector extends ProtocolAwareAssetPathCollector {
 
     /**
@@ -36,33 +40,38 @@ public class JarAssetPathCollector extends ProtocolAwareAssetPathCollector {
 
     @Override
     public Collection<String> collect(URL url, Pattern filterExpr) {
-        final JarFile jarFile = newJarFile(url);
+    	final JarFile jarFile = newJarFile(url);
         final Set<String> assetPaths = new HashSet<String>();
 
-        boolean isWarFile = jarFile.getName().endsWith(".war");
+        final String jarFileName = jarFile.getName();
+        boolean isArchive = jarFileName.endsWith(".war") || jarFileName.endsWith(".jar");
 
         final Enumeration<JarEntry> entries = jarFile.entries();
         while (entries.hasMoreElements()) {
             final JarEntry entry = entries.nextElement();
             final String assetPathCandidate = entry.getName();
 
-            if (isWarFile && assetPathCandidate.endsWith(".jar")) {
+            if (isArchive && assetPathCandidate.endsWith(".jar")) {
                 collectInnerJar(jarFile, entry, assetPaths, filterExpr);
-            } else if (!entry.isDirectory() && filterExpr.matcher(assetPathCandidate).matches()) {
-                assetPaths.add(assetPathCandidate);
-            }
+            } else if (!entry.isDirectory() && filterExpr.matcher("/" + assetPathCandidate).matches()) {
+            	assetPaths.add(assetPathCandidate);
+            } 
         }
 
         return assetPaths;
     }
 
     protected void collectInnerJar(JarFile jarFile, JarEntry entry, Set<String> assetPaths, Pattern filterExpr) {
-        try {
+    	try {
             InputStream inputStream = jarFile.getInputStream(entry);
             JarInputStream jarInputStream = new JarInputStream(inputStream);
             JarEntry innerJarEntry;
             while ((innerJarEntry = jarInputStream.getNextJarEntry()) != null) {
-                String innerJarEntryName = innerJarEntry.getName();
+            	String innerJarEntryName = innerJarEntry.getName();
+            	if(!filterExpr.matcher(innerJarEntryName).matches()){
+            		break;
+            	}
+                
                 if (!innerJarEntry.isDirectory() && filterExpr.matcher(innerJarEntryName).matches()) {
                     assetPaths.add(innerJarEntryName);
                 }
