@@ -26,12 +26,6 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <!-- THIRD PARTY DEPENDENCIES -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
         <!-- TESTING DEPENDENCIES -->
         <dependency>
             <groupId>junit</groupId>
