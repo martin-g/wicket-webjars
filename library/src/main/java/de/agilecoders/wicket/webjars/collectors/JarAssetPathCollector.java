@@ -41,7 +41,7 @@ public class JarAssetPathCollector extends ProtocolAwareAssetPathCollector {
     @Override
     public Collection<String> collect(URL url, Pattern filterExpr) {
     	final JarFile jarFile = newJarFile(url);
-        final Set<String> assetPaths = new HashSet<>();
+        final Set<String> assetPaths = new HashSet<String>();
 
         final String jarFileName = jarFile.getName();
         boolean isArchive = jarFileName.endsWith(".war") || jarFileName.endsWith(".jar");
