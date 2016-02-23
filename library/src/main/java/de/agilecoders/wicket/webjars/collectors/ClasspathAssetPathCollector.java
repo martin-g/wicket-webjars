@@ -20,7 +20,7 @@ public class ClasspathAssetPathCollector {
 
 
 	public Collection<String> collect(String webjarsPath) {
-		final Set<String> assetPaths = new HashSet<>();
+		final Set<String> assetPaths = new HashSet<String>();
 		try {
 			Enumeration<URL> webJarPathResources = Thread.currentThread().getContextClassLoader().getResources(webjarsPath);
 			while (webJarPathResources.hasMoreElements()) {
@@ -34,10 +34,12 @@ public class ClasspathAssetPathCollector {
 
 	private Set<String> collectFromWebJarPath(URL webJarPathResource)
 			throws IOException {
-		final Set<String> assetPaths = new HashSet<>();
+		final Set<String> assetPaths = new HashSet<String>();
 		
 		JarURLConnection urlcon = (JarURLConnection) (webJarPathResource.openConnection());
-		try (JarFile jar = urlcon.getJarFile();) {
+		JarFile jar = null;
+		try  {
+			jar = urlcon.getJarFile();
 		    Enumeration<JarEntry> entries = jar.entries();
 		    while (entries.hasMoreElements()) {
 		        String innerJarEntryName = entries.nextElement().getName();
@@ -45,6 +47,10 @@ public class ClasspathAssetPathCollector {
 		        		assetPaths.add(innerJarEntryName);
 		        	}
 		    }
+		} finally {
+			if(jar != null) {
+				jar.close();
+			}
 		}
 		return assetPaths;
 	}
