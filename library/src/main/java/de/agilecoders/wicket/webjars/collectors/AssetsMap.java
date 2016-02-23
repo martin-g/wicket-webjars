@@ -53,7 +53,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
 
         if (partialPathMatcher.find() && recentVersionPlaceHolder.equalsIgnoreCase(partialPathMatcher.group(2))) {
             final Set<String> assets = listAssets(partialPathMatcher.group(1));
-            final String fileName = "/" + partialPathMatcher.group(4);
+            final String fileName = "/" + partialPathMatcher.group(3);
             final List<String> versions = new ArrayList<String>();
 
             for (String asset : assets) {
