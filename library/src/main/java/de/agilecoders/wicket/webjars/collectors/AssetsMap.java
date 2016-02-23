@@ -1,11 +1,6 @@
 package de.agilecoders.wicket.webjars.collectors;
 
-import com.google.common.collect.Lists;
-import de.agilecoders.wicket.webjars.WicketWebjars;
-import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
-import de.agilecoders.wicket.webjars.util.Helper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +14,14 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Lists;
+
+import de.agilecoders.wicket.webjars.WicketWebjars;
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+import de.agilecoders.wicket.webjars.util.Helper;
 
 /**
  * asset holder map.
@@ -130,7 +132,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     private Set<String> getAssetPaths(final Pattern filterExpr, final ClassLoader... classLoaders) {
         final Set<String> assetPaths = new HashSet<String>();
         
-        assetPaths.addAll(new ClasspathAssetPathCollector().collect(filterExpr));
+        assetPaths.addAll(new ClasspathAssetPathCollector().collect(settings.webjarsPath()));
         
         final Set<URL> urls = listWebjarsParentURLs(classLoaders);
 
