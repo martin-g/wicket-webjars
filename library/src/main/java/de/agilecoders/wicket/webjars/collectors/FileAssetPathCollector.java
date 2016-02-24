@@ -14,8 +14,6 @@ import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
  * A {@link de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector} searches webjars on disk
  * in a special directory.
  * 
- * TODO check if still needed when using {@link ClasspathAssetPathCollector}
- * 
  * @author miha
  */
 public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {

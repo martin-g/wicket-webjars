@@ -1,6 +1,5 @@
 package de.agilecoders.wicket.webjars.collectors;
 
-import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -9,6 +8,8 @@ import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 
 public class AssetsMapTest extends Assert{
 

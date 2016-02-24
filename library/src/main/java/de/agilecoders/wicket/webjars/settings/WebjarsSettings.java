@@ -54,7 +54,6 @@ public class WebjarsSettings implements IWebjarsSettings {
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new ClasspathAssetPathCollector(webjarsPath),
-//                new JarAssetPathCollector(),
                 new VfsAssetPathCollector(),
                 new FileAssetPathCollector(webjarsPath)
         };

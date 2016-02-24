@@ -12,8 +12,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+
 /**
- * A collector that searches for assets in the classpath.
+ * A collector that searches for assets in the classpath, only in
+ * {@link IWebjarsSettings#webjarsPath()}, usually in <em>META-INF/resources/webjars/**</em>.
  */
 public class ClasspathAssetPathCollector implements AssetPathCollector {
 
