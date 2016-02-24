@@ -56,21 +56,21 @@ public class WebjarsResourceFinderTest extends Assert {
         System.setProperty("com.google.appengine.runtime.environment", "Production");
 
         WebjarsResourceFinder finder = new WebjarsResourceFinder(WicketWebjars.settings());
-        IResourceStream stream = finder.find(IWebjarsResourceReference.class, "/webjars/jquery/1.8.3/jquery.min.js");
+        IResourceStream stream = finder.find(IWebjarsResourceReference.class, "/webjars/jquery/2.2.1/jquery.min.js");
 
         System.setProperty("com.google.appengine.runtime.environment", "");
 
         assertThat(stream, is(not(nullValue())));
-        assertThat(IOUtils.toString(stream.getInputStream()), startsWith("/*! jQuery v1.8.3 jquery.com"));
+        assertThat(IOUtils.toString(stream.getInputStream()), startsWith("/*! jQuery v2.2.1"));
     }
 
     @Test
     public void findFile() throws ResourceStreamNotFoundException, IOException {
         WebjarsResourceFinder finder = new WebjarsResourceFinder(WicketWebjars.settings());
-        IResourceStream stream = finder.find(IWebjarsResourceReference.class, "/webjars/jquery/1.8.3/jquery.min.js");
+        IResourceStream stream = finder.find(IWebjarsResourceReference.class, "/webjars/jquery/2.2.1/jquery.min.js");
 
         assertThat(stream, is(not(nullValue())));
-        assertThat(IOUtils.toString(stream.getInputStream()), startsWith("/*! jQuery v1.8.3 jquery.com"));
+        assertThat(IOUtils.toString(stream.getInputStream()), startsWith("/*! jQuery v2.2.1"));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class WebjarsResourceFinderTest extends Assert {
                                              useRecent("/webjars/jquery/current/jquery.min.js"));
 
         assertThat(stream, is(not(nullValue())));
-        assertThat(IOUtils.toString(stream.getInputStream()), startsWith("/*! jQuery v1.8.3 jquery.com"));
+        assertThat(IOUtils.toString(stream.getInputStream()), startsWith("/*! jQuery v2.2.1"));
     }
 
     @Before

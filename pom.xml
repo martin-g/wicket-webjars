@@ -49,9 +49,8 @@
         <mvn.build.java.version>1.6</mvn.build.java.version>
         <mvn.version>3.0.0</mvn.version>
 
-        <wicket.version>6.20.0</wicket.version>
-        <slf4j.version>1.7.12</slf4j.version>
-        <guava.version>18.0</guava.version>
+        <wicket.version>6.22.0</wicket.version>
+        <slf4j.version>1.7.14</slf4j.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -78,17 +77,10 @@
                 <version>${slf4j.version}</version>
             </dependency>
 
-            <!-- THIRD PARTY DEPENDENCIES -->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <version>3.0.1</version>
             </dependency>
 
             <!-- TESTING DEPENDENCIES -->
@@ -98,7 +90,6 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-
 
         </dependencies>
     </dependencyManagement>
@@ -138,7 +129,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>${mvn.build.java.version}</source>
                     <target>${mvn.build.java.version}</target>
@@ -199,6 +190,15 @@
             <organization>agilecoders.de</organization>
             <roles>
                 <role>Owner</role>
+                <role>Committer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>martin-g</id>
+            <name>Martin Grigorov</name>
+            <email>mgrigorov@apache.org</email>
+            <organization>Apache Software Organization</organization>
+            <roles>
                 <role>Committer</role>
             </roles>
         </developer>
