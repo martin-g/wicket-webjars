@@ -1,7 +1,5 @@
 package de.agilecoders.wicket.webjars.collectors;
 
-import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
-
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -10,10 +8,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
+
 /**
  * A {@link de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector} searches webjars on disk
  * in a special directory.
- *
+ * 
  * @author miha
  */
 public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
@@ -51,7 +51,7 @@ public class FileAssetPathCollector extends ProtocolAwareAssetPathCollector {
      * @return all files that matches given filter
      */
     private Set<String> listFiles(final File file, final Pattern filterExpr) {
-        final Set<String> aggregatedChildren = new HashSet<String>();
+        final Set<String> aggregatedChildren = new HashSet<>();
         aggregateChildren(file, aggregatedChildren, filterExpr);
         return aggregatedChildren;
     }

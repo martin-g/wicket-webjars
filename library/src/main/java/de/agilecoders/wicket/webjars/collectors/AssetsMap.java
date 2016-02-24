@@ -5,6 +5,7 @@ import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.util.Helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +19,6 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 /**
  * asset holder map.
@@ -54,7 +53,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
         if (partialPathMatcher.find() && recentVersionPlaceHolder.equalsIgnoreCase(partialPathMatcher.group(2))) {
             final Set<String> assets = listAssets(partialPathMatcher.group(1));
             final String fileName = "/" + partialPathMatcher.group(3);
-            final List<String> versions = new ArrayList<String>();
+            final List<String> versions = new ArrayList<>();
 
             for (String asset : assets) {
                 if (asset.endsWith(fileName)) {
@@ -91,7 +90,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     @Override
     public Set<String> listAssets(final String folderPath) {
         final Collection<String> allAssets = getFullPathIndex().values();
-        final Set<String> assets = new HashSet<String>();
+        final Set<String> assets = new HashSet<>();
         final String prefix = settings.webjarsPath() + Helper.appendLeadingSlash(folderPath);
 
         for (final String asset : allAssets) {
@@ -108,7 +107,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
      * either identifying JAR files or plain directories.
      */
     private Set<URL> listWebjarsParentURLs(final ClassLoader[] classLoaders) {
-        final Set<URL> urls = new HashSet<URL>();
+        final Set<URL> urls = new HashSet<>();
         final String webjarsPath = settings.webjarsPath();
 
         for (final ClassLoader classLoader : classLoaders) {
@@ -128,13 +127,15 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
      * Return all of the resource paths filtered given an expression and a list of class loaders.
      */
     private Set<String> getAssetPaths(final Pattern filterExpr, final ClassLoader... classLoaders) {
-        final Set<String> assetPaths = new HashSet<String>();
+        final Set<String> assetPaths = new HashSet<>();
+        
         final Set<URL> urls = listWebjarsParentURLs(classLoaders);
 
         for (final URL url : urls) {
             for (AssetPathCollector collector : collectors) {
                 if (collector.accept(url)) {
-                    assetPaths.addAll(collector.collect(url, filterExpr));
+                    Collection<String> collection = collector.collect(url, filterExpr);
+                    assetPaths.addAll(collection);
                 }
             }
         }
@@ -155,7 +156,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     private SortedMap<String, String> createFullPathIndex(final Pattern filterExpr, final ClassLoader... classLoaders) {
         final Set<String> assetPaths = getAssetPaths(filterExpr, classLoaders);
 
-        final SortedMap<String, String> assetPathIndex = new TreeMap<String, String>();
+        final SortedMap<String, String> assetPathIndex = new TreeMap<>();
         for (final String assetPath : assetPaths) {
             assetPathIndex.put(reversePath(assetPath), assetPath);
         }
