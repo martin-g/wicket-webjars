@@ -7,6 +7,7 @@ import org.apache.wicket.util.lang.Args;
 import org.apache.wicket.util.time.Duration;
 
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
+import de.agilecoders.wicket.webjars.collectors.ClasspathAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.VfsAssetPathCollector;
 import de.agilecoders.wicket.webjars.util.Helper;
@@ -51,6 +52,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.cdnUrl = DEFAULT_WEBJAR_CDN;
 
         this.assetPathCollectors = new AssetPathCollector[] {
+                new ClasspathAssetPathCollector(webjarsPath),
                 new VfsAssetPathCollector(),
                 new FileAssetPathCollector(webjarsPath)
         };

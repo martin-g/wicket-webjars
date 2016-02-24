@@ -130,8 +130,6 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     private Set<String> getAssetPaths(final Pattern filterExpr, final ClassLoader... classLoaders) {
         final Set<String> assetPaths = new HashSet<String>();
         
-        assetPaths.addAll(new ClasspathAssetPathCollector().collect(settings.webjarsPath()));
-        
         final Set<URL> urls = listWebjarsParentURLs(classLoaders);
 
         for (final URL url : urls) {
