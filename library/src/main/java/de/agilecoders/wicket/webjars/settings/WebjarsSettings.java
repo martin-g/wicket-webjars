@@ -1,16 +1,18 @@
 package de.agilecoders.wicket.webjars.settings;
 
+import java.util.Arrays;
+import java.util.regex.Pattern;
+
+import org.apache.wicket.util.lang.Args;
+import org.apache.wicket.util.time.Duration;
+
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
+import de.agilecoders.wicket.webjars.collectors.ClasspathAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.JarAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.VfsAssetPathCollector;
 import de.agilecoders.wicket.webjars.util.Helper;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
-import org.apache.wicket.util.lang.Args;
-import org.apache.wicket.util.time.Duration;
-
-import java.util.Arrays;
-import java.util.regex.Pattern;
 
 /**
  * default {@link de.agilecoders.wicket.webjars.settings.IWebjarsSettings} implementation.
@@ -42,17 +44,19 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.resourceStreamProvider = ResourceStreamProvider.bestFitting();
         this.webjarsPackage = "META-INF.resources.webjars";
         this.webjarsPath = this.webjarsPackage.replaceAll("\\.", "/");
-        this.resourcePattern = Pattern.compile(".*");
-        this.webjarsPathPattern = Pattern.compile(Helper.PATH_PREFIX + "([^/]*)/([^/]*)/(.*)");
+        this.resourcePattern = Pattern.compile("/META-INF/resources/webjars/.*");
+        //META-INF/resources/webjars/projectname/
+        this.webjarsPathPattern = Pattern.compile(Helper.PATH_PREFIX + "([^\\/]*)\\/([^\\/]*)\\/(.*)");
         this.recentVersionPlaceHolder = "current";
         this.readFromCacheTimeout = Duration.seconds(3);
         this.useCdnResources = false;
         this.cdnUrl = DEFAULT_WEBJAR_CDN;
 
         this.assetPathCollectors = new AssetPathCollector[] {
-                new FileAssetPathCollector(webjarsPath),
-                new JarAssetPathCollector(),
-                new VfsAssetPathCollector()
+                new ClasspathAssetPathCollector(webjarsPath),
+//                new JarAssetPathCollector(),
+                new VfsAssetPathCollector(),
+                new FileAssetPathCollector(webjarsPath)
         };
     }
 
