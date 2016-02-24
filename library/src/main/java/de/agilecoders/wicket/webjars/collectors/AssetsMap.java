@@ -1,6 +1,5 @@
 package de.agilecoders.wicket.webjars.collectors;
 
-import com.google.common.collect.Lists;
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.util.Helper;
@@ -9,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
@@ -54,7 +54,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
         if (partialPathMatcher.find() && recentVersionPlaceHolder.equalsIgnoreCase(partialPathMatcher.group(2))) {
             final Set<String> assets = listAssets(partialPathMatcher.group(1));
             final String fileName = "/" + partialPathMatcher.group(3);
-            final List<String> versions = Lists.newArrayList();
+            final List<String> versions = new ArrayList<String>();
 
             for (String asset : assets) {
                 if (asset.endsWith(fileName)) {

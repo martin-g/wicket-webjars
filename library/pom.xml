@@ -26,12 +26,6 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
 
-        <!-- THIRD PARTY DEPENDENCIES -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-        </dependency>
-
         <!-- TESTING DEPENDENCIES -->
         <dependency>
             <groupId>junit</groupId>
@@ -42,7 +36,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>1.8.3</version>
+            <version>2.2.1</version>
             <scope>test</scope>
         </dependency>
 
