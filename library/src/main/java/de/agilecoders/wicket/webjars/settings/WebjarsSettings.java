@@ -52,7 +52,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.cdnUrl = DEFAULT_WEBJAR_CDN;
 
         this.assetPathCollectors = new AssetPathCollector[] {
-                new ClasspathAssetPathCollector(webjarsPath),
+                new ClasspathAssetPathCollector(),
                 new VfsAssetPathCollector(),
                 new FileAssetPathCollector(webjarsPath)
         };
