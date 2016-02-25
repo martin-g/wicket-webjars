@@ -35,18 +35,15 @@ public class ClasspathAssetPathCollector implements AssetPathCollector {
     public Collection<String> collect(final URL url, final Pattern filterExpr) {
         final Set<String> assetPaths = new HashSet<>();
         try {
-            Enumeration<URL> webJarPathResources = Thread.currentThread().getContextClassLoader().getResources(webjarsPath);
-            while (webJarPathResources.hasMoreElements()) {
-                Set<String> paths = collectFromWebJarPath(webJarPathResources.nextElement());
-                assetPaths.addAll(paths);
-            }
+            Set<String> paths = collectFromWebJarPath(url, filterExpr);
+            assetPaths.addAll(paths);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
         return assetPaths;
     }
 
-    private Set<String> collectFromWebJarPath(URL webJarPathResource) throws IOException {
+    private Set<String> collectFromWebJarPath(URL webJarPathResource, final Pattern filterExpr) throws IOException {
         final Set<String> assetPaths = new HashSet<>();
 
         URLConnection urlConnection = webJarPathResource.openConnection();
@@ -58,7 +55,7 @@ public class ClasspathAssetPathCollector implements AssetPathCollector {
                 Enumeration<JarEntry> entries = jar.entries();
                 while (entries.hasMoreElements()) {
                     String innerJarEntryName = entries.nextElement().getName();
-                    if (!isDirectory(innerJarEntryName)) {
+                    if (!isDirectory(innerJarEntryName) && filterExpr.matcher(innerJarEntryName).matches()) {
                         assetPaths.add(innerJarEntryName);
                     }
                 }

@@ -44,7 +44,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.resourceStreamProvider = ResourceStreamProvider.bestFitting();
         this.webjarsPackage = "META-INF.resources.webjars";
         this.webjarsPath = this.webjarsPackage.replaceAll("\\.", "/");
-        this.resourcePattern = Pattern.compile("/META-INF/resources/webjars/.*");
+        this.resourcePattern = Pattern.compile("META-INF/resources/webjars/.*");
         //META-INF/resources/webjars/projectname/
         this.webjarsPathPattern = Pattern.compile(Helper.PATH_PREFIX + "([^\\/]*)\\/([^\\/]*)\\/(.*)");
         this.recentVersionPlaceHolder = "current";
