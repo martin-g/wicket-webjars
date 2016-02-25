@@ -20,12 +20,6 @@ import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
  */
 public class ClasspathAssetPathCollector implements AssetPathCollector {
 
-    private final String webjarsPath;
-
-    public ClasspathAssetPathCollector(String webjarsPath) {
-        this.webjarsPath = webjarsPath;
-    }
-
     @Override
     public boolean accept(final URL url) {
         return true;
