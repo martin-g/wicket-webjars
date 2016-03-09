@@ -9,7 +9,6 @@ import org.apache.wicket.util.time.Duration;
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.ClasspathAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.FileAssetPathCollector;
-import de.agilecoders.wicket.webjars.collectors.JarAssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.VfsAssetPathCollector;
 import de.agilecoders.wicket.webjars.util.Helper;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
@@ -36,6 +35,7 @@ public class WebjarsSettings implements IWebjarsSettings {
     private Pattern webjarsPathPattern;
     private boolean useCdnResources;
     private String cdnUrl;
+    private boolean sourcemaps;
 
     /**
      * Construct.
@@ -51,6 +51,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         this.readFromCacheTimeout = Duration.seconds(3);
         this.useCdnResources = false;
         this.cdnUrl = DEFAULT_WEBJAR_CDN;
+        this.sourcemaps = false;
 
         this.assetPathCollectors = new AssetPathCollector[] {
                 new ClasspathAssetPathCollector(),
@@ -81,7 +82,7 @@ public class WebjarsSettings implements IWebjarsSettings {
 
     @Override
     public ClassLoader[] classLoaders() {
-        return new ClassLoader[] {
+        return new ClassLoader[]{
                 Thread.currentThread().getContextClassLoader(),
                 WebJarAssetLocator.class.getClassLoader(),
                 getClass().getClassLoader()
@@ -111,6 +112,11 @@ public class WebjarsSettings implements IWebjarsSettings {
     @Override
     public boolean useCdnResources() {
         return useCdnResources;
+    }
+
+    @Override
+    public boolean sourcemaps() {
+        return this.sourcemaps;
     }
 
     @Override
@@ -163,19 +169,25 @@ public class WebjarsSettings implements IWebjarsSettings {
         return this;
     }
 
+    public WebjarsSettings sourcemaps(boolean active) {
+        this.sourcemaps = active;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "WebjarsSettings{" +
-               "readFromCacheTimeout=" + readFromCacheTimeout +
-               ", resourceStreamProvider=" + resourceStreamProvider +
-               ", recentVersionPlaceHolder='" + recentVersionPlaceHolder + '\'' +
-               ", assetPathCollectors=" + Arrays.toString(assetPathCollectors) +
-               ", webjarsPackage='" + webjarsPackage + '\'' +
-               ", webjarsPath='" + webjarsPath + '\'' +
-               ", resourcePattern=" + resourcePattern +
-               ", webjarsPathPattern=" + webjarsPathPattern +
-               ", useCdnResources=" + useCdnResources +
-               ", cdnUrl='" + cdnUrl + '\'' +
-               '}';
+                "readFromCacheTimeout=" + readFromCacheTimeout +
+                ", resourceStreamProvider=" + resourceStreamProvider +
+                ", recentVersionPlaceHolder='" + recentVersionPlaceHolder + '\'' +
+                ", assetPathCollectors=" + Arrays.toString(assetPathCollectors) +
+                ", webjarsPackage='" + webjarsPackage + '\'' +
+                ", webjarsPath='" + webjarsPath + '\'' +
+                ", resourcePattern=" + resourcePattern +
+                ", webjarsPathPattern=" + webjarsPathPattern +
+                ", useCdnResources=" + useCdnResources +
+                ", sourcemaps=" + sourcemaps +
+                ", cdnUrl='" + cdnUrl + '\'' +
+                '}';
     }
 }
