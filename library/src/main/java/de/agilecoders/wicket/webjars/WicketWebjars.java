@@ -7,8 +7,6 @@ import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
 import org.apache.wicket.Application;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.core.request.mapper.ResourceReferenceMapper;
-import org.apache.wicket.markup.html.IPackageResourceGuard;
-import org.apache.wicket.markup.html.SecurePackageResourceGuard;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.mapper.parameter.PageParametersEncoder;
@@ -23,7 +21,7 @@ import java.util.List;
 /**
  * Helper class for webjars resources
  *
- * @author Michael Haitz <michael.haitz@agilecoders.de>
+ * @author miha
  */
 public final class WicketWebjars {
     private static final Logger LOG = LoggerFactory.getLogger("wicket-webjars");
@@ -65,19 +63,12 @@ public final class WicketWebjars {
         if (existingSettings == null) {
             if (settings == null) {
                 settings = new WebjarsSettings();
-
-                // allow sourcemaps in development mode by default.
-                ((WebjarsSettings) settings).sourcemaps(app.usesDevelopmentConfig());
             }
 
             app.setMetaData(WEBJARS_SETTINGS_METADATA_KEY, settings);
 
             if (settings.useCdnResources()) {
                 mountCDNMapper(app, settings.cdnUrl());
-            }
-
-            if (settings.sourcemaps()) {
-                activateSourcemaps(app);
             }
 
             final List<IResourceFinder> finders = app.getResourceSettings().getResourceFinders();
@@ -88,19 +79,6 @@ public final class WicketWebjars {
             }
 
             LOG.info("initialize wicket webjars with given settings: {}", settings);
-        }
-    }
-
-    /**
-     * adds a special {@link SecurePackageResourceGuard} pattern to allow sourcemaps
-     *
-     * @param app current web app
-     */
-    private static void activateSourcemaps(final WebApplication app) {
-        final IPackageResourceGuard guard = app.getResourceSettings().getPackageResourceGuard();
-
-        if (guard instanceof SecurePackageResourceGuard) {
-            ((SecurePackageResourceGuard) guard).addPattern("+*.map");
         }
     }
 
@@ -153,7 +131,7 @@ public final class WicketWebjars {
                 return settings;
             } else {
                 throw new IllegalStateException("you have to call WicketWebjars.install() before you can use an "
-                        + "IWebjarsResourceReference or any other component.");
+                                                + "IWebjarsResourceReference or any other component.");
             }
         }
 
