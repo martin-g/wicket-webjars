@@ -9,7 +9,7 @@ import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 /**
  * Settings interface for all webjars depended settings
  *
- * @author Michael Haitz <michael.haitz@agilecoders.de>
+ * @author miha
  */
 public interface IWebjarsSettings {
 
@@ -63,11 +63,6 @@ public interface IWebjarsSettings {
      * @return true, if the resources for the webjars should be loaded from a CDN network
      */
     boolean useCdnResources();
-
-    /**
-     * @return true, if sourcemaps are active
-     */
-    boolean sourcemaps();
     
     /**
      * @return base URL of the webjars CDN
