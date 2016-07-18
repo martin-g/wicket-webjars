@@ -37,6 +37,7 @@ public final class WebjarsVersion {
      * replaces the version string "current" with the recent available version
      *
      * @param path the full resource path
+     * @return The version of webjars resource
      */
     public static String useRecent(String path) {
         Args.notEmpty(path, "path");
