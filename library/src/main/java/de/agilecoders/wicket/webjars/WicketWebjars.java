@@ -1,9 +1,5 @@
 package de.agilecoders.wicket.webjars;
 
-import de.agilecoders.wicket.webjars.request.WebjarsCDNRequestMapper;
-import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
-import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
-import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
 import org.apache.wicket.Application;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.core.request.mapper.ResourceReferenceMapper;
@@ -11,12 +7,17 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.mapper.parameter.PageParametersEncoder;
 import org.apache.wicket.request.resource.caching.IResourceCachingStrategy;
-import org.apache.wicket.util.IProvider;
 import org.apache.wicket.util.file.IResourceFinder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.function.Supplier;
+
+import de.agilecoders.wicket.webjars.request.WebjarsCDNRequestMapper;
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
+import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
 
 /**
  * Helper class for webjars resources
@@ -89,18 +90,8 @@ public final class WicketWebjars {
      * @param cdnUrl the cdn url to use
      */
     private static void mountCDNMapper(final WebApplication app, String cdnUrl) {
-        IProvider<String> parentFolderPlaceholderProvider = new IProvider<String>() {
-            @Override
-            public String get() {
-                return app.getResourceSettings().getParentFolderPlaceholder();
-            }
-        };
-        IProvider<IResourceCachingStrategy> cachingStrategyProvider = new IProvider<IResourceCachingStrategy>() {
-            @Override
-            public IResourceCachingStrategy get() {
-                return app.getResourceSettings().getCachingStrategy();
-            }
-        };
+        Supplier<String> parentFolderPlaceholderProvider = () -> app.getResourceSettings().getParentFolderPlaceholder();
+        Supplier<IResourceCachingStrategy> cachingStrategyProvider = () -> app.getResourceSettings().getCachingStrategy();
 
         LOG.info("use cdn resources from {}", cdnUrl);
 

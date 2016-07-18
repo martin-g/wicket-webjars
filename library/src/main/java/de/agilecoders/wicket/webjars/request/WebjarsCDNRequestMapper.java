@@ -1,7 +1,5 @@
 package de.agilecoders.wicket.webjars.request;
 
-import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
-import de.agilecoders.wicket.webjars.util.Helper;
 import org.apache.wicket.request.IRequestHandler;
 import org.apache.wicket.request.IRequestMapper;
 import org.apache.wicket.request.Request;
@@ -11,10 +9,13 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.request.resource.caching.IResourceCachingStrategy;
 import org.apache.wicket.request.resource.caching.ResourceUrl;
-import org.apache.wicket.util.IProvider;
 import org.apache.wicket.util.string.Strings;
 
 import java.util.List;
+import java.util.function.Supplier;
+
+import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
+import de.agilecoders.wicket.webjars.util.Helper;
 
 /**
  * Maps {@link ResourceReference}s of type {@link IWebjarsResourceReference} to
@@ -25,10 +26,10 @@ public class WebjarsCDNRequestMapper implements IRequestMapper {
 
     private final IRequestMapper chain;
     private final String webJarCdnUrl;
-    private final IProvider<IResourceCachingStrategy> cachingStrategyProvider;
+    private final Supplier<IResourceCachingStrategy> cachingStrategyProvider;
 
     public WebjarsCDNRequestMapper(final IRequestMapper chain,
-                                   final String cdnUrl, final IProvider<IResourceCachingStrategy> cachingStrategyProvider) {
+                                   final String cdnUrl, final Supplier<IResourceCachingStrategy> cachingStrategyProvider) {
         this.chain = chain;
         this.webJarCdnUrl = cdnUrl;
         this.cachingStrategyProvider = cachingStrategyProvider;

@@ -11,7 +11,7 @@
     <groupId>de.agilecoders.wicket.webjars</groupId>
     <artifactId>wicket-webjars-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.5.5-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <name>wicket-webjars-parent</name>
     <description />
     <url>https://github.com/l0rdn1kk0n/wicket-webjars</url>
@@ -46,9 +46,9 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <mvn.build.java.version>1.7</mvn.build.java.version>
+        <mvn.build.java.version>1.8</mvn.build.java.version>
         <mvn.version>3.0.0</mvn.version>
-        <wicket.version>7.3.0</wicket.version>
+        <wicket.version>8.0.0-M1</wicket.version>
         <slf4j.version>1.7.14</slf4j.version>
         <junit.version>4.12</junit.version>
     </properties>
@@ -79,7 +79,7 @@
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
+                <version>3.1.0</version>
             </dependency>
 
             <!-- TESTING DEPENDENCIES -->
