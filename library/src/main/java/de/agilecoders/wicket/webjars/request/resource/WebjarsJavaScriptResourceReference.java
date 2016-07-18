@@ -9,8 +9,9 @@ import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
 /**
  * Static resource reference for javascript webjars resources. The resources are filtered (stripped comments
  * and whitespace) if there is a registered compressor.
- * <p/>
+ * <p>
  * You are able find out how a specific name looks like on http://www.webjars.org/.
+ * </p>
  *
  * @author miha
  */
