@@ -19,6 +19,13 @@
             <groupId>org.apache.wicket</groupId>
             <artifactId>wicket-core</artifactId>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/edu.emory.mathcs.util/emory-util-classloader -->
+		<dependency>
+		    <groupId>edu.emory.mathcs.util</groupId>
+		    <artifactId>emory-util-classloader</artifactId>
+		    <version>2.1</version>
+		</dependency>
 
         <!-- LOGGING DEPENDENCIES - LOG4J -->
         <dependency>
