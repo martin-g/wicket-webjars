@@ -92,8 +92,15 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     public Set<String> listAssets(final String folderPath) {
         final Collection<String> allAssets = getFullPathIndex().values();
         final Set<String> assets = new HashSet<String>();
-        final String prefix = settings.webjarsPath() + Helper.appendLeadingSlash(folderPath);
-
+        
+        final String prefix;
+        //Make sure the webjarpath does not already end with slash
+        if(!settings.webjarsPath().endsWith("/")){
+        	prefix = settings.webjarsPath() + Helper.appendLeadingSlash(folderPath);
+        }else{
+        	prefix = settings.webjarsPath() + folderPath;
+        }
+        
         for (final String asset : allAssets) {
             if (asset.startsWith(prefix)) {
                 assets.add(asset);
