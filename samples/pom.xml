@@ -26,7 +26,7 @@
         <dependency>
         <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
-            <version>1.8.3</version>
+            <version>1.12.4</version>
         </dependency>
 
         <dependency>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.3.1</version>
+            <version>3.3.6</version>
         </dependency>
 
         <dependency>
