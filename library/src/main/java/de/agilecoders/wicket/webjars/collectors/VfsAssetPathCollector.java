@@ -31,7 +31,7 @@ public class VfsAssetPathCollector extends ProtocolAwareAssetPathCollector {
             JarEntry entry;
             while ((entry = inputStream.getNextJarEntry()) != null) {
                 String entryName = entry.getName();
-                if (!entry.isDirectory() && filterExpr.matcher(entryName).matches()) {
+                if (!entry.isDirectory()) {
                     assetPaths.add("META-INF/resources/webjars/" + entryName);
                 }
 
