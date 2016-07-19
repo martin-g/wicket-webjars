@@ -39,6 +39,16 @@ public final class Helper {
     }
 
     /**
+     * Removes the leading slash if there is one.
+     *
+     * @param path the path
+     * @return path without leading slash
+     */
+    public static String removeLeadingSlash(final String path) {
+        return path.charAt(0) == '/' ? path.substring(1) : path;
+    }
+
+    /**
      * Make paths like aa/bb/cc = cc/bb/aa.
      *
      * @param assetPath the path to revert
