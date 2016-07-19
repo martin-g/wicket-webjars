@@ -94,11 +94,11 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
         final Set<String> assets = new HashSet<>();
 
         final String prefix;
-        //Make sure the webjarpath does not already end with slash
-        if (!settings.webjarsPath().endsWith("/")) {
-        	prefix = settings.webjarsPath() + Helper.appendLeadingSlash(folderPath);
+        final String webjarsPath = settings.webjarsPath();
+        if (webjarsPath.endsWith("/")) {
+        	prefix = webjarsPath + Helper.removeLeadingSlash(folderPath);
         } else {
-        	prefix = settings.webjarsPath() + folderPath;
+        	prefix = webjarsPath + Helper.appendLeadingSlash(folderPath);
         }
         
         for (final String asset : allAssets) {

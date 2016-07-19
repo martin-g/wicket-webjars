@@ -20,12 +20,13 @@
             <artifactId>wicket-core</artifactId>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/edu.emory.mathcs.util/emory-util-classloader -->
-		<dependency>
-		    <groupId>edu.emory.mathcs.util</groupId>
-		    <artifactId>emory-util-classloader</artifactId>
-		    <version>2.1</version>
-		</dependency>
+        <!-- Needed for deployments on IBM WebSphere -->
+        <dependency>
+            <groupId>edu.emory.mathcs.util</groupId>
+            <artifactId>emory-util-classloader</artifactId>
+            <version>2.1</version>
+            <optional>true</optional>
+        </dependency>
 
         <!-- LOGGING DEPENDENCIES - LOG4J -->
         <dependency>
