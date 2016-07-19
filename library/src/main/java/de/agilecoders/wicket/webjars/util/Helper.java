@@ -1,6 +1,7 @@
 package de.agilecoders.wicket.webjars.util;
 
 import org.apache.wicket.util.lang.Args;
+import org.apache.wicket.util.string.Strings;
 
 /**
  * some helper methods
@@ -44,7 +45,7 @@ public final class Helper {
      * @return reverted path
      */
     public static String reversePath(String assetPath) {
-        final String[] assetPathComponents = assetPath.split("/");
+        final String[] assetPathComponents = Strings.split(assetPath, '/');
         final StringBuilder reversedAssetPath = new StringBuilder();
         for (int i = assetPathComponents.length - 1; i >= 0; --i) {
             if (reversedAssetPath.length() > 0) {
