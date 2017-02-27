@@ -32,17 +32,27 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     private final SortedMap<String, String> fullPathIndex;
     private final AssetPathCollector[] collectors;
     private final String recentVersionPlaceHolder;
+    private static AssetsMap assetsMap;
 
     /**
      * Construct.
      *
      * @param settings the settings to use.
      */
-    public AssetsMap(IWebjarsSettings settings) {
+    private AssetsMap(IWebjarsSettings settings) {
         this.settings = settings;
         this.collectors = settings.assetPathCollectors();
         this.recentVersionPlaceHolder = settings.recentVersionPlaceHolder();
         this.fullPathIndex = createFullPathIndex(settings.resourcePattern(), settings.classLoaders());
+    }
+
+    public static AssetsMap create(IWebjarsSettings settings) {
+        assetsMap = new AssetsMap(settings);
+        return assetsMap;
+    }
+
+    public static AssetsMap get() {
+        return assetsMap;
     }
 
     @Override
