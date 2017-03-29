@@ -26,6 +26,7 @@ public class WebJarAssetLocator implements IAssetProvider, IFullPathProvider {
      */
     public WebJarAssetLocator(final IWebjarsSettings settings) {
         this.assetMap = new AssetsMap(settings);
+        RecentVersionCallable.Holder.createNewRecentVersionProvider(settings);
         this.recentVersionPlaceHolder = "/" + settings.recentVersionPlaceHolder() + "/";
     }
 
