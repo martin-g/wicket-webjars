@@ -5,20 +5,14 @@ import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.util.Helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 /**
  * asset holder map.
@@ -32,27 +26,17 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     private final SortedMap<String, String> fullPathIndex;
     private final AssetPathCollector[] collectors;
     private final String recentVersionPlaceHolder;
-    private static AssetsMap assetsMap;
 
     /**
      * Construct.
      *
      * @param settings the settings to use.
      */
-    private AssetsMap(IWebjarsSettings settings) {
+    public AssetsMap(IWebjarsSettings settings) {
         this.settings = settings;
         this.collectors = settings.assetPathCollectors();
         this.recentVersionPlaceHolder = settings.recentVersionPlaceHolder();
         this.fullPathIndex = createFullPathIndex(settings.resourcePattern(), settings.classLoaders());
-    }
-
-    public static AssetsMap create(IWebjarsSettings settings) {
-        assetsMap = new AssetsMap(settings);
-        return assetsMap;
-    }
-
-    public static AssetsMap get() {
-        return assetsMap;
     }
 
     @Override

@@ -1,6 +1,9 @@
 package de.agilecoders.wicket.webjars.util;
 
+import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.collectors.AssetsMap;
+import de.agilecoders.wicket.webjars.collectors.IRecentVersionProvider;
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
@@ -45,8 +48,20 @@ public class RecentVersionCallable implements Callable<String> {
      * @return recent version string
      */
     private static String collectRecentVersionFor(final String partialPath) {
-        AssetsMap assetsMap = AssetsMap.get();
-        return assetsMap.findRecentVersionFor(partialPath);
+        return Holder.getRecentVersionProvider().findRecentVersionFor(partialPath);
     }
 
+    static final class Holder {
+        private static IRecentVersionProvider recentVersionProvider;
+
+        static void createNewRecentVersionProvider(IWebjarsSettings settings) {
+            recentVersionProvider = new AssetsMap(settings);
+        }
+
+        static IRecentVersionProvider getRecentVersionProvider() {
+            if (recentVersionProvider == null)
+                recentVersionProvider = new AssetsMap(WicketWebjars.settings());
+            return recentVersionProvider;
+        }
+    }
 }
