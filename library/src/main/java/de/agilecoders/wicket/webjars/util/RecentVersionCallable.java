@@ -21,7 +21,7 @@ public class RecentVersionCallable implements Callable<String> {
      * @return recent version as future
      */
     public static FutureTask<String> createFutureTask(final String partialPath) {
-        return new FutureTask<String>(new RecentVersionCallable(partialPath));
+        return new FutureTask<>(new RecentVersionCallable(partialPath));
     }
 
     private final String partialPath;

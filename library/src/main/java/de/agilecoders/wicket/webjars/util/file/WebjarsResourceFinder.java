@@ -34,9 +34,8 @@ public class WebjarsResourceFinder implements IResourceFinder {
         this.locator = newFullPathProvider();
         this.resourceStreamProvider = settings.resourceStreamProvider().newInstance(settings.classLoaders());
 
-        int result = locator != null ? locator.hashCode() : 0;
-        result = 31 * result + (settings != null ? settings.hashCode() : 0);
-        this.hashCode = result;
+        int _hashCode = locator != null ? locator.hashCode() : 0;
+        this.hashCode = 31 * (_hashCode + settings.hashCode());
     }
 
     /**
