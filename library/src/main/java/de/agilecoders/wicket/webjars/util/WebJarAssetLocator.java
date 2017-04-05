@@ -25,7 +25,7 @@ public class WebJarAssetLocator implements IAssetProvider, IFullPathProvider {
      * Convenience constructor that will form a locator for all resources on the current class path.
      */
     public WebJarAssetLocator(final IWebjarsSettings settings) {
-        this.assetMap = new AssetsMap(settings);
+        this.assetMap = RecentVersionCallable.Holder.recentVersionProvider;
         this.recentVersionPlaceHolder = "/" + settings.recentVersionPlaceHolder() + "/";
     }
 
@@ -75,6 +75,10 @@ public class WebJarAssetLocator implements IAssetProvider, IFullPathProvider {
     @Override
     public Set<String> listAssets(final String folderPath) {
         return assetMap.listAssets(folderPath);
+    }
+
+    public void reindex() {
+        assetMap.reindex();
     }
 
     /**

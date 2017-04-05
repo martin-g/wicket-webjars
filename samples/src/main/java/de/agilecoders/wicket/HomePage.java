@@ -1,11 +1,14 @@
 package de.agilecoders.wicket;
 
+import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
 import de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 public class HomePage extends WebPage {
@@ -13,6 +16,13 @@ public class HomePage extends WebPage {
 
     public HomePage(final PageParameters parameters) {
         super(parameters);
+
+        add(new Link<Void>("reindex") {
+            @Override
+            public void onClick() {
+                WicketWebjars.reindex(WebApplication.get());
+            }
+        });
     }
 
     @Override

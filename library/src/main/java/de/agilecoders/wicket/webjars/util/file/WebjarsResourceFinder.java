@@ -38,6 +38,13 @@ public class WebjarsResourceFinder implements IResourceFinder {
         this.hashCode = 31 * (_hashCode + settings.hashCode());
     }
 
+    public void reindex() {
+        if (locator instanceof WebJarAssetLocator) {
+            WebJarAssetLocator webJarAssetLocator = (WebJarAssetLocator) locator;
+            webJarAssetLocator.reindex();
+        }
+    }
+
     /**
      * @return new resource locator instance
      */
