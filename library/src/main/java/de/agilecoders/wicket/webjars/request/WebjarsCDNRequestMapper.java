@@ -28,7 +28,8 @@ public class WebjarsCDNRequestMapper implements IRequestMapper {
     private final IProvider<IResourceCachingStrategy> cachingStrategyProvider;
 
     public WebjarsCDNRequestMapper(final IRequestMapper chain,
-                                   final String cdnUrl, final IProvider<IResourceCachingStrategy> cachingStrategyProvider) {
+                                   final String cdnUrl,
+                                   final IProvider<IResourceCachingStrategy> cachingStrategyProvider) {
         this.chain = chain;
         this.webJarCdnUrl = cdnUrl;
         this.cachingStrategyProvider = cachingStrategyProvider;

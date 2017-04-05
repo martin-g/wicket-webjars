@@ -23,7 +23,7 @@ import static de.agilecoders.wicket.webjars.util.Helper.prependWebjarsPathIfMiss
  */
 public final class WebjarsVersion {
     private static final Logger LOG = LoggerFactory.getLogger(WicketWebjars.class);
-    private static final ConcurrentMap<String, FutureTask<String>> VERSIONS_CACHE = new ConcurrentHashMap<String, FutureTask<String>>();
+    private static final ConcurrentMap<String, FutureTask<String>> VERSIONS_CACHE = new ConcurrentHashMap<>();
 
     private static final class Holder {
         private static final IWebjarsSettings settings = WicketWebjars.settings();
@@ -68,11 +68,7 @@ public final class WebjarsVersion {
 
         try {
             return VERSIONS_CACHE.get(partialPath).get(Holder.timeout.getMilliseconds(), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            LOG.error("can't collect recent version of {}; {}", partialPath, e.getMessage());
-        } catch (ExecutionException e) {
-            LOG.error("can't collect recent version of {}; {}", partialPath, e.getMessage());
-        } catch (TimeoutException e) {
+        } catch (InterruptedException | ExecutionException | TimeoutException e) {
             LOG.error("can't collect recent version of {}; {}", partialPath, e.getMessage());
         }
 
