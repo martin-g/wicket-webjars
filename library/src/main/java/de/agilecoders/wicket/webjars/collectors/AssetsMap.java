@@ -5,20 +5,14 @@ import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import de.agilecoders.wicket.webjars.util.Helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static de.agilecoders.wicket.webjars.util.Helper.reversePath;
 
 /**
  * asset holder map.

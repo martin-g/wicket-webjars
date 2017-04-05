@@ -55,7 +55,7 @@ public interface IWebjarsSettings {
     String recentVersionPlaceHolder();
 
     /**
-     * @return timeout which is used when reading from cache (Future.get(timeout))
+     * @return timeout which is used when reading from cache (Future.create(timeout))
      */
     Duration readFromCacheTimeout();
     
