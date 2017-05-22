@@ -1,5 +1,10 @@
 package de.agilecoders.wicket.webjars;
 
+import de.agilecoders.wicket.webjars.request.WebjarsCDNRequestMapper;
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
+import de.agilecoders.wicket.webjars.util.WebjarsVersion;
+import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
 import org.apache.wicket.Application;
 import org.apache.wicket.MetaDataKey;
 import org.apache.wicket.core.request.mapper.ResourceReferenceMapper;
@@ -13,11 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.function.Supplier;
-
-import de.agilecoders.wicket.webjars.request.WebjarsCDNRequestMapper;
-import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
-import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
-import de.agilecoders.wicket.webjars.util.file.WebjarsResourceFinder;
 
 /**
  * Helper class for webjars resources
@@ -80,6 +80,18 @@ public final class WicketWebjars {
             }
 
             LOG.info("initialize wicket webjars with given settings: {}", settings);
+        }
+    }
+
+    public static void reindex(final WebApplication application) {
+        final List<IResourceFinder> resourceFinders = application.getResourceSettings().getResourceFinders();
+        for (IResourceFinder resourceFinder : resourceFinders) {
+            if (resourceFinder instanceof WebjarsResourceFinder) {
+                WebjarsVersion.reset();
+                WebjarsResourceFinder webjarsResourceFinder = (WebjarsResourceFinder) resourceFinder;
+                webjarsResourceFinder.reindex();
+                break;
+            }
         }
     }
 

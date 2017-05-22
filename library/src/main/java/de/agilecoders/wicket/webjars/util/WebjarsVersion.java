@@ -77,6 +77,10 @@ public final class WebjarsVersion {
                                                                     partialPath);
     }
 
+    public static void reset() {
+        VERSIONS_CACHE.clear();
+    }
+
     private WebjarsVersion() {
         throw new UnsupportedOperationException();
     }

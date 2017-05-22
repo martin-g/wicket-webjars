@@ -42,7 +42,17 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
         this.settings = settings;
         this.collectors = settings.assetPathCollectors();
         this.recentVersionPlaceHolder = settings.recentVersionPlaceHolder();
-        this.fullPathIndex = createFullPathIndex(settings.resourcePattern(), settings.classLoaders());
+        this.fullPathIndex = new TreeMap<>();
+        reindex();
+    }
+
+    public AssetsMap reindex() {
+        final Pattern resourcePattern = settings.resourcePattern();
+        final ClassLoader[] classLoaders = settings.classLoaders();
+        final SortedMap<String, String> _fullPathIndex = createFullPathIndex(resourcePattern, classLoaders);
+        fullPathIndex.clear();
+        fullPathIndex.putAll(_fullPathIndex);
+        return this;
     }
 
     @Override
