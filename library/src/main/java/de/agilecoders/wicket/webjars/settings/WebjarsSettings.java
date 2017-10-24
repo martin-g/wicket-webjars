@@ -23,7 +23,7 @@ public class WebjarsSettings implements IWebjarsSettings {
     /**
      * The default base url of the WebJars CDN.
      */
-    private static final String DEFAULT_WEBJAR_CDN = "//cdn.jsdelivr.net:80";
+    private static final String DEFAULT_WEBJAR_CDN = "//cdn.jsdelivr.net:80/webjars/org.webjars";
 
     private Duration readFromCacheTimeout;
     private ResourceStreamProvider resourceStreamProvider;
