@@ -113,7 +113,7 @@ public WebjarsComponent extends Panel {
 }
 ```
 
-**Note**: you must specify in your path either an explicit version (``1.8.3``) or the ``<recentVersionPlaceHolder>`` configured in ``IWebjarsSettings`` (``current`` for a default config).
+**Note**: you must specify in your path either an explicit version (e.g. ``1.8.3``) or the ``<recentVersionPlaceHolder>`` configured in ``IWebjarsSettings`` (``current`` for a default config).
 
 Authors
 -------
