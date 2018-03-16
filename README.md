@@ -92,7 +92,7 @@ It is also possible to use a resource by adding it to your html markup directly:
 <img src="/webjars/jquery-ui/1.9.2/css/smoothness/images/ui-icons_cd0a0a_256x240.png"/>
 ```
 
-**Note**: The above works only for Servlet 3 web containers! Embedded Jetty needs extra configuration to enable this feature!
+**Note**: The above works only for Servlet 3 web containers that automatically map META-INF/resources/* as browsable resources! Embedded Jetty or containers without this feature need extra configuration to enable this feature! Explicit version is also required (``jquery-ui/current/...`` urls are not handled).
 
 To use always recent version from your pom you have to replace the version in path with the string "current". When resource
 name gets resolved this string will be replaced by recent available version in classpath. (this feature is available since 0.2.0)
@@ -112,6 +112,8 @@ public WebjarsComponent extends Panel {
   }
 }
 ```
+
+**Note**: you must specify in your path either an explicit version (e.g. ``1.8.3``) or the ``<recentVersionPlaceHolder>`` configured in ``IWebjarsSettings`` (``current`` for a default config).
 
 Authors
 -------
