@@ -11,24 +11,24 @@ import org.apache.wicket.util.string.Strings;
  *
  * @author miha
  */
-public enum ResourceStreamProvider {
+public abstract class ResourceStreamProvider {
 
     /**
      * The ClassLoader provider uses {@link ClassLoader#getResourceAsStream(String)} with a custom
      * {@link org.apache.wicket.util.resource.AbstractResourceStream} implementation.
      */
-    ClassLoader {
+    public static final ResourceStreamProvider ClassLoader = new ResourceStreamProvider() {
         @Override
         public IResourceStreamProvider newInstance(ClassLoader... classLoaders) {
             return new ClassLoaderResourceStreamProvider(classLoaders);
         }
-    },
+    };
 
     /**
      * The Url provider uses a {@link org.apache.wicket.core.util.resource.UrlResourceStream} to load
      * a resource. This provider can't be used on GAE, because it uses {@link java.net.URL#openConnection()}.
      */
-    Url {
+    public static final ResourceStreamProvider Url = new ResourceStreamProvider() {
         @Override
         public IResourceStreamProvider newInstance(ClassLoader... classLoaders) {
             return new UrlResourceStreamProvider(classLoaders);
