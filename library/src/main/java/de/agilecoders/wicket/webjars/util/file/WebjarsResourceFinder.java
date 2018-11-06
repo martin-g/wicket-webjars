@@ -6,6 +6,8 @@ import de.agilecoders.wicket.webjars.util.Helper;
 import de.agilecoders.wicket.webjars.util.IFullPathProvider;
 import de.agilecoders.wicket.webjars.util.IResourceStreamProvider;
 import de.agilecoders.wicket.webjars.util.WebJarAssetLocator;
+import de.agilecoders.wicket.webjars.util.WebjarsVersion;
+
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.slf4j.Logger;
@@ -64,21 +66,22 @@ public class WebjarsResourceFinder implements IResourceFinder {
         IResourceStream stream = null;
 
         if (clazz != null && IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
-            final int pos = pathName != null ? pathName.lastIndexOf(Helper.PATH_PREFIX) : -1;
+            String versionnedName = WebjarsVersion.useRecent(pathName);
+            final int pos = versionnedName != null ? versionnedName.lastIndexOf(Helper.PATH_PREFIX) : -1;
 
             if (pos > -1) {
                 try {
-                    final String webjarsPath = locator.getFullPath(pathName.substring(pos));
+                    final String webjarsPath = locator.getFullPath(versionnedName.substring(pos));
 
                     LOG.debug("webjars path: {}", webjarsPath);
 
                     stream = newResourceStream(webjarsPath);
                 } catch (Exception e) {
-                    LOG.debug("can't locate resource for: {}; {}", pathName, e.getMessage());
+                    LOG.debug("can't locate resource for: {} (actual name {}); {}", pathName, versionnedName, e.getMessage());
                 }
 
                 if (stream == null) {
-                    LOG.debug("there is no webjars resource for: {}", pathName);
+                    LOG.debug("there is no webjars resource for: {} (actual name {})", pathName, versionnedName);
                 }
             }
         }

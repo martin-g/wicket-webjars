@@ -1,10 +1,12 @@
 package de.agilecoders.wicket.webjars.request.resource;
 
-import org.apache.wicket.request.resource.JavaScriptResourceReference;
+import static de.agilecoders.wicket.webjars.util.Helper.prependWebjarsPathIfMissing;
 
 import java.util.Locale;
 
-import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
+import org.apache.wicket.request.resource.JavaScriptResourceReference;
+
+import de.agilecoders.wicket.webjars.util.Helper;
 
 /**
  * Static resource reference for javascript webjars resources. The resources are filtered (stripped comments
@@ -25,7 +27,7 @@ public class WebjarsJavaScriptResourceReference extends JavaScriptResourceRefere
      * @param name The webjars path to load
      */
     public WebjarsJavaScriptResourceReference(final String name) {
-        super(WebjarsJavaScriptResourceReference.class, useRecent(name));
+        super(WebjarsJavaScriptResourceReference.class, prependWebjarsPathIfMissing(name));
 
         this.originalName = name;
     }

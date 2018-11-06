@@ -1,10 +1,10 @@
 package de.agilecoders.wicket.webjars.request.resource;
 
-import org.apache.wicket.request.resource.CssResourceReference;
+import static de.agilecoders.wicket.webjars.util.Helper.prependWebjarsPathIfMissing;
 
 import java.util.Locale;
 
-import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
+import org.apache.wicket.request.resource.CssResourceReference;
 
 /**
  * Static resource reference for webjars css resources. The resources are filtered (stripped comments and
@@ -25,7 +25,7 @@ public class WebjarsCssResourceReference extends CssResourceReference implements
      * @param name The webjars path to load
      */
     public WebjarsCssResourceReference(final String name) {
-        super(WebjarsCssResourceReference.class, useRecent(name));
+        super(WebjarsCssResourceReference.class, prependWebjarsPathIfMissing(name));
 
         this.originalName = name;
     }
