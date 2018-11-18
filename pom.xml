@@ -123,7 +123,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>${mvn.build.java.version}</source>
                     <target>${mvn.build.java.version}</target>
@@ -148,7 +148,6 @@
                     <execution>
                         <goals>
                             <goal>jar</goal>
-                            <goal>test-jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -157,13 +156,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
