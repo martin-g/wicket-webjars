@@ -10,7 +10,6 @@ import de.agilecoders.wicket.webjars.util.WebjarsVersion;
 
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
-import org.omg.CORBA.VersionSpecHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
