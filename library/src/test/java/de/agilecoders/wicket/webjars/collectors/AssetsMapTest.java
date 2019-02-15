@@ -2,16 +2,17 @@ package de.agilecoders.wicket.webjars.collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 
-public class AssetsMapTest extends Assert{
+public class AssetsMapTest extends Assertions {
 
     /**
      * https://github.com/l0rdn1kk0n/wicket-webjars/issues/22

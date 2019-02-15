@@ -14,10 +14,10 @@ import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
 
 import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.startsWith;
 
 /**
  * Tests for WebjarsResourceFinder

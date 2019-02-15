@@ -6,8 +6,6 @@ import java.util.Locale;
 
 import org.apache.wicket.request.resource.JavaScriptResourceReference;
 
-import de.agilecoders.wicket.webjars.util.Helper;
-
 /**
  * Static resource reference for javascript webjars resources. The resources are filtered (stripped comments
  * and whitespace) if there is a registered compressor.
