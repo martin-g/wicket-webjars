@@ -108,7 +108,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
         if (webjarsPath.endsWith("/")) {
         	prefix = webjarsPath + Helper.removeLeadingSlash(folderPath);
         } else {
-        	prefix = webjarsPath + Helper.appendLeadingSlash(folderPath);
+        	prefix = webjarsPath + Helper.prependLeadingSlash(folderPath);
         }
         
         for (final String asset : allAssets) {

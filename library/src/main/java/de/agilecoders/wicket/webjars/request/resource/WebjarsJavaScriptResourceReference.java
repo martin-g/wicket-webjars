@@ -26,7 +26,7 @@ public class WebjarsJavaScriptResourceReference extends JavaScriptResourceRefere
      * @param name The webjars path to load
      */
     public WebjarsJavaScriptResourceReference(final String name) {
-        super(WebjarsJavaScriptResourceReference.class, prependWebjarsPathIfMissing(useRecent(name)));
+        super(WebjarsJavaScriptResourceReference.class, useRecent(prependWebjarsPathIfMissing(name)));
 
         this.originalName = name;
     }

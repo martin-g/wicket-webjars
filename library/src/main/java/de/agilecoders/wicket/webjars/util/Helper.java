@@ -19,7 +19,7 @@ public final class Helper {
      * @return file name that starts with "/webjars/"
      */
     public static String prependWebjarsPathIfMissing(final String path) {
-        final String cleanedName = appendLeadingSlash(Args.notEmpty(path, "path"));
+        final String cleanedName = prependLeadingSlash(Args.notEmpty(path, "path"));
 
         if (!path.contains(PATH_PREFIX)) {
             return "/webjars" + cleanedName;
@@ -33,8 +33,20 @@ public final class Helper {
      *
      * @param path the path
      * @return path with leading slash
+     * @deprecated Use {@link #prependLeadingSlash(String)}
      */
+    @Deprecated
     public static String appendLeadingSlash(final String path) {
+        return prependLeadingSlash(path);
+    }
+
+    /**
+     * prepends a leading slash if there is none.
+     *
+     * @param path the path
+     * @return path with leading slash
+     */
+    public static String prependLeadingSlash(final String path) {
         return path.charAt(0) == '/' ? path : '/' + path;
     }
 
