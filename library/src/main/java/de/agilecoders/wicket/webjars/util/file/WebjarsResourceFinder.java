@@ -10,6 +10,7 @@ import de.agilecoders.wicket.webjars.util.WebjarsVersion;
 
 import org.apache.wicket.util.file.IResourceFinder;
 import org.apache.wicket.util.resource.IResourceStream;
+import org.omg.CORBA.VersionSpecHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,7 +67,11 @@ public class WebjarsResourceFinder implements IResourceFinder {
         IResourceStream stream = null;
 
         if (clazz != null && IWebjarsResourceReference.class.isAssignableFrom(clazz)) {
-            String versionnedName = WebjarsVersion.useRecent(pathName);
+            // pathname as extracted by wicket is a classpath resource path with no leading '/'
+            // historically, webjars file locator works with /webjars/ prefixed path
+            // prepend '/' and resolve version if needed
+            String versionnedName = "/" + pathName;
+            versionnedName = WebjarsVersion.useRecent(versionnedName); 
             final int pos = versionnedName != null ? versionnedName.lastIndexOf(Helper.PATH_PREFIX) : -1;
 
             if (pos > -1) {

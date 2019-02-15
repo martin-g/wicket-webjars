@@ -1,5 +1,6 @@
 package de.agilecoders.wicket.webjars.util;
 
+
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import org.apache.wicket.util.lang.Args;
@@ -14,7 +15,6 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static de.agilecoders.wicket.webjars.util.Helper.prependWebjarsPathIfMissing;
 
 /**
  * Collects recent versions of webjars resources.
@@ -41,8 +41,6 @@ public final class WebjarsVersion {
      */
     public static String useRecent(String path) {
         Args.notEmpty(path, "path");
-
-        path = prependWebjarsPathIfMissing(path);
 
         if (path.matches(Holder.recentVersionPattern)) {
             return path.replaceFirst(Holder.replacePattern, "/" + recentVersion(path) + "/");
