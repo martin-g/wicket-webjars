@@ -6,18 +6,20 @@ import org.apache.wicket.util.io.IOUtils;
 import org.apache.wicket.util.resource.IResourceStream;
 import org.apache.wicket.util.resource.ResourceStreamNotFoundException;
 import org.apache.wicket.util.tester.WicketTestCase;
-import org.junit.Test;
 
 import java.io.IOException;
 
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.request.resource.IWebjarsResourceReference;
+import org.junit.jupiter.api.Test;
 
 import static de.agilecoders.wicket.webjars.util.WebjarsVersion.useRecent;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Tests for WebjarsResourceFinder
