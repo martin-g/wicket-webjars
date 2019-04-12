@@ -18,7 +18,7 @@ import org.apache.wicket.request.resource.CssResourceReference;
  */
 public class WebjarsCssResourceReference extends CssResourceReference implements IWebjarsResourceReference {
 
-    final String originalName;
+    private final String originalName;
 
     /**
      * Construct.
