@@ -5,6 +5,12 @@ import java.util.concurrent.FutureTask;
 
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.collectors.AssetsMap;
+import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
+import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
+
+import org.apache.wicket.Application;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Callable that loads the recent version string of given webjars resource
@@ -12,6 +18,8 @@ import de.agilecoders.wicket.webjars.collectors.AssetsMap;
  * @author miha
  */
 public class RecentVersionCallable implements Callable<String> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(RecentVersionCallable.class);
 
     /**
      * creates a new future recent version collector
@@ -50,6 +58,15 @@ public class RecentVersionCallable implements Callable<String> {
     }
 
     static final class Holder {
-        static final AssetsMap recentVersionProvider = new AssetsMap(WicketWebjars.settings());
+        static final AssetsMap recentVersionProvider = new AssetsMap(getSettings());
+
+        private static IWebjarsSettings getSettings() {
+            if (Application.exists()) {
+                return WicketWebjars.settings();
+            } else {
+                LOG.warn("There is no Wicket Application thread local! Going to use default Webjars settings.");
+                return new WebjarsSettings();
+            }
+        }
     }
 }
