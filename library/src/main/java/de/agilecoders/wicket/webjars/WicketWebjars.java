@@ -138,7 +138,9 @@ public final class WicketWebjars {
             }
         }
 
-        throw new IllegalStateException("there is no active application assigned to this thread.");
+        final String warning = "There is no Wicket Application thread local! Going to use default Webjars settings.";
+        LOG.warn(warning, new RuntimeException(warning));
+        return new WebjarsSettings();
     }
 
     /**
