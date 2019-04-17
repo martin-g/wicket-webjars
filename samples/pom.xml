@@ -24,7 +24,7 @@
         </dependency>
 
         <dependency>
-        <groupId>org.webjars</groupId>
+            <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>1.12.4</version>
         </dependency>
