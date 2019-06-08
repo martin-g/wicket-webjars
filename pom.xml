@@ -43,7 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>1.8</mvn.build.java.version>
-        <wicket.version>8.4.0</wicket.version>
+        <wicket.version>8.5.0</wicket.version>
         <slf4j.version>1.7.26</slf4j.version>
         <junit.version>4.12</junit.version>
     </properties>
