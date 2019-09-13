@@ -43,9 +43,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>11</mvn.build.java.version>
-        <wicket.version>9.0.0-M2</wicket.version>
+        <wicket.version>9.0.0-M3</wicket.version>
         <slf4j.version>1.7.26</slf4j.version>
-        <junit.version>5.4.2</junit.version>
+        <junit.version>5.5.2</junit.version>
     </properties>
 
     <dependencyManagement>
