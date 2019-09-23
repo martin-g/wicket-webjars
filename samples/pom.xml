@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.agilecoders.wicket.webjars</groupId>
         <artifactId>wicket-webjars-parent</artifactId>
-        <version>3.0.0-M3-SNAPSHOT</version>
+        <version>3.0.0-M3</version>
         <relativePath>../</relativePath>
     </parent>
 
