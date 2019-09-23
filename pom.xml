@@ -44,7 +44,7 @@
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>11</mvn.build.java.version>
         <wicket.version>9.0.0-M3</wicket.version>
-        <slf4j.version>1.7.26</slf4j.version>
+        <slf4j.version>1.7.25</slf4j.version>
         <junit.version>5.5.2</junit.version>
     </properties>
 
