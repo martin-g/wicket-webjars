@@ -1,10 +1,10 @@
 package de.agilecoders.wicket.webjars.settings;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.apache.wicket.util.lang.Args;
-import org.apache.wicket.util.time.Duration;
 
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 import de.agilecoders.wicket.webjars.collectors.ClasspathAssetPathCollector;
@@ -47,7 +47,7 @@ public class WebjarsSettings implements IWebjarsSettings {
         //META-INF/resources/webjars/projectname/
         this.webjarsPathPattern = Pattern.compile(Helper.PATH_PREFIX + "([^\\/]*)\\/([^\\/]*)\\/(.*)");
         this.recentVersionPlaceHolder = "current";
-        this.readFromCacheTimeout = Duration.seconds(3);
+        this.readFromCacheTimeout = Duration.ofSeconds(3);
         this.useCdnResources = false;
         this.cdnUrl = DEFAULT_WEBJAR_CDN;
 

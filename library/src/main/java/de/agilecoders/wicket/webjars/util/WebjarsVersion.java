@@ -4,10 +4,10 @@ package de.agilecoders.wicket.webjars.util;
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.settings.IWebjarsSettings;
 import org.apache.wicket.util.lang.Args;
-import org.apache.wicket.util.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutionException;
@@ -66,13 +66,13 @@ public final class WebjarsVersion {
         }
 
         try {
-            return VERSIONS_CACHE.get(partialPath).get(Holder.timeout.getMilliseconds(), TimeUnit.MILLISECONDS);
+            return VERSIONS_CACHE.get(partialPath).get(Holder.timeout.toMillis(), TimeUnit.MILLISECONDS);
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             LOG.error("can't collect recent version of {}; {}", partialPath, e.getMessage());
         }
 
         throw new WebJarAssetLocator.ResourceException(partialPath, "there is no webjars dependency for: " +
-                                                                    partialPath);
+                                                                                                       partialPath);
     }
 
     public static void reset() {

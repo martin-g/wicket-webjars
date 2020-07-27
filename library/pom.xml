@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.agilecoders.wicket.webjars</groupId>
         <artifactId>wicket-webjars-parent</artifactId>
-        <version>3.0.0-M6-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 

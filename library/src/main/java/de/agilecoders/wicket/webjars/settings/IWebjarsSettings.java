@@ -1,8 +1,7 @@
 package de.agilecoders.wicket.webjars.settings;
 
+import java.time.Duration;
 import java.util.regex.Pattern;
-
-import org.apache.wicket.util.time.Duration;
 
 import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 
@@ -14,12 +13,12 @@ import de.agilecoders.wicket.webjars.collectors.AssetPathCollector;
 public interface IWebjarsSettings {
 
     /**
-     * @return {@link de.agilecoders.wicket.webjars.settings.ResourceStreamProvider} to use to load resources
+     * @return {@link ResourceStreamProvider} to use to load resources
      */
     ResourceStreamProvider resourceStreamProvider();
 
     /**
-     * @return a set of {@link de.agilecoders.wicket.webjars.collectors.AssetPathCollector} instances to use to find
+     * @return a set of {@link AssetPathCollector} instances to use to find
      * resources
      */
     AssetPathCollector[] assetPathCollectors();
