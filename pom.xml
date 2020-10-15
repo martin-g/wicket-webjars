@@ -43,9 +43,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>1.8</mvn.build.java.version>
-        <wicket.version>8.8.0</wicket.version>
+        <wicket.version>8.9.0</wicket.version>
         <slf4j.version>1.7.25</slf4j.version>
-        <junit.version>4.13</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -138,6 +138,12 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>2.7</version>
+                <inherited>true</inherited>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
                 <inherited>true</inherited>
             </plugin>
             <plugin>
