@@ -11,7 +11,7 @@
     <groupId>de.agilecoders.wicket.webjars</groupId>
     <artifactId>wicket-webjars-parent</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.7-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <name>wicket-webjars-parent</name>
     <description />
     <url>https://github.com/l0rdn1kk0n/wicket-webjars</url>
@@ -43,10 +43,23 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
-        <mvn.build.java.version>11</mvn.build.java.version>
-        <wicket.version>9.10.0</wicket.version>
-        <slf4j.version>1.7.32</slf4j.version>
-        <junit.version>5.8.2</junit.version>
+        <mvn.build.java.version>17</mvn.build.java.version>
+        <wicket.version>10.0.0-M1-SNAPSHOT</wicket.version>
+        <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+        <slf4j.version>2.0.6</slf4j.version>
+        <junit.version>5.9.2</junit.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <emory-util-classloader.version>2.1</emory-util-classloader.version>
+        <jquery.version>3.6.3</jquery.version>
+
+        <versions-maven-plugin.version>2.14.0</versions-maven-plugin.version>
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-javadoc-plugin.version>3.4.1</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
+        <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -73,9 +86,9 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <groupId>jakarta.servlet</groupId>
+                <artifactId>jakarta.servlet-api</artifactId>
+                <version>${jakarta.servlet-api.version}</version>
             </dependency>
 
             <!-- TESTING DEPENDENCIES -->
@@ -94,10 +107,23 @@
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest</artifactId>
-                <version>2.2</version>
+                <version>${hamcrest.version}</version>
                 <scope>test</scope>
             </dependency>
 
+            <!-- library -->
+            <dependency>
+                <groupId>edu.emory.mathcs.util</groupId>
+                <artifactId>emory-util-classloader</artifactId>
+                <version>${emory-util-classloader.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>jquery</artifactId>
+                <version>${jquery.version}</version>
+                <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -136,21 +162,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>${maven-gpg-plugin.version}</version>
                 <executions>
-                <execution>
-                    <id>sign-artifacts</id>
-                    <phase>verify</phase>
-                    <goals>
-                    <goal>sign</goal>
-                    </goals>
-                </execution>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${mvn.build.java.version}</source>
                     <target>${mvn.build.java.version}</target>
@@ -165,7 +191,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <detectOfflineLinks>false</detectOfflineLinks>
                     <minmemory>128m</minmemory>
@@ -193,13 +219,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.11</version>
+                <version>${versions-maven-plugin.version}</version>
                 <inherited>true</inherited>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${maven-source-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -211,9 +237,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>${maven-jar-plugin.version}</version>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${maven-war-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <licenses>

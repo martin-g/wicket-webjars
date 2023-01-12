@@ -1,7 +1,7 @@
 wicket-webjars
 ==============
 
-Integration of webjars for Apache Wicket. 
+Integration of webjars for Apache Wicket.
 
 Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn1kk0n/job/wicket-webjars/badge/icon)](https://buildhive.cloudbees.com/job/l0rdn1kk0n/job/wicket-webjars/)
 
@@ -9,10 +9,11 @@ Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn
 
 Current release version:
 
-* For Wicket 9.x use 3.x
-* For Wicket 8.x use 2.x
-* For Wicket 7.x use 0.5.x
-* For Wicket 6.x use 0.4.x
+* For Wicket 10.x use 4.x
+* For Wicket 9.x  use 3.x
+* For Wicket 8.x  use 2.x
+* For Wicket 7.x  use 0.5.x
+* For Wicket 6.x  use 0.4.x
 
 
 Documentation:
@@ -26,7 +27,7 @@ Add maven dependency:
 <dependency>
   <groupId>de.agilecoders.wicket.webjars</groupId>
   <artifactId>wicket-webjars</artifactId>
-  <version>0.4.10</version>
+  <version>4.0.0</version>
 </dependency>
 ```
 
