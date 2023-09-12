@@ -50,7 +50,7 @@
         <junit.version>5.9.2</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <emory-util-classloader.version>2.1</emory-util-classloader.version>
-        <jquery.version>3.6.3</jquery.version>
+        <jquery.version>3.7.1</jquery.version>
 
         <versions-maven-plugin.version>2.14.0</versions-maven-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
