@@ -63,7 +63,7 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
         if (partialPathMatcher.find() && recentVersionPlaceHolder.equalsIgnoreCase(partialPathMatcher.group(2))) {
             final Set<String> assets = listAssets(partialPathMatcher.group(1));
             final String fileName = "/" + partialPathMatcher.group(3);
-            final List<String> versions = new ArrayList<>();
+            final Set<String> versions = new HashSet<>();
 
             for (String asset : assets) {
                 if (asset.endsWith(fileName)) {
@@ -76,14 +76,16 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
             }
 
             if (versions.size() == 1) {
-                return versions.get(0);
+                return versions.iterator().next();
             } else if (versions.size() > 1) {
-                LOG.warn("more than one version of a dependency is not supported till now. webjars resource: {}; available versions: {}; using: {}",
-                         fileName, versions, versions.get(0));
+                final String first = versions.iterator().next();
+                LOG.warn("More than one version of a webjars resource has been found in the classpath. " +
+                    "This is not supported! Webjars resource: {}; available versions: {}; going to use: {}",
+                        fileName, versions, first);
 
-                return versions.get(0);
+                return first;
             } else {
-                LOG.debug("no version found for webjars resource: {}", partialPath);
+                LOG.debug("No version found for webjars resource: {}", partialPath);
             }
         } else {
             LOG.trace("given webjars resource isn't a dynamic versioned one: {}", partialPath);
