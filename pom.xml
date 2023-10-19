@@ -44,15 +44,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>17</mvn.build.java.version>
-        <wicket.version>10.0.0-M1</wicket.version>
+        <wicket.version>10.0.0-M2</wicket.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <slf4j.version>2.0.9</slf4j.version>
-        <junit.version>5.9.2</junit.version>
+        <junit.version>5.10.0</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <emory-util-classloader.version>2.1</emory-util-classloader.version>
         <jquery.version>3.7.1</jquery.version>
 
-        <versions-maven-plugin.version>2.14.0</versions-maven-plugin.version>
+        <versions-maven-plugin.version>2.16.1</versions-maven-plugin.version>
         <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.6.0</maven-javadoc-plugin.version>
@@ -60,6 +60,7 @@
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
         <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -92,6 +93,12 @@
             </dependency>
 
             <!-- TESTING DEPENDENCIES -->
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-tester</artifactId>
+                <version>${wicket.version}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter</artifactId>
@@ -246,6 +253,14 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
                     <version>${maven-war-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <useModulePath>false</useModulePath>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
