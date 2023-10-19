@@ -26,13 +26,6 @@ updates:
       day: "sunday"
     open-pull-requests-limit: 50
 
-  - package-ecosystem: "npm"
-    directory: "/testing/wicket-js-tests/"
-    schedule:
-      interval: "weekly"
-      day: "sunday"
-    open-pull-requests-limit: 20
-
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
