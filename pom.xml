@@ -47,7 +47,7 @@
         <wicket.version>10.0.0-M2</wicket.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <slf4j.version>2.0.9</slf4j.version>
-        <junit.version>5.10.0</junit.version>
+        <junit.version>5.10.1</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <emory-util-classloader.version>2.1</emory-util-classloader.version>
         <jquery.version>3.7.1</jquery.version>
