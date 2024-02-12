@@ -44,9 +44,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>11</mvn.build.java.version>
-        <wicket.version>9.13.0</wicket.version>
-        <slf4j.version>1.7.32</slf4j.version>
-        <junit.version>5.10.1</junit.version>
+        <wicket.version>9.16.0</wicket.version>
+        <slf4j.version>2.0.12</slf4j.version>
+        <junit.version>5.10.2</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
         <emory-util-classloader.version>2.1</emory-util-classloader.version>
         <jquery.version>3.7.1</jquery.version>
