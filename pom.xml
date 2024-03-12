@@ -44,8 +44,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>17</mvn.build.java.version>
-        <wicket.version>10.0.0-M2</wicket.version>
-        <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+        <wicket.version>10.0.0</wicket.version>
+        <jakarta.servlet-api.version>5.0.0</jakarta.servlet-api.version>
         <slf4j.version>2.0.12</slf4j.version>
         <junit.version>5.10.2</junit.version>
         <hamcrest.version>2.2</hamcrest.version>
@@ -53,7 +53,7 @@
         <jquery.version>3.7.1</jquery.version>
 
         <versions-maven-plugin.version>2.16.2</versions-maven-plugin.version>
-        <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.0</maven-gpg-plugin.version>
         <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
