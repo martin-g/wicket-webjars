@@ -11,7 +11,7 @@
     <groupId>de.agilecoders.wicket.webjars</groupId>
     <artifactId>wicket-webjars-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.3</version>
+    <version>4.0.4-SNAPSHOT</version>
     <name>wicket-webjars-parent</name>
     <description />
     <url>https://github.com/l0rdn1kk0n/wicket-webjars</url>
