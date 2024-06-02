@@ -44,7 +44,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <mvn.build.java.version>17</mvn.build.java.version>
-        <wicket.version>10.0.0</wicket.version>
+        <wicket.version>10.1.0</wicket.version>
         <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
         <slf4j.version>2.0.13</slf4j.version>
         <junit.version>5.10.2</junit.version>
