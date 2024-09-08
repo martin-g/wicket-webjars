@@ -13,7 +13,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <jquery-ui.version>1.13.3</jquery-ui.version>
+        <jquery-ui.version>1.14.0</jquery-ui.version>
         <bootstrap.version>5.3.3</bootstrap.version>
         <log4j.version>2.23.1</log4j.version>
     </properties>
