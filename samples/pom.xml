@@ -15,7 +15,7 @@
     <properties>
         <jquery-ui.version>1.14.0</jquery-ui.version>
         <bootstrap.version>5.3.3</bootstrap.version>
-        <log4j.version>2.24.1</log4j.version>
+        <log4j.version>2.24.2</log4j.version>
     </properties>
 
     <dependencies>
