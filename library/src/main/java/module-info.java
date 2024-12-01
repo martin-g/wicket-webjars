@@ -11,7 +11,7 @@ module de.agilecoders.wicket.webjars {
 	requires org.apache.wicket.request;
 	requires org.apache.wicket.util;
 
-	requires emory.util.classloader;
+	requires static emory.util.classloader;
 
 	requires org.slf4j;
 }
