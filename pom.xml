@@ -213,9 +213,9 @@
                     <notimestamp>true</notimestamp>
                     <quiet>true</quiet>
                     <links>
-                        <link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
-                        <link>http://ci.apache.org/projects/wicket/apidocs/9.x</link>
-                        <link>http://logback.qos.ch/apidocs</link>
+                        <link>https://docs.oracle.com/en/java/javase/17/docs/api/</link>
+                        <link>https://nightlies.apache.org/wicket/apidocs/10.x</link>
+                        <link>https://logback.qos.ch/apidocs</link>
                     </links>
                     <failOnError>false</failOnError>
                     <doclint>none</doclint>
