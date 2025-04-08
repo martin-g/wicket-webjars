@@ -5,7 +5,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,5 +37,28 @@ public class AssetsMapTest extends Assertions {
         };
         String versionFor = assetsMap.findRecentVersionFor("realname/current/realname.js");
         assertThat(versionFor, is(equalTo("2.0.0")));
+    }
+
+    /**
+     * https://github.com/martin-g/wicket-webjars/issues/167
+     * 
+     * Matching was done on partial path-component, so bootstrap4 resources matched bootstrap resource lookup.
+     */
+    @Test
+    public void partialPathMatching() {
+        AssetsMap assetsMap = new AssetsMap(new WebjarsSettings()) {
+            public SortedMap<String, String> getFullPathIndex() {
+            	// only values are significant for the use case
+            	// same versions must be used to triggers the issue as versions are put in a Set and first version
+            	// is retrieved.
+                return new TreeMap<>(Map.of(
+                		"0", "META-INF/resources/webjars/bootstrap4/4.6.0/matching.js",
+                		"1", "META-INF/resources/webjars/bootstrap/5.3.2/matching.js"
+                ));
+            }
+        };
+        String versionFor = assetsMap.findRecentVersionFor("/bootstrap/current/matching.js");
+        // bootstrap4 must not match
+        assertThat(versionFor, is(equalTo("5.3.2")));
     }
 }
