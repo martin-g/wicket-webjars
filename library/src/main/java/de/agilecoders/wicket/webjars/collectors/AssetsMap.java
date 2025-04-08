@@ -102,19 +102,22 @@ public class AssetsMap implements IAssetProvider, IRecentVersionProvider {
     @Override
     public Set<String> listAssets(final String folderPath) {
         final Collection<String> allAssets = getFullPathIndex().values();
+        // ensure that webjarModulePath contains trailing a file separator (bootstrap -> boostrap/)
+        final String webjarModulePath = folderPath.endsWith("/") ? folderPath : folderPath + "/";
 
         final Set<String> assets = new HashSet<>();
 
         final String prefix;
         final String webjarsPath = settings.webjarsPath();
         if (webjarsPath.endsWith("/")) {
-        	prefix = webjarsPath + Helper.removeLeadingSlash(folderPath);
+        	prefix = webjarsPath + Helper.removeLeadingSlash(webjarModulePath);
         } else {
-        	prefix = webjarsPath + Helper.prependLeadingSlash(folderPath);
+        	prefix = webjarsPath + Helper.prependLeadingSlash(webjarModulePath);
         }
         
         for (final String asset : allAssets) {
             if (asset.startsWith(prefix)) {
+            	// all assets in webjarModulePath subpath are candidates
                 assets.add(asset);
             }
         }
