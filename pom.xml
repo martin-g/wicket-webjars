@@ -63,17 +63,6 @@
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
     </properties>
 
-    <developers>
-        <developer>
-            <id>martin-g</id>
-            <name>Martin Grigorov</name>
-            <email>mgrigorov@apache.org</email>
-            <roles>
-                <role>developer</role>
-            </roles>
-        </developer>
-    </developers>
-
     <dependencyManagement>
         <dependencies>
             <!-- PROJECT DEPENDENCIES -->
