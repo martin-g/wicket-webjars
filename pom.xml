@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
     <version>4.0.10-SNAPSHOT</version>
     <name>wicket-webjars-parent</name>
-    <description />
+    <description>Parent pom for Wicket Webjars</description>
     <url>https://github.com/l0rdn1kk0n/wicket-webjars</url>
 
     <scm>
