@@ -11,6 +11,7 @@
 
     <artifactId>samples</artifactId>
     <packaging>war</packaging>
+    <name>Wicket Webjars Samples application</name>
 
     <properties>
         <jquery-ui.version>1.14.1</jquery-ui.version>
