@@ -50,7 +50,7 @@
         <junit-jupiter.version>6.0.1</junit-jupiter.version>
         <hamcrest.version>3.0</hamcrest.version>
         <emory-util-classloader.version>2.1</emory-util-classloader.version>
-        <jquery.version>3.7.1</jquery.version>
+        <jquery.version>4.0.0</jquery.version>
 
         <versions-maven-plugin.version>2.20.1</versions-maven-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
