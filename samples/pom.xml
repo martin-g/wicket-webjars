@@ -14,7 +14,7 @@
     <name>Wicket Webjars Samples application</name>
 
     <properties>
-        <jquery-ui.version>1.14.1</jquery-ui.version>
+        <jquery-ui.version>1.14.2</jquery-ui.version>
         <bootstrap.version>5.3.8</bootstrap.version>
         <log4j.version>2.25.3</log4j.version>
     </properties>
