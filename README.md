@@ -9,6 +9,7 @@ Current build status: [![Build Status](https://buildhive.cloudbees.com/job/l0rdn
 
 Current release version:
 
+* For Wicket 11.x use 5.x
 * For Wicket 10.x use 4.x
 * For Wicket 9.x  use 3.x
 * For Wicket 8.x  use 2.x
